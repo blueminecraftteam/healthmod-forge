@@ -24,7 +24,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 
 public class WoundInfectionEffect extends Effect {
-    public WoundInfectionStatusEffect(EffectType type, int color) {
+    public WoundInfectionEffect(EffectType type, int color) {
         super(type, color);
     }
 
