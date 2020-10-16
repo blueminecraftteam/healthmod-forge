@@ -20,17 +20,15 @@
 package io.github.xf8b.healthmod.registries;
 
 import io.github.xf8b.healthmod.HealthMod;
-import io.github.xf8b.healthmod.statuseffects.WoundInfectionStatusEffect;
+import io.github.xf8b.healthmod.effects.WoundInfectionEffect;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class StatusEffectRegistries {
-
+public class EffectRegistries {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionStatusEffect(EffectType.HARMFUL, 0x00FF00));
-
+    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00));
 }
