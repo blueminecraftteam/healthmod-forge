@@ -19,7 +19,7 @@
 
 package io.github.xf8b.healthmod.items;
 
-import io.github.xf8b.healthmod.registries.StatusEffectRegistries;
+import io.github.xf8b.healthmod.registries.EffectRegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -48,7 +48,7 @@ public class BandAidItem extends Item {
                         playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
                         break;
                     case 3:
-                        playerIn.addPotionEffect(new EffectInstance(StatusEffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
+                        playerIn.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
                     default:
                         throw new IllegalStateException("bruh moment exxx deeee");
                 }

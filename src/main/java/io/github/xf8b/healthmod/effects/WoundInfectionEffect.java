@@ -22,6 +22,7 @@ package io.github.xf8b.healthmod.effects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
+import net.minecraft.util.DamageSource;
 
 public class WoundInfectionEffect extends Effect {
     public WoundInfectionEffect(EffectType type, int color) {
