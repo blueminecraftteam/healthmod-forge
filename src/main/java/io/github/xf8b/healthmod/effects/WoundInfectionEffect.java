@@ -17,21 +17,20 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.statuseffects;
+package io.github.xf8b.healthmod.effects;
 
-import io.github.xf8b.healthmod.mixins.DamageSourceAccessorMixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 
-public class WoundInfectionStatusEffect extends Effect {
+public class WoundInfectionEffect extends Effect {
     public WoundInfectionStatusEffect(EffectType type, int color) {
         super(type, color);
     }
 
     @Override
     public void performEffect(LivingEntity entity, int amplifier) {
-        entity.attackEntityFrom(DamageSourceAccessorMixin.newDamageSource("wound_infection"), 2.5F);
+        entity.attackEntityFrom(new DamageSource("wound_infection"), 2.5F);
     }
 
     @Override
