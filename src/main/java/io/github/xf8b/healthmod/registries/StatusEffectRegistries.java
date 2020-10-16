@@ -21,18 +21,16 @@ package io.github.xf8b.healthmod.registries;
 
 import io.github.xf8b.healthmod.HealthMod;
 import io.github.xf8b.healthmod.statuseffects.WoundInfectionStatusEffect;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectType;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class StatusEffectRegistries {
-    public static final StatusEffect WOUND_INFECTION = register(
-            "wound_infection",
-            new WoundInfectionStatusEffect(StatusEffectType.HARMFUL, 0x00FF00)
-    );
 
-    private static StatusEffect register(String id, StatusEffect statusEffect) {
-        return Registry.register(Registry.STATUS_EFFECT, new Identifier(HealthMod.MOD_ID, id), statusEffect);
-    }
+    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
+
+    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionStatusEffect(EffectType.HARMFUL, 0x00FF00));
+
 }

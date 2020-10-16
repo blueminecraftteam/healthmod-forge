@@ -21,21 +21,21 @@ package io.github.xf8b.healthmod.statuseffects;
 
 import io.github.xf8b.healthmod.mixins.DamageSourceAccessorMixin;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectType;
 
-public class WoundInfectionStatusEffect extends StatusEffect {
-    public WoundInfectionStatusEffect(StatusEffectType type, int color) {
+public class WoundInfectionStatusEffect extends Effect {
+    public WoundInfectionStatusEffect(EffectType type, int color) {
         super(type, color);
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.damage(DamageSourceAccessorMixin.newDamageSource("wound_infection"), 2.5F);
+    public void performEffect(LivingEntity entity, int amplifier) {
+        entity.attackEntityFrom(DamageSourceAccessorMixin.newDamageSource("wound_infection"), 2.5F);
     }
 
     @Override
-    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+    public boolean isReady(int duration, int amplifier) {
         int k = 25 >> amplifier;
         if (k > 0) {
             return duration % k == 0;

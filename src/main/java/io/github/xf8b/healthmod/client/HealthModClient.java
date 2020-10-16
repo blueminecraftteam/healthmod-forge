@@ -19,13 +19,20 @@
 
 package io.github.xf8b.healthmod.client;
 
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import io.github.xf8b.healthmod.HealthMod;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Environment(EnvType.CLIENT)
-public class HealthModClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class HealthModClient {
+
+    @SubscribeEvent
+    public static void clientEvent(FMLClientSetupEvent event){
+
     }
+
 }

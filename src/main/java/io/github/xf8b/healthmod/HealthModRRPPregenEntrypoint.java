@@ -21,14 +21,7 @@ package io.github.xf8b.healthmod;
 
 import io.github.xf8b.healthmod.registries.ItemRegistries;
 import io.github.xf8b.healthmod.registries.StatusEffectRegistries;
-import net.devtech.arrp.api.RRPCallback;
-import net.devtech.arrp.api.RRPPreGenEntrypoint;
-import net.devtech.arrp.api.RuntimeResourcePack;
-import net.devtech.arrp.json.lang.JLang;
-import net.devtech.arrp.json.models.JModel;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.logging.log4j.LogManager;
@@ -37,10 +30,9 @@ import org.apache.logging.log4j.Logger;
 import java.lang.reflect.Field;
 
 import static io.github.xf8b.healthmod.HealthMod.MOD_ID;
-import static net.devtech.arrp.api.RuntimeResourcePack.id;
 
-public class HealthModRRPPregenEntrypoint implements RRPPreGenEntrypoint {
-    private static final Logger LOGGER = LogManager.getLogger();
+public class HealthModRRPPregenEntrypoint /*implements RRPPreGenEntrypoint*/ {
+    /*private static final Logger LOGGER = LogManager.getLogger();
     public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create(MOD_ID + ":resources");
 
     @Override
@@ -77,5 +69,5 @@ public class HealthModRRPPregenEntrypoint implements RRPPreGenEntrypoint {
 
     private String getFormattedName(String translationKey, String type) {
         return WordUtils.capitalizeFully(translationKey.replace(type + "." + MOD_ID + ".", "").replace("_", " "));
-    }
+    }*/
 }

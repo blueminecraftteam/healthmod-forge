@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+license="GPL v3"
+[[mods]]
+modId="healthmod"
+version="${file.jarVersion}"
+displayName="Health Mod"
+
+description='''
+This mod adds health related items into minecraft, such as viruses, medicines and more!
+'''
+[[dependencies.healthmod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.healthmod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.2]"
+    ordering="NONE"
+    side="BOTH"

@@ -20,19 +20,16 @@
 package io.github.xf8b.healthmod.registries;
 
 import io.github.xf8b.healthmod.HealthMod;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockRegistries {
-    private static Block register(String id, Block block) {
-        Registry.register(
-                Registry.ITEM,
-                new Identifier(HealthMod.MOD_ID, id),
-                new BlockItem(block, new Item.Settings().group(HealthMod.ITEM_GROUP))
-        );
-        return Registry.register(Registry.BLOCK, new Identifier(HealthMod.MOD_ID, id), block);
-    }
+
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
+
+    public static final RegistryObject<Block> TEST = BLOCKS.register("test", () -> new Block(AbstractBlock.Properties.create(Material.IRON)));
 }

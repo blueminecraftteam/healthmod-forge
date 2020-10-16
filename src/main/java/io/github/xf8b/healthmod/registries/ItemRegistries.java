@@ -22,18 +22,14 @@ package io.github.xf8b.healthmod.registries;
 import io.github.xf8b.healthmod.HealthMod;
 import io.github.xf8b.healthmod.items.BandAidItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.item.Rarity;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemRegistries {
-    public static final Item BAND_AID = register("band_aid", new BandAidItem(new Item.Settings()
-            .group(HealthMod.ITEM_GROUP)
-            .maxCount(16)
-            .maxDamage(2)
-            .rarity(Rarity.UNCOMMON)));
 
-    private static Item register(String id, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(HealthMod.MOD_ID, id), item);
-    }
+        public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
+
+        public static final RegistryObject<Item> BAND_AID = ITEMS.register("band_aid", () -> new BandAidItem(new Item.Properties().group(HealthMod.itemGroup).maxDamage(2).maxStackSize(16).rarity(Rarity.UNCOMMON)));
 }

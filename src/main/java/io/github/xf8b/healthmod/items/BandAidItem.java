@@ -20,44 +20,44 @@
 package io.github.xf8b.healthmod.items;
 
 import io.github.xf8b.healthmod.registries.StatusEffectRegistries;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BandAidItem extends Item {
-    public BandAidItem(Settings settings) {
+    public BandAidItem(Item.Properties settings) {
         super(settings);
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!world.isClient) {
-            ItemStack itemStack = user.getStackInHand(hand);
-            if (itemStack.getDamage() == 1) {
-                switch (ThreadLocalRandom.current().nextInt(4)) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if(!worldIn.isRemote){
+            ItemStack itemStack = playerIn.getHeldItem(handIn);
+            if(itemStack.getDamage() == 1){
+                switch(ThreadLocalRandom.current().nextInt(4)){
                     case 0:
                     case 1:
                     case 2:
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15 * 20, 0));
+                        playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
                         break;
                     case 3:
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffectRegistries.WOUND_INFECTION, 15 * 20, 0));
-                        break;
+                        playerIn.addPotionEffect(new EffectInstance(StatusEffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
                     default:
-                        throw new IllegalStateException("bruh");
+                        throw new IllegalStateException("bruh moment exxx deeee");
                 }
-            } else {
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 15 * 20, 0));
+            }else{
+                playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
             }
-            itemStack.damage(1, user, (playerEntity) -> playerEntity.sendToolBreakStatus(hand));
+            itemStack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
         }
-        return super.use(world, user, hand);
+
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }

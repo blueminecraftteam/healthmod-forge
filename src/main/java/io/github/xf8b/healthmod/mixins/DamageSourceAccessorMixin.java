@@ -19,7 +19,7 @@
 
 package io.github.xf8b.healthmod.mixins;
 
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.util.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -30,3 +30,5 @@ public interface DamageSourceAccessorMixin {
         throw new UnsupportedOperationException();
     }
 }
+
+
