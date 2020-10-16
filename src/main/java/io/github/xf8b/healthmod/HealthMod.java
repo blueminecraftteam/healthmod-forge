@@ -21,7 +21,7 @@ package io.github.xf8b.healthmod;
 
 import io.github.xf8b.healthmod.registries.BlockRegistries;
 import io.github.xf8b.healthmod.registries.ItemRegistries;
-import io.github.xf8b.healthmod.registries.StatusEffectRegistries;
+import io.github.xf8b.healthmod.registries.EffectRegistries;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -45,7 +45,6 @@ import org.apache.logging.log4j.Logger;
 @Mod("healthmod")
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HealthMod {
-
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "healthmod";
     public static final ItemGroup itemGroup = new ItemGroup(MOD_ID) {
@@ -56,8 +55,7 @@ public class HealthMod {
         }
     };
 
-
-    public HealthMod(){
+    public HealthMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
@@ -65,16 +63,16 @@ public class HealthMod {
 
         BlockRegistries.BLOCKS.register(modEventBus);
         ItemRegistries.ITEMS.register(modEventBus);
-        StatusEffectRegistries.EFFECTS.register(modEventBus);
+        EffectRegistries.EFFECTS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public void clientSetup(final FMLClientSetupEvent event){
+    public void clientSetup(final FMLClientSetupEvent event) {
 
     }
 
-    public void setup(final FMLCommonSetupEvent event){
+    public void setup(final FMLCommonSetupEvent event) {
 
     }
 
@@ -87,10 +85,6 @@ public class HealthMod {
             final BlockItem blockItem = new BlockItem(block, properties);
             blockItem.setRegistryName(block.getRegistryName());
             registry.register(blockItem);
-
-            LOGGER.log(Level.INFO, "Registered BlockItems.");
         });
-
-
     }
 }
