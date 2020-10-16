@@ -88,7 +88,7 @@ minecraft {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${project.forge_version}-${project.minecraft_version}"
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 }
 
 license {
