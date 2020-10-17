@@ -49,6 +49,7 @@ public class BandAidItem extends Item {
                         break;
                     case 3:
                         playerIn.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
+                        break;
                     default:
                         throw new IllegalStateException("bruh moment exxx deeee");
                 }
