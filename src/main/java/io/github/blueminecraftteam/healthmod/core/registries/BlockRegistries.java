@@ -17,22 +17,19 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.client;
+package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.xf8b.healthmod.HealthMod;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import io.github.blueminecraftteam.healthmod.HealthMod;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class HealthModClient {
+public class BlockRegistries {
 
-    @SubscribeEvent
-    public static void clientEvent(FMLClientSetupEvent event){
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
 
-    }
-
+    public static final RegistryObject<Block> TEST = BLOCKS.register("test", () -> new Block(AbstractBlock.Properties.create(Material.IRON)));
 }

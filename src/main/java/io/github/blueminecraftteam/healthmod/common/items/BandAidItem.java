@@ -17,9 +17,9 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.items;
+package io.github.blueminecraftteam.healthmod.common.items;
 
-import io.github.xf8b.healthmod.registries.EffectRegistries;
+import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

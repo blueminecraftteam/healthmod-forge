@@ -17,18 +17,30 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.registries;
+package io.github.blueminecraftteam.healthmod.common.effects;
 
-import io.github.xf8b.healthmod.HealthMod;
-import io.github.xf8b.healthmod.effects.WoundInfectionEffect;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.util.DamageSource;
 
-public class EffectRegistries {
-    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
+public class WoundInfectionEffect extends Effect {
+    public WoundInfectionEffect(EffectType type, int color) {
+        super(type, color);
+    }
 
-    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00));
+    @Override
+    public void performEffect(LivingEntity entity, int amplifier) {
+        entity.attackEntityFrom(new DamageSource("wound_infection"), 2.5F);
+    }
+
+    @Override
+    public boolean isReady(int duration, int amplifier) {
+        int k = 25 >> amplifier;
+        if (k > 0) {
+            return duration % k == 0;
+        } else {
+            return true;
+        }
+    }
 }

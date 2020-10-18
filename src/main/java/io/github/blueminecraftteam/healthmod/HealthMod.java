@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod;
+package io.github.blueminecraftteam.healthmod;
 
-import io.github.xf8b.healthmod.registries.BlockRegistries;
-import io.github.xf8b.healthmod.registries.ItemRegistries;
-import io.github.xf8b.healthmod.registries.EffectRegistries;
+import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries;
+import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries;
+import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -30,15 +30,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,24 +52,11 @@ public class HealthMod {
     };
 
     public HealthMod() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        BlockRegistries.BLOCKS.register(modEventBus);
-        ItemRegistries.ITEMS.register(modEventBus);
-        EffectRegistries.EFFECTS.register(modEventBus);
+        BlockRegistries.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ItemRegistries.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        EffectRegistries.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    public void clientSetup(final FMLClientSetupEvent event) {
-
-    }
-
-    public void setup(final FMLCommonSetupEvent event) {
-
     }
 
     @SubscribeEvent

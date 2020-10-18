@@ -17,14 +17,22 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.util;
+package io.github.blueminecraftteam.healthmod.client;
 
-import javax.annotation.Nonnull;
+import io.github.blueminecraftteam.healthmod.HealthMod;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-public class IWantToDieException extends Exception {
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class HealthModClient {
 
-    public IWantToDieException(@Nonnull String message){
-        super(message);
+    @SubscribeEvent
+    public static void clientEvent(FMLClientSetupEvent event){
+
     }
 
 }

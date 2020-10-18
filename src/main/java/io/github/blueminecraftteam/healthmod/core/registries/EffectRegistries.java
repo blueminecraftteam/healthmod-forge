@@ -17,19 +17,18 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.healthmod.registries;
+package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.xf8b.healthmod.HealthMod;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import io.github.blueminecraftteam.healthmod.HealthMod;
+import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockRegistries {
+public class EffectRegistries {
+    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
-
-    public static final RegistryObject<Block> TEST = BLOCKS.register("test", () -> new Block(AbstractBlock.Properties.create(Material.IRON)));
+    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00));
 }
