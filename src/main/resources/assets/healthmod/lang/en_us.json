@@ -1,0 +1,8 @@
+{
+  "itemGroup.healthmod": "HealthMod Group",
+
+  "item.healthmod.band_aid": "Band Aid",
+  "item.healthmod.syringe": "Syringe",
+
+  "effect.healthmod.wound_infection": "Wound Infection"
+}
