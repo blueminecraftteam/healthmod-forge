@@ -99,7 +99,6 @@ license {
         projectName = project.projectName
     }
     include("**/*.java")
-    ignoreFailures = true
 }
 
 jar {
