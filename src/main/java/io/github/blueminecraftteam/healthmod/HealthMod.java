@@ -22,6 +22,7 @@ package io.github.blueminecraftteam.healthmod;
 import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries;
 import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries;
 import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries;
+import io.github.blueminecraftteam.healthmod.core.registries.SoundRegistries;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -55,6 +56,7 @@ public class HealthMod {
         BlockRegistries.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ItemRegistries.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         EffectRegistries.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        SoundRegistries.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(this);
     }

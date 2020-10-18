@@ -20,17 +20,15 @@
 package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.HealthMod;
-import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Rarity;
+import io.github.blueminecraftteam.healthmod.common.container.BandAidBoxContainer;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ItemRegistries {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
+public class ContainerRegistries {
+    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Item> BAND_AID = ITEMS.register("band_aid", () -> new BandAidItem(new Item.Properties().group(HealthMod.itemGroup).maxDamage(2).rarity(Rarity.UNCOMMON)));
-    //TODO: Stuff the syringe. e.g. extract blood etc
-    public static final RegistryObject<Item> SYRINGE = ITEMS.register("syringe", () -> new Item(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
+    public static final RegistryObject<ContainerType<BandAidBoxContainer>> BAND_AID_BOX = CONTAINERS.register("band_aid_box", () -> IForgeContainerType.create(BandAidBoxContainer::new));
 }
