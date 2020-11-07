@@ -19,10 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod;
 
-import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries;
-import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries;
-import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries;
-import io.github.blueminecraftteam.healthmod.core.registries.SoundRegistries;
+import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
+import io.github.blueminecraftteam.healthmod.core.registries.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -32,8 +30,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +57,11 @@ public class HealthMod {
         ItemRegistries.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         EffectRegistries.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         SoundRegistries.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ContainerRegistries.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TileEntityRegistries.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        //Ignore still testing this
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.CONFIG_SPEC);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

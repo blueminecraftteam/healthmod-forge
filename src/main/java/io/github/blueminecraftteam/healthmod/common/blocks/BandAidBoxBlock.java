@@ -39,6 +39,7 @@ public class BandAidBoxBlock extends Block {
     }
 
     //TODO: Model
+    //TODO: Opening gui logic
 
     @Override
     public boolean hasTileEntity(BlockState state) {
