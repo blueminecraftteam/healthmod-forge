@@ -35,6 +35,7 @@ public class ItemRegistries {
     //TODO: Stuff the syringe. e.g. extract blood etc
     public static final RegistryObject<Item> SYRINGE = ITEMS.register("syringe", () -> new Item(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
     //TODO: Model
-    public static final RegistryObject<Item> FACEMASK = ITEMS.register("facemask", () -> new FaceMaskItem(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
+    //Do this later, i cba to do the functionality for it -AG6 28/11/2020
+    //public static final RegistryObject<Item> FACEMASK = ITEMS.register("facemask", () -> new FaceMaskItem(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
 }
 

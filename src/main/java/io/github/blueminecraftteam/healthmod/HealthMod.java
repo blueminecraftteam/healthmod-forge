@@ -60,8 +60,7 @@ public class HealthMod {
         ContainerRegistries.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TileEntityRegistries.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        //Ignore still testing this
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.CONFIG_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.COMMON_SPEC);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
