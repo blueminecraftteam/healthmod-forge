@@ -20,19 +20,19 @@
 package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.HealthMod;
-import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import io.github.blueminecraftteam.healthmod.common.entities.DoctorNPCEntity;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockRegistries {
+public class EntityRegistries {
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, HealthMod.MOD_ID);
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
-
-    public static final RegistryObject<Block> TEST = BLOCKS.register("test", () -> new Block(AbstractBlock.Properties.create(Material.IRON)));
-    public static final RegistryObject<Block> BAND_AID_BOX = BLOCKS.register("band_aid_box", () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.CLOTH).noDrops()));
+    public static final RegistryObject<EntityType<DoctorNPCEntity>> DOCTOR = ENTITIES.register("doctor", () ->
+            EntityType.Builder.create(DoctorNPCEntity::new, EntityClassification.MISC)
+                    .size(0.6F, 1.95F)
+                    .build(new ResourceLocation(HealthMod.MOD_ID, "doctor").toString()));
 }

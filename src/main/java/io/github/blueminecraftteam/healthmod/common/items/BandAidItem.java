@@ -27,6 +27,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -38,27 +39,18 @@ public class BandAidItem extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        if(!worldIn.isRemote){
+        if (!worldIn.isRemote) {
             ItemStack itemStack = playerIn.getHeldItem(handIn);
-            if(itemStack.getDamage() == 1){
-                switch(ThreadLocalRandom.current().nextInt(4)){
-                    case 0:
-                    case 1:
-                    case 2:
-                        playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
-                        break;
-                    case 3:
-                        playerIn.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
-                        break;
-                    default:
-                        throw new IllegalStateException("bruh moment exxx deeee");
+            if (playerIn.getMaxHealth() != playerIn.getHealth()) {
+                if (ThreadLocalRandom.current().nextInt(0, 3) == 0) {
+                    playerIn.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
+                    playerIn.sendStatusMessage(new TranslationTextComponent("text.healthmod.band_aid.failed_apply"), true);
+                } else {
+                    playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
                 }
-            }else{
-                playerIn.addPotionEffect(new EffectInstance(Effects.REGENERATION, 15 * 20, 0));
+                itemStack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
             }
-            itemStack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
         }
-
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 }
