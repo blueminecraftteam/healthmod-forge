@@ -19,10 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod;
 
-import io.github.blueminecraftteam.healthmod.common.entities.DoctorNPCEntity;
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
 import io.github.blueminecraftteam.healthmod.core.registries.*;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -36,7 +34,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -56,22 +53,20 @@ public class HealthMod {
     };
 
     public HealthMod() {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-
         BlockRegistries.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ItemRegistries.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         EffectRegistries.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         SoundRegistries.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ContainerRegistries.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         TileEntityRegistries.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        EntityRegistries.ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.COMMON_SPEC);
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
-    public static void onRegisterBlockItems(final RegistryEvent.Register<Item> event) {
+    public static void onRegisterBlockItems(final RegistryEvent.Register<Item> event){
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         BlockRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
@@ -80,9 +75,5 @@ public class HealthMod {
             blockItem.setRegistryName(block.getRegistryName());
             registry.register(blockItem);
         });
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        GlobalEntityTypeAttributes.put(EntityRegistries.DOCTOR.get(), DoctorNPCEntity.registerAttributes().create());
     }
 }
