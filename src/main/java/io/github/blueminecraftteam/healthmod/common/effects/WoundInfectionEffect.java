@@ -37,6 +37,7 @@ public class WoundInfectionEffect extends Effect {
     @Override
     public boolean isReady(int duration, int amplifier) {
         int k = 25 >> amplifier;
+
         if (k > 0) {
             return duration % k == 0;
         } else {

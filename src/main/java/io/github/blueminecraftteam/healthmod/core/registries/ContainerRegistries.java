@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
 import io.github.blueminecraftteam.healthmod.common.container.BandAidBoxContainer;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.RegistryObject;
@@ -30,5 +30,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ContainerRegistries {
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<ContainerType<BandAidBoxContainer>> BAND_AID_BOX = CONTAINERS.register("band_aid_box", () -> IForgeContainerType.create(BandAidBoxContainer::new));
+    public static final RegistryObject<ContainerType<BandAidBoxContainer>> BAND_AID_BOX = CONTAINERS.register(
+            "band_aid_box",
+            () -> IForgeContainerType.create(BandAidBoxContainer::new)
+    );
 }

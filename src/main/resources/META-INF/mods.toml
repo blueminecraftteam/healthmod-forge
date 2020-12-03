@@ -1,6 +1,6 @@
 modLoader = "javafml"
 
-loaderVersion = "[33,)"
+loaderVersion = "[35,)"
 
 license = "GPL v3"
 
@@ -12,26 +12,26 @@ modId = "healthmod"
 
 version = "${version}"
 
-displayName = "Health Mod"
+displayName = "HealthMod"
 
-description = "This mod adds health related items into minecraft, such as viruses, medicines and more!"
+description = "This mod adds health related items into Minecraft, such as viruses, medicines and more!"
 
 logoFile = "logo.png"
 
-credits = "AG6, LoneWolf"
+credits = "xf8b, AG6, LoneWolf, ilja615, Saksham4106, PTZ"
 
 authors = "Blue Minecraft Team"
 
 [[dependencies.healthmod]]
-    modId = "forge"
-    mandatory = true
-    versionRange = "[33,)"
-    ordering = "NONE"
-    side = "BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[35,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.healthmod]]
-    modId = "minecraft"
-    mandatory = true
-    versionRange = "[1.16.2]"
-    ordering = "NONE"
-    side = "BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.4]"
+ordering = "NONE"
+side = "BOTH"

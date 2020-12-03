@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core.config;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
@@ -34,8 +34,4 @@ public class HealthModConfig {
         COMMON_SPEC = specPair.getRight();
         COMMON = specPair.getLeft();
     }
-
-    public static boolean canSleepWithoutMask = COMMON.canSleepWithoutMask.get();
-
-
 }

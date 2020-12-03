@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.client;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
-import io.github.blueminecraftteam.healthmod.client.entity.doctor.DoctorNPCEntityRender;
+import io.github.blueminecraftteam.healthmod.client.entity.doctor.DoctorNPCEntityRenderer;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import io.github.blueminecraftteam.healthmod.core.registries.EntityRegistries;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,10 +30,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class HealthModClient {
-
     @SubscribeEvent
-    public static void clientEvent(FMLClientSetupEvent event){
-        RenderingRegistry.registerEntityRenderingHandler(EntityRegistries.DOCTOR.get(), DoctorNPCEntityRender::new);
+    public static void clientEvent(FMLClientSetupEvent event) {
+        RenderingRegistry.registerEntityRenderingHandler(EntityRegistries.DOCTOR.get(), DoctorNPCEntityRenderer::new);
     }
-
 }

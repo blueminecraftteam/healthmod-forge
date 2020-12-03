@@ -19,25 +19,48 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
-import io.github.blueminecraftteam.healthmod.common.items.AntiBioticsItem;
+import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@SuppressWarnings("UNUSED")
 public class ItemRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Item> BAND_AID = ITEMS.register("band_aid", () -> new BandAidItem(new Item.Properties().group(HealthMod.itemGroup).maxDamage(2).rarity(Rarity.UNCOMMON)));
-    //TODO: Stuff the syringe. e.g. extract blood etc
-    public static final RegistryObject<Item> SYRINGE = ITEMS.register("syringe", () -> new Item(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
-    //TODO: Model
-    //Do this later, i cba to do the functionality for it -AG6 28/11/2020
-    //public static final RegistryObject<Item> FACEMASK = ITEMS.register("facemask", () -> new FaceMaskItem(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
+    public static final RegistryObject<Item> BAND_AID = ITEMS.register(
+            "band_aid",
+            () -> new BandAidItem(new Item.Properties()
+                    .group(HealthMod.ITEM_GROUP)
+                    .maxDamage(2)
+                    .rarity(Rarity.UNCOMMON))
+    );
 
-    public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register("antibiotics", () -> new AntiBioticsItem(new Item.Properties().group(HealthMod.itemGroup)));
+    // TODO: do the syringe e.g. extract blood etc
+    public static final RegistryObject<Item> SYRINGE = ITEMS.register(
+            "syringe",
+            () -> new Item(new Item.Properties()
+                    .group(HealthMod.ITEM_GROUP)
+                    .maxStackSize(1))
+    );
+    // TODO: Model
+    // Do this later, i cba to do the functionality for it -AG6 28/11/2020
+    /*
+    public static final RegistryObject<Item> FACEMASK = ITEMS.register(
+            "facemask",
+            () -> new FaceMaskItem(new Item.Properties()
+                    .group(HealthMod.ITEM_GROUP)
+                    .maxStackSize(1))
+    );
+    */
+
+    public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register(
+            "antibiotics",
+            () -> new AntibioticsItem(new Item.Properties().group(HealthMod.ITEM_GROUP))
+    );
 }
 

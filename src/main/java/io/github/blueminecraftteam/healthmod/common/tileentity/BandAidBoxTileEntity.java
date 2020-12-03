@@ -48,9 +48,9 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import javax.annotation.Nullable;
 
 public class BandAidBoxTileEntity extends LockableLootTileEntity {
-    private NonNullList<ItemStack> contents = NonNullList.withSize(6, ItemStack.EMPTY);
+    private final IItemHandlerModifiable items = new InvWrapper(this);
     protected int numPlayersUsing;
-    private IItemHandlerModifiable items = new InvWrapper(this);
+    private NonNullList<ItemStack> contents = NonNullList.withSize(6, ItemStack.EMPTY);
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
     public BandAidBoxTileEntity(TileEntityType<?> tileEntityTypeIn) {
@@ -59,6 +59,25 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
 
     public BandAidBoxTileEntity() {
         this(TileEntityRegistries.BAND_AID_BOX.get());
+    }
+
+    public static int getPlayersUsing(IBlockReader reader, BlockPos pos) {
+        BlockState state = reader.getBlockState(pos);
+
+        if (state.hasTileEntity()) {
+            TileEntity tileEntity = reader.getTileEntity(pos);
+            if (tileEntity instanceof BandAidBoxTileEntity) {
+                return ((BandAidBoxTileEntity) tileEntity).numPlayersUsing;
+            }
+        }
+
+        return 0;
+    }
+
+    public static void swapContents(BandAidBoxTileEntity tileEntity, BandAidBoxTileEntity otherTileEntity) {
+        NonNullList<ItemStack> list = tileEntity.getItems();
+        tileEntity.setItems(otherTileEntity.getItems());
+        otherTileEntity.setItems(list);
     }
 
     @Override
@@ -89,9 +108,11 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
+
         if (!this.checkLootAndWrite(compound)) {
             ItemStackHelper.saveAllItems(compound, this.contents);
         }
+
         return compound;
     }
 
@@ -99,6 +120,7 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
         this.contents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+
         if (!this.checkLootAndRead(nbt)) {
             ItemStackHelper.loadAllItems(nbt, this.contents);
         }
@@ -136,27 +158,11 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
 
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
+
         if (block instanceof BandAidBoxBlock) {
             this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
             this.world.notifyNeighborsOfStateChange(this.pos, block);
         }
-    }
-
-    public static int getPlayersUsing(IBlockReader reader, BlockPos pos) {
-        BlockState state = reader.getBlockState(pos);
-        if (state.hasTileEntity()) {
-            TileEntity tileEntity = reader.getTileEntity(pos);
-            if (tileEntity instanceof BandAidBoxTileEntity) {
-                return ((BandAidBoxTileEntity) tileEntity).numPlayersUsing;
-            }
-        }
-        return 0;
-    }
-
-    public static void swapContents(BandAidBoxTileEntity t, BandAidBoxTileEntity te) {
-        NonNullList<ItemStack> list = t.getItems();
-        t.setItems(te.getItems());
-        te.setItems(list);
     }
 
     @Override
@@ -170,16 +176,18 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
 
     @Nullable
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return itemHandler.cast();
         }
-        return super.getCapability(cap, side);
+
+        return super.getCapability(capability, side);
     }
 
     @Override
     public void remove() {
         super.remove();
+
         if (itemHandler != null) {
             itemHandler.invalidate();
         }

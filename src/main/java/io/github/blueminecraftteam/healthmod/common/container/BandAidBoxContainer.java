@@ -25,7 +25,6 @@ import io.github.blueminecraftteam.healthmod.core.registries.ContainerRegistries
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
@@ -42,8 +41,6 @@ public class BandAidBoxContainer extends Container {
         this.callable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
 
         int slotSizePlus2 = 18;
-
-
     }
 
     public BandAidBoxContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
@@ -53,20 +50,18 @@ public class BandAidBoxContainer extends Container {
     private static BandAidBoxTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "PlayerInventory cannot be null");
         Objects.requireNonNull(data, "PacketBuffer cannot be null");
+
         final TileEntity tileEntity = playerInventory.player.world.getTileEntity(data.readBlockPos());
+
         if (tileEntity instanceof BandAidBoxTileEntity) {
             return (BandAidBoxTileEntity) tileEntity;
         }
-        throw new IllegalStateException("The Tile Entity is not correct!" + tileEntity);
+
+        throw new IllegalStateException("Tile entity " + tileEntity + " is not correct!");
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         return isWithinUsableDistance(callable, playerIn, BlockRegistries.BAND_AID_BOX.get());
-    }
-
-    @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
     }
 }

@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
 import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraftforge.fml.RegistryObject;
@@ -30,5 +30,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EffectRegistries {
     public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register("wound_infection", () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00));
+    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register(
+            "wound_infection",
+            () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00)
+    );
 }

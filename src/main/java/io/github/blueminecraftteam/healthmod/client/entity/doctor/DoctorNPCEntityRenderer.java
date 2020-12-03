@@ -17,22 +17,20 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.items;
+package io.github.blueminecraftteam.healthmod.client.entity.doctor;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import io.github.blueminecraftteam.healthmod.common.entities.AbstractNPCEntity;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.util.ResourceLocation;
 
-public class AntiBioticsItem extends Item {
-    public AntiBioticsItem(Properties properties) {
-        super(properties);
+public class DoctorNPCEntityRenderer extends MobRenderer<AbstractNPCEntity, DoctorNPCEntityModel> {
+    public DoctorNPCEntityRenderer(EntityRendererManager rendererManager) {
+        super(rendererManager, new DoctorNPCEntityModel(), 0.5F);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+    public ResourceLocation getEntityTexture(AbstractNPCEntity entity) {
+        return entity.getTexture();
     }
 }

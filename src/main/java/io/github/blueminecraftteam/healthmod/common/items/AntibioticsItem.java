@@ -17,13 +17,14 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.common.items;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.item.Item;
 
-public class SoundRegistries {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, HealthMod.MOD_ID);
+public class AntibioticsItem extends Item {
+    public AntibioticsItem(Item.Properties properties) {
+        super(properties);
+    }
+
+    // TODO
 }

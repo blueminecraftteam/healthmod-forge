@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod;
+package io.github.blueminecraftteam.healthmod.core;
 
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
 import io.github.blueminecraftteam.healthmod.core.registries.*;
@@ -29,6 +29,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
@@ -39,41 +40,50 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod("healthmod")
+import java.util.Objects;
+
+@Mod(HealthMod.MOD_ID)
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class HealthMod {
-    public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "healthmod";
-    public static final ItemGroup itemGroup = new ItemGroup(MOD_ID) {
+    public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
         @OnlyIn(Dist.CLIENT)
         @Override
         public ItemStack createIcon() {
             return new ItemStack(ItemRegistries.BAND_AID.get());
         }
     };
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public HealthMod() {
-        BlockRegistries.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ItemRegistries.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        EffectRegistries.EFFECTS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        SoundRegistries.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ContainerRegistries.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TileEntityRegistries.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        BlockRegistries.BLOCKS.register(modEventBus);
+        ItemRegistries.ITEMS.register(modEventBus);
+        EffectRegistries.EFFECTS.register(modEventBus);
+        ContainerRegistries.CONTAINERS.register(modEventBus);
+        TileEntityRegistries.TILE_ENTITIES.register(modEventBus);
+
+        LOGGER.debug("Registered deferred registers to mod event bus!");
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.COMMON_SPEC);
+
+        LOGGER.debug("Registered config!");
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     @SubscribeEvent
-    public static void onRegisterBlockItems(final RegistryEvent.Register<Item> event){
+    public static void onRegisterBlockItems(final RegistryEvent.Register<Item> event) {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         BlockRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-            final Item.Properties properties = new Item.Properties().group(itemGroup);
+            final Item.Properties properties = new Item.Properties().group(ITEM_GROUP);
             final BlockItem blockItem = new BlockItem(block, properties);
-            blockItem.setRegistryName(block.getRegistryName());
+            blockItem.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
             registry.register(blockItem);
         });
+
+        LOGGER.debug("Registered block items!");
     }
 }

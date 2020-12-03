@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
 import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -30,9 +30,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockRegistries {
-
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Block> TEST = BLOCKS.register("test", () -> new Block(AbstractBlock.Properties.create(Material.IRON)));
-    public static final RegistryObject<Block> BAND_AID_BOX = BLOCKS.register("band_aid_box", () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.CLOTH).noDrops()));
+    public static final RegistryObject<Block> BAND_AID_BOX = BLOCKS.register(
+            "band_aid_box",
+            () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.IRON)
+                    .sound(SoundType.CLOTH)
+                    .noDrops())
+    );
 }

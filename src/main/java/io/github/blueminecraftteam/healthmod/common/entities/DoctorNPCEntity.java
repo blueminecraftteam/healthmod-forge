@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.common.entities;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import io.github.blueminecraftteam.healthmod.core.registries.EntityRegistries;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
@@ -52,6 +52,4 @@ public class DoctorNPCEntity extends AbstractNPCEntity {
         MerchantOffers offers = this.getOffers();
         this.addTrades(offers, EntityTrades.DOCTOR.get(0), Math.max(4, this.rand.nextInt(6) + 1));
     }
-
-
 }

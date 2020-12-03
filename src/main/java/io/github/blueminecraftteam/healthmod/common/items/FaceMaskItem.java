@@ -25,8 +25,8 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-//TODO: Model
-//NOTE: To take the piss i might just make it so when u right click it puts it on your head, since its not an ArmorItem I don't think it can do this?
+// TODO: Model
+// NOTE: To take the piss i might just make it so when u right click it puts it on your head, since its not an ArmorItem I don't think it can do this?
 public class FaceMaskItem extends Item {
     public FaceMaskItem(Properties properties) {
         super(properties);

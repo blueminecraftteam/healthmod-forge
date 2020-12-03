@@ -19,7 +19,6 @@
 
 package io.github.blueminecraftteam.healthmod.client.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.ITextComponent;
 
@@ -28,13 +27,5 @@ public class BandAidBoxScreen extends Screen {
         super(titleIn);
     }
 
-    @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
-    }
-
-    @Override
-    public void renderBackground(MatrixStack matrixStack) {
-        super.renderBackground(matrixStack);
-    }
+    // TODO
 }

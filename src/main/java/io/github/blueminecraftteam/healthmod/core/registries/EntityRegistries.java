@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.HealthMod;
 import io.github.blueminecraftteam.healthmod.common.entities.DoctorNPCEntity;
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -31,8 +31,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class EntityRegistries {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, HealthMod.MOD_ID);
 
-    public static final RegistryObject<EntityType<DoctorNPCEntity>> DOCTOR = ENTITIES.register("doctor", () ->
-            EntityType.Builder.create(DoctorNPCEntity::new, EntityClassification.MISC)
+    public static final RegistryObject<EntityType<DoctorNPCEntity>> DOCTOR = ENTITIES.register(
+            "doctor",
+            () -> EntityType.Builder.create(DoctorNPCEntity::new, EntityClassification.MISC)
                     .size(0.6F, 1.95F)
-                    .build(new ResourceLocation(HealthMod.MOD_ID, "doctor").toString()));
+                    .build(new ResourceLocation(HealthMod.MOD_ID, "doctor").toString())
+    );
 }

@@ -41,6 +41,7 @@ public class BandAidItem extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         if (!worldIn.isRemote) {
             ItemStack itemStack = playerIn.getHeldItem(handIn);
+
             if (playerIn.getMaxHealth() != playerIn.getHealth()) {
                 if (ThreadLocalRandom.current().nextInt(0, 3) == 0) {
                     playerIn.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
@@ -51,7 +52,7 @@ public class BandAidItem extends Item {
                 itemStack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(handIn));
             }
         }
+
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
-
 }

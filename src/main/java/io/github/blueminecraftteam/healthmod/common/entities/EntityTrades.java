@@ -36,7 +36,7 @@ import java.util.Random;
 
 public class EntityTrades {
     protected static final Int2ObjectMap<VillagerTrades.ITrade[]> DOCTOR = Util.make(() -> {
-        VillagerTrades.ITrade[] offers = new VillagerTrades.ITrade[]{
+        VillagerTrades.ITrade[] offers = new VillagerTrades.ITrade[] {
                 new ItemsForEmeraldsTrade(ItemRegistries.BAND_AID.get(), 1, 2, 1),
                 new ItemsForEmeraldsTrade(ItemRegistries.BAND_AID.get(), 1, 2, 1),
                 new ItemsForEmeraldsTrade(ItemRegistries.BAND_AID.get(), 1, 2, 1)
@@ -49,7 +49,6 @@ public class EntityTrades {
     private static Int2ObjectMap<VillagerTrades.ITrade[]> getAsIntMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> map) {
         return new Int2ObjectOpenHashMap<>(map);
     }
-
 
     static class ItemsForEmeraldsTrade implements VillagerTrades.ITrade {
         private final ItemStack offerStack;
@@ -86,7 +85,13 @@ public class EntityTrades {
 
         @Override
         public MerchantOffer getOffer(Entity trader, Random rand) {
-            return new MerchantOffer(new ItemStack(Items.EMERALD, this.price), new ItemStack(this.offerStack.getItem(), this.offerStackCount), this.maxUses, this.experience, this.priceMultiplier);
+            return new MerchantOffer(
+                    new ItemStack(Items.EMERALD, this.price),
+                    new ItemStack(this.offerStack.getItem(), this.offerStackCount),
+                    this.maxUses,
+                    this.experience,
+                    this.priceMultiplier
+            );
         }
     }
 }
