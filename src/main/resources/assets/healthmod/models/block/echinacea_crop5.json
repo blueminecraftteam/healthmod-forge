@@ -1,6 +1,0 @@
-{
-  "parent": "block/crop",
-  "textures": {
-    "crop": "healthmod:blocks/enchinacea_crop5"
-  }
-}

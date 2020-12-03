@@ -20,11 +20,10 @@
 package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.HealthMod;
+import io.github.blueminecraftteam.healthmod.common.items.AntiBioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
-import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
-import net.minecraft.item.*;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.item.Item;
+import net.minecraft.item.Rarity;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,7 +38,6 @@ public class ItemRegistries {
     //Do this later, i cba to do the functionality for it -AG6 28/11/2020
     //public static final RegistryObject<Item> FACEMASK = ITEMS.register("facemask", () -> new FaceMaskItem(new Item.Properties().maxStackSize(1).group(HealthMod.itemGroup)));
 
-    public static final RegistryObject<Item> ECHINACEA_SEED = ITEMS.register("echinacea_seed", () -> new BlockItem(BlockRegistries.ECHINACEA_PLANT.get() , new Item.Properties().group(ItemGroup.FOOD)));
-    public static final RegistryObject<Item> ECHINACEA = ITEMS.register("echinacea", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).group(ItemGroup.FOOD).food(new Food.Builder().hunger(3).saturation(2.5F).meat().effect(new EffectInstance(Effects.REGENERATION, 100, 1), 0.9F).fastToEat().build())));
+    public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register("antibiotics", () -> new AntiBioticsItem(new Item.Properties().group(HealthMod.itemGroup)));
 }
 
