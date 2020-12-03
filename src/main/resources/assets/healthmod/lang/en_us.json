@@ -1,10 +1,11 @@
 {
   "itemGroup.healthmod": "HealthMod",
+
   "item.healthmod.band_aid": "Band Aid",
   "item.healthmod.syringe": "Syringe",
-  "block.healthmod.band_aid_box": "Box of Band Aids",
-  "effect.healthmod.wound_infection": "Wound Infection",
-  "healthmod.config.canSleepWithoutMask": "Can Sleep without a Mask.",
-  "death.attack.wound_infection": "%1$s died from a wound infection",
-  "text.healthmod.band_aid.failed_apply": "Uh oh, you didn't put the band aid on correctly!"
+
+  "item.healthmod.echinacea": "Echinacea",
+  "block.healthmod.echinacea_plant": "Echinacea Seed",
+
+  "effect.healthmod.wound_infection": "Wound Infection"
 }
