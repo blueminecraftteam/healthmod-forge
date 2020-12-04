@@ -25,6 +25,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,8 +35,9 @@ public class BlockRegistries {
 
     public static final RegistryObject<Block> BAND_AID_BOX = BLOCKS.register(
             "band_aid_box",
-            () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.IRON)
+            () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
                     .sound(SoundType.CLOTH)
-                    .noDrops())
+                    .noDrops()
+                    .zeroHardnessAndResistance())
     );
 }

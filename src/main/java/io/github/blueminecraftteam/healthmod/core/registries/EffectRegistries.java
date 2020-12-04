@@ -19,6 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
+import io.github.blueminecraftteam.healthmod.common.effects.ModEffect;
 import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.potion.Effect;
@@ -33,5 +34,10 @@ public class EffectRegistries {
     public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register(
             "wound_infection",
             () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00)
+    );
+
+    public static final RegistryObject<Effect> HEALTHY = EFFECTS.register(
+            "healthy",
+            () -> new ModEffect(EffectType.BENEFICIAL, 0x67eb34)
     );
 }

@@ -19,6 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core;
 
+import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
 import io.github.blueminecraftteam.healthmod.core.registries.*;
 import net.minecraft.item.BlockItem;
@@ -66,7 +67,7 @@ public class HealthMod {
 
         LOGGER.debug("Registered deferred registers to mod event bus!");
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, HealthModConfig.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HealthModConfig.SERVER_SPEC);
 
         LOGGER.debug("Registered config!");
 
@@ -78,7 +79,14 @@ public class HealthMod {
         final IForgeRegistry<Item> registry = event.getRegistry();
 
         BlockRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-            final Item.Properties properties = new Item.Properties().group(ITEM_GROUP);
+            final Item.Properties properties;
+
+            if (block instanceof BandAidBoxBlock) {
+                properties = new Item.Properties().group(ITEM_GROUP).maxStackSize(1);
+            } else {
+                properties = new Item.Properties().group(ITEM_GROUP);
+            }
+
             final BlockItem blockItem = new BlockItem(block, properties);
             blockItem.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
             registry.register(blockItem);

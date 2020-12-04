@@ -22,8 +22,10 @@ package io.github.blueminecraftteam.healthmod.core.registries;
 import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,8 +37,8 @@ public class ItemRegistries {
     public static final RegistryObject<Item> BAND_AID = ITEMS.register(
             "band_aid",
             () -> new BandAidItem(new Item.Properties()
-                    .group(HealthMod.ITEM_GROUP)
-                    .maxDamage(2)
+                    .maxStackSize(16)
+                    .maxDamage(1)
                     .rarity(Rarity.UNCOMMON))
     );
 
@@ -47,6 +49,7 @@ public class ItemRegistries {
                     .group(HealthMod.ITEM_GROUP)
                     .maxStackSize(1))
     );
+
     // TODO: Model
     // Do this later, i cba to do the functionality for it -AG6 28/11/2020
     /*
@@ -60,7 +63,18 @@ public class ItemRegistries {
 
     public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register(
             "antibiotics",
-            () -> new AntibioticsItem(new Item.Properties().group(HealthMod.ITEM_GROUP))
+            () -> new AntibioticsItem(new Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(16))
+    );
+
+    public static final RegistryObject<Item> BROCCOLI = ITEMS.register(
+            "broccoli",
+            () -> new Item(new Item.Properties()
+                    .group(HealthMod.ITEM_GROUP)
+                    .food(new Food.Builder()
+                            .hunger(3)
+                            .saturation(2F)
+                            .effect(() -> new EffectInstance(EffectRegistries.HEALTHY.get(), 60 * 20), 1F)
+                            .build()))
     );
 }
 

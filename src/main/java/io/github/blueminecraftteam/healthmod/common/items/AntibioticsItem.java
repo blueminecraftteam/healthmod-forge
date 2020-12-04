@@ -19,12 +19,70 @@
 
 package io.github.blueminecraftteam.healthmod.common.items;
 
+import io.github.blueminecraftteam.healthmod.core.HealthMod;
+import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.EffectType;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AntibioticsItem extends Item {
     public AntibioticsItem(Item.Properties properties) {
         super(properties);
     }
 
-    // TODO
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+        if (!world.isRemote) {
+            if (ThreadLocalRandom.current().nextInt(1, HealthModConfig.SERVER_CONFIG.bacterialResistanceChance.get() + 1) != 1) {
+                for (EffectInstance effectInstance : player.getActivePotionEffects()) {
+                    if (effectInstance.getPotion().getEffectType() == EffectType.HARMFUL && effectInstance.getPotion() != Effects.POISON) {
+                        player.removePotionEffect(effectInstance.getPotion());
+                    }
+                }
+            } else {
+                player.sendStatusMessage(
+                        new TranslationTextComponent("text." + HealthMod.MOD_ID + ".antibiotics.resistant_bacteria"),
+                        true
+                );
+
+                for (EffectInstance effectInstance : player.getActivePotionEffects()) {
+                    if (effectInstance.getPotion().getEffectType() == EffectType.HARMFUL && effectInstance.getPotion() != Effects.POISON) {
+                        player.removePotionEffect(effectInstance.getPotion());
+
+                        effectInstance.combine(new EffectInstance(
+                                effectInstance.getPotion(),
+                                Math.round(effectInstance.getDuration() * 1.5F),
+                                effectInstance.getAmplifier() + 1,
+                                effectInstance.isAmbient(),
+                                effectInstance.doesShowParticles(),
+                                effectInstance.isShowIcon(),
+                                ObfuscationReflectionHelper.getPrivateValue(
+                                        EffectInstance.class,
+                                        effectInstance,
+                                        "field_230115_j_"
+                                )
+                        ));
+
+                        player.addPotionEffect(effectInstance);
+                    }
+                }
+            }
+        }
+
+        final ItemStack stack = player.getHeldItem(hand);
+
+        stack.shrink(1);
+
+        return ActionResult.resultConsume(stack);
+    }
 }

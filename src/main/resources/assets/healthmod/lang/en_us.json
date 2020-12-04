@@ -1,9 +1,17 @@
 {
-  "itemGroup.healthmod": "HealthMod",
+  "item.healthmod.antibiotics": "Antibiotics",
   "item.healthmod.band_aid": "Band Aid",
+  "item.healthmod.broccoli": "Broccoli",
   "item.healthmod.syringe": "Syringe",
-  "block.healthmod.band_aid_box": "Box of Band Aids",
+  "effect.healthmod.healthy": "Healthy",
   "effect.healthmod.wound_infection": "Wound Infection",
+  "itemGroup.healthmod": "HealthMod",
+  "text.healthmod.band_aid.1": "Gives you regeneration for 15 seconds.",
+  "text.healthmod.band_aid.2": "Can only be used once.",
+  "text.healthmod.band_aid.3": "You have a 25% chance of getting an infection.",
+  "text.healthmod.band_aid.failed_apply": "Uh oh, you didn't put the band aid on correctly!",
+  "text.healthmod.antibiotics.resistant_bacteria": "Uh oh, the bacteria has become resistant!",
+  "block.healthmod.band_aid_box": "Box of Band Aids",
   "death.attack.wound_infection": "%1$s died from a wound infection",
-  "text.healthmod.band_aid.failed_apply": "Uh oh, you didn't put the band aid on correctly!"
+  "death.attack.wound_infection.player": "%1$s died from a wound infection"
 }
