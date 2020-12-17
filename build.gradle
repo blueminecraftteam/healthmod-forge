@@ -92,6 +92,7 @@ license {
     }
 
     include("**/*.java")
+    include("**/*.kt")
 }
 
 jar {
