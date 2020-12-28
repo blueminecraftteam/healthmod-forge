@@ -3,6 +3,7 @@
   "item.healthmod.band_aid": "Band Aid",
   "item.healthmod.broccoli": "Broccoli",
   "item.healthmod.syringe": "Syringe",
+  "item.healthmod.facemask": "Medical Mask",
   "effect.healthmod.healthy": "Healthy",
   "effect.healthmod.wound_infection": "Wound Infection",
   "itemGroup.healthmod": "HealthMod",
