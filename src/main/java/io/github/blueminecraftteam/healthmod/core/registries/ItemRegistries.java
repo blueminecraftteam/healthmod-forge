@@ -21,6 +21,7 @@ package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
+import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -52,14 +53,12 @@ public class ItemRegistries {
 
     // TODO: Model
     // Do this later, i cba to do the functionality for it -AG6 28/11/2020
-    /*
     public static final RegistryObject<Item> FACEMASK = ITEMS.register(
             "facemask",
             () -> new FaceMaskItem(new Item.Properties()
                     .group(HealthMod.ITEM_GROUP)
-                    .maxStackSize(1))
+                    .maxDamage(100))
     );
-    */
 
     public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register(
             "antibiotics",
