@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.common.items;
 
-import io.github.blueminecraftteam.healthmod.client.armor.CustomArmorModel;
+import io.github.blueminecraftteam.healthmod.client.armor.FaceMaskModel;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries;
 import net.minecraft.client.renderer.entity.model.BipedModel;
@@ -27,37 +27,37 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-
-// NOTE: To take the piss i might just make it so when u right click it puts it on your head, since its not an ArmorItem I don't think it can do this?
-// NOTE: Model should work with texture and it dose , atm {@link CustomArmorModel} don't do anything and acts as a placeholder for modlers to put their custom models there. -BioAstroiner
+// NOTE: Model should work with texture and it does, atm FaceMaskModel doesn't do anything and acts as a placeholder for modelers to put their custom models there. -BioAstroiner
 public class FaceMaskItem extends ArmorItem {
-    public FaceMaskItem(Properties builderIn) {
-        super(ArmorMaterial.LEATHER, EquipmentSlotType.HEAD, builderIn);
+    public FaceMaskItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
+        super(materialIn, slot, builderIn);
     }
 
     @Nullable
     @OnlyIn(Dist.CLIENT)
     @Override
-    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack,
-                                                     EquipmentSlotType armorSlot, A _default) {
-        if(itemStack.getItem() instanceof ArmorItem)
-        {
-            CustomArmorModel model = new CustomArmorModel();
+    public <A extends BipedModel<?>> A getArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlotType armorSlot, A originalModel) {
+        if (itemStack.getItem() instanceof ArmorItem) {
+            FaceMaskModel model = new FaceMaskModel();
 
             model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD;
+            model.isChild = originalModel.isChild;
+            model.isSitting = originalModel.isSitting;
+            model.isSneak = originalModel.isSneak;
+            model.rightArmPose = originalModel.rightArmPose;
+            model.leftArmPose = originalModel.leftArmPose;
 
-            model.isChild = _default.isChild;
-            model.isSitting = _default.isSitting;
-            model.isSneak = _default.isSneak;
-            model.rightArmPose = _default.rightArmPose;
-            model.leftArmPose = _default.leftArmPose;
+            // noinspection unchecked
             return (A) model;
         }
         return null;
@@ -65,7 +65,7 @@ public class FaceMaskItem extends ArmorItem {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
-        return HealthMod.MOD_ID + ":textures/models/armor/facemask.png";
+        return HealthMod.MOD_ID + ":textures/models/armor/face_mask.png";
     }
 
     @Nullable
@@ -76,15 +76,20 @@ public class FaceMaskItem extends ArmorItem {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-        return repair.getItem() == Items.SLIME_BALL; // why not?
+        return repair.getItem() == Items.SLIME_BALL;
     }
 
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-        //if the player is infected it would damage the mask
-        //TODO make player suffer less from bad potion effects while wearing masks
-        if(player.isPotionActive(EffectRegistries.WOUND_INFECTION.get())){
-            stack.damageItem((int)Math.floor( world.rand.nextFloat() * 5),player,playerEntity -> playerEntity.sendBreakAnimation(playerEntity.getActiveHand()));
+        // if the player is infected it would damage the mask
+        // TODO make player suffer less from bad potion effects while wearing masks
+
+        if (player.isPotionActive(EffectRegistries.WOUND_INFECTION.get())) {
+            stack.damageItem(
+                    (int) Math.floor(world.rand.nextFloat() * 5),
+                    player,
+                    playerEntity -> playerEntity.sendBreakAnimation(playerEntity.getActiveHand())
+            );
         }
     }
 }

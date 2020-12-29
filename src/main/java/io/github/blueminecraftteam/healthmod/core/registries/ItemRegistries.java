@@ -23,6 +23,8 @@ import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
 import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
@@ -31,7 +33,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@SuppressWarnings("UNUSED")
+@SuppressWarnings({"UNUSED", "unused"})
 public class ItemRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
 
@@ -51,13 +53,13 @@ public class ItemRegistries {
                     .maxStackSize(1))
     );
 
-    // TODO: Model
-    // Do this later, i cba to do the functionality for it -AG6 28/11/2020
-    public static final RegistryObject<Item> FACEMASK = ITEMS.register(
-            "facemask",
-            () -> new FaceMaskItem(new Item.Properties()
-                    .group(HealthMod.ITEM_GROUP)
-                    .maxDamage(100))
+    public static final RegistryObject<Item> FACE_MASK = ITEMS.register(
+            "face_mask",
+            () -> new FaceMaskItem(
+                    ArmorMaterial.LEATHER,
+                    EquipmentSlotType.HEAD,
+                    new Item.Properties().group(HealthMod.ITEM_GROUP).maxDamage(100)
+            )
     );
 
     public static final RegistryObject<Item> ANTIBIOTICS = ITEMS.register(
