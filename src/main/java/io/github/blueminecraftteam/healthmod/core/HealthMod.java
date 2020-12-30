@@ -63,6 +63,7 @@ public class HealthMod {
         ItemRegistries.ITEMS.register(modEventBus);
         EffectRegistries.EFFECTS.register(modEventBus);
         ContainerRegistries.CONTAINERS.register(modEventBus);
+        EntityRegistries.ENTITIES.register(modEventBus);
         TileEntityRegistries.TILE_ENTITIES.register(modEventBus);
 
         LOGGER.debug("Registered deferred registers to mod event bus!");
