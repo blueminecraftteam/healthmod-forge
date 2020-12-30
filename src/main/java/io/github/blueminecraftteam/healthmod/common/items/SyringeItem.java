@@ -27,88 +27,54 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-// TODO : add more functionalities to syringe
+// TODO: add more functionalities to syringe
 public class SyringeItem extends Item {
-    private static final String TAG_BLOOD = "blood_fill";
-    public static final IItemPropertyGetter bloodFillProperty = (stack, world, entity) -> {
-        if (getBloodAmount(stack) < 0.2f) {
-            return 0.0f;
-        } else if (getBloodAmount(stack) < 0.4f) {
-            return 0.2f;
-        } else if (getBloodAmount(stack) < 0.6f) {
-            return 0.4f;
-        } else if (getBloodAmount(stack) < 0.8f) {
-            return 0.6f;
-        } else if (getBloodAmount(stack) < 1.0f) {
-            return 0.8f;
-        } else if (getBloodAmount(stack) == 1.0f) {
-            return 1.0f;
-        }
-        return 0.0f;
-    };
+    private static final String BLOOD_NBT_TAG = "blood";
+    public static final IItemPropertyGetter BLOOD_PROPERTY = (stack, world, entity) -> getBlood(stack);
 
     public SyringeItem(Properties properties) {
         super(properties);
     }
 
-    /**
-     * @param amountIn value between 0 and 1
-     */
-    // TODO : change this horrible math later
-    public static void storeBlood(ItemStack stack, float amountIn) {
-        amountIn = Math.abs(amountIn);
-        amountIn = Math.min(amountIn, 1.0f);
-        amountIn += stack.getOrCreateTag().getFloat(TAG_BLOOD);
-        stack.getOrCreateTag().putFloat(TAG_BLOOD,
-                Math.min(amountIn, 1.0f));
+    private static int getBlood(ItemStack stack) {
+        return stack.getOrCreateTag().getInt(BLOOD_NBT_TAG);
     }
 
-    /**
-     * @param amountOut value between 0 and 1
-     */
-    // TODO : change this horrible math later
-    public static void extractBlood(ItemStack stack, float amountOut) {
-        amountOut = Math.abs(amountOut);
-        amountOut = Math.min(amountOut, 1.0f);
-        float amountStored = stack.getOrCreateTag().getFloat(TAG_BLOOD);
-        amountStored -= amountOut;
-        amountStored = Math.min(Math.abs(amountStored), 0.0f);
-        stack.getOrCreateTag().putFloat(TAG_BLOOD, amountStored);
-    }
-
-    public static boolean isFull(ItemStack stack) {
-        if (!(stack.getOrCreateTag().contains(TAG_BLOOD))) {
-            return false;
-        }
-        float blood = stack.getOrCreateTag().getFloat(TAG_BLOOD);
-        return blood == 1.0f;
-    }
-
-    public static float getBloodAmount(ItemStack stack) {
-        if (!(stack.getOrCreateTag().contains(TAG_BLOOD))) {
-            return 0.0f;
-        }
-        return stack.getOrCreateTag().getFloat(TAG_BLOOD);
+    private static void setBlood(ItemStack stack, int amount) {
+        stack.getOrCreateTag().putInt(BLOOD_NBT_TAG, Math.min(amount, 1));
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemStack = playerIn.getHeldItem(handIn);
-        if (isFull(itemStack)) {
-            return ActionResult.resultPass(itemStack);
+    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+        ItemStack heldItem = player.getHeldItem(hand);
+
+        if (getBlood(heldItem) >= 1) {
+            return ActionResult.resultPass(heldItem);
+        } else {
+            player.addStat(Stats.DAMAGE_TAKEN);
+            player.attackEntityFrom(DamageSource.GENERIC, 1);
+
+            setBlood(heldItem, 1);
+
+            world.playSound(
+                    player,
+                    player.getPosition(),
+                    SoundEvents.ENTITY_GENERIC_HURT,
+                    SoundCategory.PLAYERS,
+                    0.3F,
+                    1F
+            );
+
+            return ActionResult.resultSuccess(heldItem);
         }
-        playerIn.addStat(Stats.DAMAGE_TAKEN);
-        playerIn.attackEntityFrom(DamageSource.CACTUS, 1);
-        storeBlood(itemStack, 0.1f);
-        worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.PLAYERS,
-                0.3F, 1F);
-        return ActionResult.resultSuccess(itemStack);
     }
 
     @Override
@@ -116,10 +82,9 @@ public class SyringeItem extends Item {
         return 20;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip,
-                               ITooltipFlag flagIn) {
-        tooltip.add(new StringTextComponent(String.valueOf(getBloodAmount(stack))));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        tooltip.add(new TranslationTextComponent("text.healthmod.syringe.tooltip.1", getBlood(stack) >= 1));
     }
 }

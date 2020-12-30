@@ -10,6 +10,7 @@
   "text.healthmod.band_aid.1": "Gives you regeneration for 15 seconds.",
   "text.healthmod.band_aid.2": "Can only be used once.",
   "text.healthmod.band_aid.3": "You have a 25% chance of getting an infection.",
+  "text.healthmod.syringe.tooltip.1": "Full: %s",
   "text.healthmod.band_aid.failed_apply": "Uh oh, you didn't put the band aid on correctly!",
   "text.healthmod.antibiotics.resistant_bacteria": "Uh oh, the bacteria has become resistant!",
   "block.healthmod.band_aid_box": "Box of Band Aids",

@@ -37,8 +37,10 @@ public class HealthModClient {
     @SubscribeEvent
     public static void clientEvent(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(EntityRegistries.DOCTOR.get(), DoctorNPCEntityRenderer::new);
-        ItemModelsProperties.registerProperty(ItemRegistries.SYRINGE.get(),
+        ItemModelsProperties.registerProperty(
+                ItemRegistries.SYRINGE.get(),
                 new ResourceLocation(HealthMod.MOD_ID, "blood"),
-                SyringeItem.bloodFillProperty);
+                SyringeItem.BLOOD_PROPERTY
+        );
     }
 }
