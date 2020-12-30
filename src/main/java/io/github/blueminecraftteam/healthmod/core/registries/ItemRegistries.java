@@ -22,6 +22,7 @@ package io.github.blueminecraftteam.healthmod.core.registries;
 import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
 import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
 import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
+import io.github.blueminecraftteam.healthmod.common.items.SyringeItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
@@ -45,10 +46,9 @@ public class ItemRegistries {
                     .rarity(Rarity.UNCOMMON))
     );
 
-    // TODO: do the syringe e.g. extract blood etc
     public static final RegistryObject<Item> SYRINGE = ITEMS.register(
             "syringe",
-            () -> new Item(new Item.Properties()
+            () -> new SyringeItem(new Item.Properties()
                     .group(HealthMod.ITEM_GROUP)
                     .maxStackSize(1))
     );

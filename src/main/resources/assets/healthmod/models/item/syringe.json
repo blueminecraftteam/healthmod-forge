@@ -1,0 +1,44 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "healthmod:item/syringe_empty"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "healthmod:blood": 0.0
+      },
+      "model": "healthmod:item/syringe"
+    },
+    {
+      "predicate": {
+        "healthmod:blood": 0.2
+      },
+      "model": "healthmod:item/syringe_1"
+    },
+    {
+      "predicate": {
+        "healthmod:blood": 0.4
+      },
+      "model": "healthmod:item/syringe_2"
+    },
+    {
+      "predicate": {
+        "healthmod:blood": 0.6
+      },
+      "model": "healthmod:item/syringe_3"
+    },
+    {
+      "predicate": {
+        "healthmod:blood": 0.8
+      },
+      "model": "healthmod:item/syringe_4"
+    },
+    {
+      "predicate": {
+        "healthmod:blood": 1.0
+      },
+      "model": "healthmod:item/syringe_5"
+    }
+  ]
+}
