@@ -20,19 +20,15 @@
 package io.github.blueminecraftteam.healthmod.common.items;
 
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -59,25 +55,13 @@ public class SyringeItem extends Item {
         stack.getOrCreateTag().putInt(BLOOD_NBT_TAG, Math.min(amount, 1));
     }
 
-    /**
-     * ray traces from a player to an entity
-     */
-    private static EntityRayTraceResult rayTrace(World worldIn, PlayerEntity player, Entity entityIn) {
-        return ProjectileHelper.rayTraceEntities(worldIn, player, player.getPositionVec(), entityIn.getPositionVec(),
-                player.getBoundingBox().expand(player.getMotion()).grow(1.0D), Entity::isAlive);
-    }
-
-    /**
-     * ray traces from a player in favor of a vector3d
-     */
-    private static EntityRayTraceResult rayTrace(World worldIn, PlayerEntity player, Vector3d vto) {
-        return ProjectileHelper.rayTraceEntities(worldIn, player, player.getPositionVec(), vto,
-                player.getBoundingBox().expand(player.getMotion()).grow(1.0D), Entity::isAlive);
-    }
-
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
         ItemStack heldItem = player.getHeldItem(hand);
+
+        // TODO: readd code
+        // this is bad code - it doesn't check for isRemote and i dont think it would still work
+        /*
         EntityRayTraceResult raytraceresult = rayTrace(world, player, player.getPositionVec().add(player.getLookVec()));
 
         try {
@@ -89,6 +73,7 @@ public class SyringeItem extends Item {
         } catch (NullPointerException e) {
             // pretend nothing happened...
         }
+        */
 
         if (getBlood(heldItem) >= 1) {
             return ActionResult.resultPass(heldItem);
@@ -111,14 +96,12 @@ public class SyringeItem extends Item {
         }
     }
 
-    //TODO : syringe still crashes when used on an entity mob fix it later
+    //TODO: syringe still crashes when used on an entity mob fix it later
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target,
-                                                     Hand hand) {
-        if (getBlood(stack) >= 1) {
-            return ActionResultType.PASS;
-        }
-        if (playerIn.world.isRemote) {
+    public ActionResultType itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
+        if (getBlood(stack) >= 1) return ActionResultType.PASS;
+
+        if (!playerIn.world.isRemote) {
             if (target instanceof MobEntity) {
                 target.attackEntityAsMob(playerIn);
 
@@ -148,9 +131,7 @@ public class SyringeItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn,
-                               List<ITextComponent> tooltip,
-                               ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new TranslationTextComponent("text.healthmod.syringe.tooltip.1", getBlood(stack) >= 1));
     }
 }
