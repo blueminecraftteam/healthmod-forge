@@ -19,16 +19,13 @@
 
 package io.github.blueminecraftteam.healthmod.client;
 
-import io.github.blueminecraftteam.healthmod.client.entity.doctor.DoctorNPCEntityRenderer;
 import io.github.blueminecraftteam.healthmod.common.items.SyringeItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import io.github.blueminecraftteam.healthmod.core.registries.EntityRegistries;
 import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -36,7 +33,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class HealthModClient {
     @SubscribeEvent
     public static void clientEvent(FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(EntityRegistries.DOCTOR.get(), DoctorNPCEntityRenderer::new);
         ItemModelsProperties.registerProperty(
                 ItemRegistries.SYRINGE.get(),
                 new ResourceLocation(HealthMod.MOD_ID, "blood"),

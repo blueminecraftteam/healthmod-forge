@@ -38,8 +38,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ItemRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Item> BAND_AID = ITEMS.register(
-            "band_aid",
+    public static final RegistryObject<Item> BANDAGE = ITEMS.register(
+            "bandage",
             () -> new BandAidItem(new Item.Properties()
                     .maxStackSize(16)
                     .maxDamage(1)
@@ -76,6 +76,12 @@ public class ItemRegistries {
                             .saturation(2F)
                             .effect(() -> new EffectInstance(EffectRegistries.HEALTHY.get(), 60 * 20), 1F)
                             .build()))
+    );
+
+    public static final RegistryObject<Item> FIRST_AID_KIT = ITEMS.register(
+            "first_aid_kit",
+            () -> new Item(new Item.Properties()
+                    .group(HealthMod.ITEM_GROUP))
     );
 }
 

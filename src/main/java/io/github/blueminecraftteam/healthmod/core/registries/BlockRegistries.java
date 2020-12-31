@@ -33,8 +33,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockRegistries {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Block> BAND_AID_BOX = BLOCKS.register(
-            "band_aid_box",
+    public static final RegistryObject<Block> BANDAGE_BOX = BLOCKS.register(
+            "bandage_box",
             () -> new BandAidBoxBlock(AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
                     .sound(SoundType.CLOTH)
                     .noDrops()

@@ -51,7 +51,7 @@ public class HealthMod {
         @OnlyIn(Dist.CLIENT)
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ItemRegistries.BAND_AID.get());
+            return new ItemStack(ItemRegistries.BANDAGE.get());
         }
     };
     private static final Logger LOGGER = LogManager.getLogger();
@@ -63,8 +63,9 @@ public class HealthMod {
         ItemRegistries.ITEMS.register(modEventBus);
         EffectRegistries.EFFECTS.register(modEventBus);
         ContainerRegistries.CONTAINERS.register(modEventBus);
-        EntityRegistries.ENTITIES.register(modEventBus);
         TileEntityRegistries.TILE_ENTITIES.register(modEventBus);
+        VillagerProfessionRegistries.PROFESSIONS.register(modEventBus);
+        VillagerProfessionRegistries.POI_TYPES.register(modEventBus);
 
         LOGGER.debug("Registered deferred registers to mod event bus!");
 
