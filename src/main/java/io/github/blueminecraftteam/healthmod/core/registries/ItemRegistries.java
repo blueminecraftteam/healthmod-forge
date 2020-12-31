@@ -38,8 +38,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ItemRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Item> BANDAGE = ITEMS.register(
-            "bandage",
+    public static final RegistryObject<Item> BAND_AID = ITEMS.register(
+            "band_aid",
             () -> new BandAidItem(new Item.Properties()
                     .maxStackSize(16)
                     .maxDamage(1)

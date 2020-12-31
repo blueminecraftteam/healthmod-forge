@@ -21,7 +21,6 @@ package io.github.blueminecraftteam.healthmod.core.registries;
 
 import com.google.common.collect.ImmutableSet;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.util.SoundEvents;
@@ -30,28 +29,38 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.HashSet;
 import java.util.Set;
 
-//dont work maybe cus no trades? -ag6
-@SuppressWarnings("UNUSED")
+// dont work maybe cus no trades? -ag6
+@SuppressWarnings("unused")
 public class VillagerProfessionRegistries {
-
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID);
     public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID);
 
-    public static final RegistryObject<PointOfInterestType> DOCTOR_POI = POI_TYPES.register("", () -> new PointOfInterestType(
+    public static final RegistryObject<VillagerProfession> DOCTOR = PROFESSIONS.register(
             "doctor",
-            getBlockStates(BlockRegistries.BANDAGE_BOX.get()),
-            1,
-            20));
-    public static final RegistryObject<VillagerProfession> DOCTOR = PROFESSIONS.register("doctor", () -> new VillagerProfession(
-            "doctor",
-            DOCTOR_POI.get(),
-            ImmutableSet.of(ItemRegistries.FIRST_AID_KIT.get()),
-            ImmutableSet.of(BlockRegistries.BANDAGE_BOX.get()),
-            SoundEvents.BLOCK_BREWING_STAND_BREW));
+            () -> new VillagerProfession(
+                    "doctor_point_of_interest",
+                    DOCTOR_POINT_OF_INTEREST.get(),
+                    ImmutableSet.of(ItemRegistries.FIRST_AID_KIT.get()),
+                    ImmutableSet.of(BlockRegistries.BAND_AID_BOX.get()),
+                    SoundEvents.BLOCK_BREWING_STAND_BREW
+            )
+    );
+    private static final Set<BlockState> DOCTOR_POINT_OF_INTEREST_STATES = new HashSet<>();
+    public static final RegistryObject<PointOfInterestType> DOCTOR_POINT_OF_INTEREST = POI_TYPES.register(
+            "doctor_point_of_interest",
+            () -> new PointOfInterestType(
+                    "doctor_point_of_interest",
+                    ImmutableSet.copyOf(DOCTOR_POINT_OF_INTEREST_STATES),
+                    1,
+                    1
+            )
+    );
 
-    private static Set<BlockState> getBlockStates(Block block) {
-        return ImmutableSet.copyOf(block.getStateContainer().getValidStates());
+    static {
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BAND_AID_BOX.get()));
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BAND_AID_BOX.get()));
     }
 }

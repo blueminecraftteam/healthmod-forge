@@ -51,7 +51,7 @@ public class HealthMod {
         @OnlyIn(Dist.CLIENT)
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ItemRegistries.BANDAGE.get());
+            return new ItemStack(ItemRegistries.BAND_AID.get());
         }
     };
     private static final Logger LOGGER = LogManager.getLogger();
