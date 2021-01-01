@@ -19,8 +19,8 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.common.tileentity.BandageBoxTileEntity;
-import io.github.blueminecraftteam.healthmod.common.tileentity.BloodTestMachineTileEntity;
+import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity;
+import io.github.blueminecraftteam.healthmod.common.tileentities.BloodTestMachineTileEntity;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -40,6 +40,6 @@ public class TileEntityRegistries {
     public static final RegistryObject<TileEntityType<BloodTestMachineTileEntity>> BLOOD_TEST_MACHINE = TILE_ENTITIES.register(
             "blood_test_machine",
             () -> TileEntityType.Builder.create(BloodTestMachineTileEntity::new, BlockRegistries.BLOOD_TEST_MACHINE.get())
-            .build(null)
+                    .build(null)
     );
 }

@@ -46,9 +46,7 @@ public class BlockRegistries {
     public static final RegistryObject<Block> BLOOD_TEST_MACHINE = BLOCKS.register(
             "blood_test_machine",
             () -> new BloodTestMachineBlock(AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
-            .sound(SoundType.GLASS)
-            .hardnessAndResistance(0, 0))
+                    .sound(SoundType.GLASS)
+                    .hardnessAndResistance(0, 0))
     );
-
-
 }

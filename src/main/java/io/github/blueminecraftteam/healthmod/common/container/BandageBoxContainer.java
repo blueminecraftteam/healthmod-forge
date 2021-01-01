@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.common.container;
 
-import io.github.blueminecraftteam.healthmod.common.tileentity.BandageBoxTileEntity;
+import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity;
 import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries;
 import io.github.blueminecraftteam.healthmod.core.registries.ContainerRegistries;
 import net.minecraft.entity.player.PlayerEntity;

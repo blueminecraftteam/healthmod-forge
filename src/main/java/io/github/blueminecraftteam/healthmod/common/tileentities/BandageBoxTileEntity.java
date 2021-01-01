@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.tileentity;
+package io.github.blueminecraftteam.healthmod.common.tileentities;
 
 import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
 import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer;

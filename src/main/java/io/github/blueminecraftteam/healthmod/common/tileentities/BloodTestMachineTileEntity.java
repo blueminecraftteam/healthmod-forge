@@ -17,30 +17,19 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.blocks;
+package io.github.blueminecraftteam.healthmod.common.tileentities;
 
 import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
-
-import javax.annotation.Nullable;
+import net.minecraft.tileentity.TileEntityType;
 
 // TODO functionality
-public class BloodTestMachineBlock extends Block {
-    public BloodTestMachineBlock(Properties properties) {
-        super(properties);
+public class BloodTestMachineTileEntity extends TileEntity {
+    public BloodTestMachineTileEntity(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityRegistries.BLOOD_TEST_MACHINE.get().create();
+    public BloodTestMachineTileEntity(){
+        this(TileEntityRegistries.BLOOD_TEST_MACHINE.get());
     }
 }
