@@ -91,6 +91,7 @@ public class HealthMod {
 
             final BlockItem blockItem = new BlockItem(block, properties);
             blockItem.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
+
             registry.register(blockItem);
         });
 

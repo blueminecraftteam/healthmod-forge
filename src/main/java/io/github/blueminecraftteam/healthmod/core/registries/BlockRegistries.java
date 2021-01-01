@@ -20,12 +20,14 @@
 package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
+import io.github.blueminecraftteam.healthmod.common.blocks.BloodTestMachineBlock;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.DyeColor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -40,4 +42,13 @@ public class BlockRegistries {
                     .noDrops()
                     .zeroHardnessAndResistance())
     );
+
+    public static final RegistryObject<Block> BLOOD_TEST_MACHINE = BLOCKS.register(
+            "blood_test_machine",
+            () -> new BloodTestMachineBlock(AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
+            .sound(SoundType.GLASS)
+            .hardnessAndResistance(0, 0))
+    );
+
+
 }

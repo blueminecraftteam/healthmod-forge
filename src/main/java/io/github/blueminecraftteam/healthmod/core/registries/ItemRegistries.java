@@ -19,10 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
-import io.github.blueminecraftteam.healthmod.common.items.BandageItem;
-import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
-import io.github.blueminecraftteam.healthmod.common.items.SyringeItem;
+import io.github.blueminecraftteam.healthmod.common.items.*;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorMaterial;
@@ -82,6 +79,16 @@ public class ItemRegistries {
             "first_aid_kit",
             () -> new Item(new Item.Properties()
                     .group(HealthMod.ITEM_GROUP))
+    );
+    
+    public static final RegistryObject<Item> BLOOD_VIAL = ITEMS.register(
+            "blood_vial",
+            () -> new Item(new Item.Properties().group(HealthMod.ITEM_GROUP))
+    );
+
+    public static final RegistryObject<Item> ISOPROPYL_ALCOHOl = ITEMS.register(
+            "isopropyl_alcohol",
+            () -> new IsopropylAlcoholItem(new Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(1))
     );
 }
 
