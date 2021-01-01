@@ -4,7 +4,7 @@ loaderVersion = "[35,)"
 
 license = "LGPL-3.0-or-later"
 
-issueTrackerURL = "https://github.com/blueminecraftteam/HealthMod/issues/"
+issueTrackerURL = "https://github.com/blueminecraftteam/healthmod-forge/issues/"
 
 [[mods]]
 
@@ -14,7 +14,7 @@ version = "${version}"
 
 displayName = "HealthMod"
 
-description = "This mod adds health related items into Minecraft, such as viruses, medicines and more!"
+description = "This mod adds health related things into Minecraft, such as viruses, medicines and more!"
 
 logoFile = "logo.png"
 
