@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.common.tileentity;
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
+import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
 import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer;
 import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries;
 import net.minecraft.block.Block;
@@ -159,7 +159,7 @@ public class BandageBoxTileEntity extends LockableLootTileEntity {
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
 
-        if (block instanceof BandAidBoxBlock) {
+        if (block instanceof BandageBoxBlock) {
             this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
             this.world.notifyNeighborsOfStateChange(this.pos, block);
         }

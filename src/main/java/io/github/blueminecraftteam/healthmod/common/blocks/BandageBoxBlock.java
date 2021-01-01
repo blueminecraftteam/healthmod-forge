@@ -27,8 +27,8 @@ import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nullable;
 
-public class BandAidBoxBlock extends Block {
-    public BandAidBoxBlock(Properties properties) {
+public class BandageBoxBlock extends Block {
+    public BandageBoxBlock(Properties properties) {
         super(properties);
     }
 

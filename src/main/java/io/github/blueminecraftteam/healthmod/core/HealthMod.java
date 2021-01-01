@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core;
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
+import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
 import io.github.blueminecraftteam.healthmod.core.registries.*;
 import net.minecraft.item.BlockItem;
@@ -83,7 +83,7 @@ public class HealthMod {
         BlockRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
             final Item.Properties properties;
 
-            if (block instanceof BandAidBoxBlock) {
+            if (block instanceof BandageBoxBlock) {
                 properties = new Item.Properties().group(ITEM_GROUP).maxStackSize(1);
             } else {
                 properties = new Item.Properties().group(ITEM_GROUP);
