@@ -37,7 +37,7 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object ItemRegistries {
     val ITEMS = KDeferredRegister(ForgeRegistries.ITEMS, HealthMod.MOD_ID)
 
-    val BANDAGE by ITEMS.register("bandage") {
+    val BANDAGE by ITEMS.registerObject("bandage") {
         BandageItem(
             Item.Properties()
                 .maxStackSize(16)
@@ -46,7 +46,7 @@ object ItemRegistries {
         )
     }
 
-    val SYRINGE by ITEMS.register("syringe") {
+    val SYRINGE by ITEMS.registerObject("syringe") {
         SyringeItem(
             Item.Properties()
                 .group(HealthMod.ITEM_GROUP)
@@ -54,7 +54,7 @@ object ItemRegistries {
         )
     }
 
-    val FACE_MASK by ITEMS.register("face_mask") {
+    val FACE_MASK by ITEMS.registerObject("face_mask") {
         FaceMaskItem(
             ArmorMaterial.LEATHER,
             EquipmentSlotType.HEAD,
@@ -62,11 +62,11 @@ object ItemRegistries {
         )
     }
 
-    val ANTIBIOTICS by ITEMS.register("antibiotics") {
+    val ANTIBIOTICS by ITEMS.registerObject("antibiotics") {
         AntibioticsItem(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(16))
     }
 
-    val BROCCOLI by ITEMS.register("broccoli") {
+    val BROCCOLI by ITEMS.registerObject("broccoli") {
         Item(
             Item.Properties()
                 .group(HealthMod.ITEM_GROUP)
@@ -80,16 +80,16 @@ object ItemRegistries {
         )
     }
 
-    val FIRST_AID_KIT by ITEMS.register("first_aid_kit") {
+    val FIRST_AID_KIT by ITEMS.registerObject("first_aid_kit") {
         Item(Item.Properties().group(HealthMod.ITEM_GROUP))
     }
 
-    val BLOOD_VIAL by ITEMS.register("blood_vial") {
+    val BLOOD_VIAL by ITEMS.registerObject("blood_vial") {
         Item(Item.Properties().group(HealthMod.ITEM_GROUP))
     }
 
     // TODO functionality
-    val ISOPROPYL_ALCOHOL by ITEMS.register("isopropyl_alcohol") {
+    val ISOPROPYL_ALCOHOL by ITEMS.registerObject("isopropyl_alcohol") {
         Item(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(1))
     }
 }

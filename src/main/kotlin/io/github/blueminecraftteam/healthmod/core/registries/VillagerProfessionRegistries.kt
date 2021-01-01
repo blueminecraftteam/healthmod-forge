@@ -33,7 +33,7 @@ object VillagerProfessionRegistries {
     val PROFESSIONS = KDeferredRegister(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID)
     val POI_TYPES = KDeferredRegister(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID)
 
-    val DOCTOR_POINT_OF_INTEREST by POI_TYPES.register("doctor_point_of_interest") {
+    val DOCTOR_POINT_OF_INTEREST by POI_TYPES.registerObject("doctor_point_of_interest") {
         PointOfInterestType(
             "doctor_point_of_interest",
             mutableSetOf<BlockState>().apply {
@@ -45,7 +45,7 @@ object VillagerProfessionRegistries {
         )
     }
 
-    val DOCTOR by PROFESSIONS.register("doctor") {
+    val DOCTOR by PROFESSIONS.registerObject("doctor") {
         VillagerProfession(
             "doctor",
             DOCTOR_POINT_OF_INTEREST,

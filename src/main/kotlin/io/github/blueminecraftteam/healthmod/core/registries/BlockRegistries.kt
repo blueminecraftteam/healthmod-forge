@@ -33,7 +33,7 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object BlockRegistries {
     val BLOCKS = KDeferredRegister(ForgeRegistries.BLOCKS, HealthMod.MOD_ID)
 
-    val BANDAGE_BOX by BLOCKS.register("bandage_box") {
+    val BANDAGE_BOX by BLOCKS.registerObject("bandage_box") {
         BandageBoxBlock(
             AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
                 .sound(SoundType.CLOTH)
@@ -42,7 +42,7 @@ object BlockRegistries {
         )
     }
 
-    val BLOOD_TEST_MACHINE by BLOCKS.register("blood_test_machine") {
+    val BLOOD_TEST_MACHINE by BLOCKS.registerObject("blood_test_machine") {
         BloodTestMachineBlock(
             AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
                 .sound(SoundType.GLASS)

@@ -1,6 +1,4 @@
 buildscript {
-    ext.kotlin_version = '1.4.30-M1'
-
     repositories {
         maven {
             url = "https://files.minecraftforge.net/maven"
@@ -15,7 +13,7 @@ buildscript {
 
     dependencies {
         classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "3.+", changing: true
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.kotlin_version}"
     }
 }
 
@@ -102,14 +100,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    fg.deobf(implementation('thedarkcolour:kotlinforforge:1.6.1'))
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${project.kotlin_version}"
+    implementation "thedarkcolour:kotlinforforge:${project.kotlin_for_forge_version}"
 }
 
 compileKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 license {

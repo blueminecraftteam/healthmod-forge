@@ -29,7 +29,7 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object ContainerRegistries {
     val CONTAINERS = KDeferredRegister(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID)
 
-    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.register("bandage_box") {
+    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.registerObject("bandage_box") {
         IForgeContainerType.create(::BandageBoxContainer)
     }
 }

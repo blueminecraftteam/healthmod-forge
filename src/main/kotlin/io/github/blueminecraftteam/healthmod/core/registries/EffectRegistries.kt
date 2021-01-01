@@ -29,7 +29,11 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object EffectRegistries {
     val EFFECTS = KDeferredRegister(ForgeRegistries.POTIONS, HealthMod.MOD_ID)
 
-    val WOUND_INFECTION by EFFECTS.register("wound_infection") { WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00) }
+    val WOUND_INFECTION by EFFECTS.registerObject("wound_infection") {
+        WoundInfectionEffect(type = EffectType.HARMFUL, color = 0x00FF00)
+    }
 
-    val HEALTHY by EFFECTS.register("healthy") { ModEffect(EffectType.BENEFICIAL, 0x67eb34) }
+    val HEALTHY by EFFECTS.registerObject("healthy") {
+        ModEffect(type = EffectType.BENEFICIAL, color = 0x67eb34)
+    }
 }

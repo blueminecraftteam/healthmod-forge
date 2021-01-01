@@ -45,7 +45,6 @@ object HealthMod {
         @OnlyIn(Dist.CLIENT)
         override fun createIcon() = ItemStack(ItemRegistries.BANDAGE)
     }
-
     private val LOGGER = LogManager.getLogger()
 
     init {
