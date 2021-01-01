@@ -38,16 +38,16 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BandAidItem extends Item {
-    public BandAidItem(Item.Properties settings) {
+public class BandageItem extends Item {
+    public BandageItem(Item.Properties settings) {
         super(settings);
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".band_aid.1"));
-        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".band_aid.2"));
-        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".band_aid.3"));
+        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".bandage.1"));
+        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".bandage.2"));
+        tooltip.add(new TranslationTextComponent("text." + HealthMod.MOD_ID + ".bandage.3"));
     }
 
     @Override
@@ -59,16 +59,16 @@ public class BandAidItem extends Item {
                 final int chance;
 
                 if (player.getActivePotionEffect(EffectRegistries.HEALTHY.get()) != null) {
-                    chance = HealthModConfig.SERVER_CONFIG.bandAidInfectionChanceWhenHealthy.get();
+                    chance = HealthModConfig.SERVER_CONFIG.bandageInfectionChanceWhenHealthy.get();
                 } else {
-                    chance = HealthModConfig.SERVER_CONFIG.bandAidInfectionChance.get();
+                    chance = HealthModConfig.SERVER_CONFIG.bandageInfectionChance.get();
                 }
 
                 // 1 in 4 chance (or 1 in 10 if healthy) to have it not apply correct
                 if (ThreadLocalRandom.current().nextInt(1, chance + 1) == 1) {
                     player.addPotionEffect(new EffectInstance(EffectRegistries.WOUND_INFECTION.get(), 15 * 20, 0));
                     player.sendStatusMessage(
-                            new TranslationTextComponent("text." + HealthMod.MOD_ID + ".band_aid.failed_apply"),
+                            new TranslationTextComponent("text." + HealthMod.MOD_ID + ".bandage.failed_apply"),
                             true
                     );
                 } else {

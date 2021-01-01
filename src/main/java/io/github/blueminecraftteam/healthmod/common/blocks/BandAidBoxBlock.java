@@ -43,6 +43,6 @@ public class BandAidBoxBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityRegistries.BAND_AID_BOX.get().create();
+        return TileEntityRegistries.BANDAGE_BOX.get().create();
     }
 }

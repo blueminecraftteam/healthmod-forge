@@ -22,8 +22,8 @@ package io.github.blueminecraftteam.healthmod.core.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ServerConfig {
-    public final ForgeConfigSpec.IntValue bandAidInfectionChance;
-    public final ForgeConfigSpec.IntValue bandAidInfectionChanceWhenHealthy;
+    public final ForgeConfigSpec.IntValue bandageInfectionChance;
+    public final ForgeConfigSpec.IntValue bandageInfectionChanceWhenHealthy;
     public final ForgeConfigSpec.IntValue bacterialResistanceChance;
 
     public ServerConfig(ForgeConfigSpec.Builder builder) {
@@ -31,13 +31,13 @@ public class ServerConfig {
 
         builder.push("Wound Infection");
         builder.comment("Chance for band aids to fail and to give you a wound infection. Chance is 1 divided by this.");
-        bandAidInfectionChance = builder.defineInRange(
+        bandageInfectionChance = builder.defineInRange(
                 "bandAidInfectionChance",
                 8,
                 1, /* to */ Integer.MAX_VALUE
         );
         builder.comment("Chance for band aids to fail and to give you a wound infection when healthy. Chance is 1 divided by this.");
-        bandAidInfectionChanceWhenHealthy = builder.defineInRange(
+        bandageInfectionChanceWhenHealthy = builder.defineInRange(
                 "bandAidInfectionChanceWhenHealthy",
                 16,
                 1, /* to */ Integer.MAX_VALUE

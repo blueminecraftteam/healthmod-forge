@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.core.registries;
 
-import io.github.blueminecraftteam.healthmod.common.tileentity.BandAidBoxTileEntity;
+import io.github.blueminecraftteam.healthmod.common.tileentity.BandageBoxTileEntity;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -30,9 +30,9 @@ public class TileEntityRegistries {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, HealthMod.MOD_ID);
 
     @SuppressWarnings("ConstantConditions")
-    public static final RegistryObject<TileEntityType<BandAidBoxTileEntity>> BAND_AID_BOX = TILE_ENTITIES.register(
+    public static final RegistryObject<TileEntityType<BandageBoxTileEntity>> BANDAGE_BOX = TILE_ENTITIES.register(
             "band_aid_box",
-            () -> TileEntityType.Builder.create(BandAidBoxTileEntity::new, BlockRegistries.BAND_AID_BOX.get())
+            () -> TileEntityType.Builder.create(BandageBoxTileEntity::new, BlockRegistries.BANDAGE_BOX.get())
                     .build(null)
     );
 }

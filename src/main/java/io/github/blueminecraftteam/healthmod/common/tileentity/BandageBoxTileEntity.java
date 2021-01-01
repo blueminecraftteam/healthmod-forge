@@ -20,7 +20,7 @@
 package io.github.blueminecraftteam.healthmod.common.tileentity;
 
 import io.github.blueminecraftteam.healthmod.common.blocks.BandAidBoxBlock;
-import io.github.blueminecraftteam.healthmod.common.container.BandAidBoxContainer;
+import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer;
 import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -47,18 +47,18 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
 
-public class BandAidBoxTileEntity extends LockableLootTileEntity {
+public class BandageBoxTileEntity extends LockableLootTileEntity {
     private final IItemHandlerModifiable items = new InvWrapper(this);
     protected int numPlayersUsing;
     private NonNullList<ItemStack> contents = NonNullList.withSize(6, ItemStack.EMPTY);
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public BandAidBoxTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public BandageBoxTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 
-    public BandAidBoxTileEntity() {
-        this(TileEntityRegistries.BAND_AID_BOX.get());
+    public BandageBoxTileEntity() {
+        this(TileEntityRegistries.BANDAGE_BOX.get());
     }
 
     public static int getPlayersUsing(IBlockReader reader, BlockPos pos) {
@@ -66,15 +66,15 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
 
         if (state.hasTileEntity()) {
             TileEntity tileEntity = reader.getTileEntity(pos);
-            if (tileEntity instanceof BandAidBoxTileEntity) {
-                return ((BandAidBoxTileEntity) tileEntity).numPlayersUsing;
+            if (tileEntity instanceof BandageBoxTileEntity) {
+                return ((BandageBoxTileEntity) tileEntity).numPlayersUsing;
             }
         }
 
         return 0;
     }
 
-    public static void swapContents(BandAidBoxTileEntity tileEntity, BandAidBoxTileEntity otherTileEntity) {
+    public static void swapContents(BandageBoxTileEntity tileEntity, BandageBoxTileEntity otherTileEntity) {
         NonNullList<ItemStack> list = tileEntity.getItems();
         tileEntity.setItems(otherTileEntity.getItems());
         otherTileEntity.setItems(list);
@@ -102,7 +102,7 @@ public class BandAidBoxTileEntity extends LockableLootTileEntity {
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new BandAidBoxContainer(id, player, this);
+        return new BandageBoxContainer(id, player, this);
     }
 
     @Override

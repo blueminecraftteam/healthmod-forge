@@ -22,8 +22,8 @@ package io.github.blueminecraftteam.healthmod.client.screen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.ITextComponent;
 
-public class BandAidBoxScreen extends Screen {
-    protected BandAidBoxScreen(ITextComponent titleIn) {
+public class BandageBoxScreen extends Screen {
+    protected BandageBoxScreen(ITextComponent titleIn) {
         super(titleIn);
     }
 

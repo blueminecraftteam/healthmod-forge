@@ -20,7 +20,7 @@
 package io.github.blueminecraftteam.healthmod.core.registries;
 
 import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem;
-import io.github.blueminecraftteam.healthmod.common.items.BandAidItem;
+import io.github.blueminecraftteam.healthmod.common.items.BandageItem;
 import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem;
 import io.github.blueminecraftteam.healthmod.common.items.SyringeItem;
 import io.github.blueminecraftteam.healthmod.core.HealthMod;
@@ -38,9 +38,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ItemRegistries {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Item> BAND_AID = ITEMS.register(
-            "band_aid",
-            () -> new BandAidItem(new Item.Properties()
+    public static final RegistryObject<Item> BANDAGE = ITEMS.register(
+            "bandage",
+            () -> new BandageItem(new Item.Properties()
                     .maxStackSize(16)
                     .maxDamage(1)
                     .rarity(Rarity.UNCOMMON))

@@ -19,7 +19,7 @@
 
 package io.github.blueminecraftteam.healthmod.common.container;
 
-import io.github.blueminecraftteam.healthmod.common.tileentity.BandAidBoxTileEntity;
+import io.github.blueminecraftteam.healthmod.common.tileentity.BandageBoxTileEntity;
 import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries;
 import io.github.blueminecraftteam.healthmod.core.registries.ContainerRegistries;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,11 +31,11 @@ import net.minecraft.util.IWorldPosCallable;
 
 import java.util.Objects;
 
-public class BandAidBoxContainer extends Container {
-    public final BandAidBoxTileEntity tileEntity;
+public class BandageBoxContainer extends Container {
+    public final BandageBoxTileEntity tileEntity;
     private final IWorldPosCallable callable;
 
-    public BandAidBoxContainer(final int windowId, final PlayerInventory playerInventory, final BandAidBoxTileEntity tileEntity) {
+    public BandageBoxContainer(final int windowId, final PlayerInventory playerInventory, final BandageBoxTileEntity tileEntity) {
         super(ContainerRegistries.BAND_AID_BOX.get(), windowId);
         this.tileEntity = tileEntity;
         this.callable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
@@ -43,18 +43,18 @@ public class BandAidBoxContainer extends Container {
         int slotSizePlus2 = 18;
     }
 
-    public BandAidBoxContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+    public BandageBoxContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
-    private static BandAidBoxTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+    private static BandageBoxTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "PlayerInventory cannot be null");
         Objects.requireNonNull(data, "PacketBuffer cannot be null");
 
         final TileEntity tileEntity = playerInventory.player.world.getTileEntity(data.readBlockPos());
 
-        if (tileEntity instanceof BandAidBoxTileEntity) {
-            return (BandAidBoxTileEntity) tileEntity;
+        if (tileEntity instanceof BandageBoxTileEntity) {
+            return (BandageBoxTileEntity) tileEntity;
         }
 
         throw new IllegalStateException("Tile entity " + tileEntity + " is not correct!");
