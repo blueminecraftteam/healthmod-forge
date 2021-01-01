@@ -4,11 +4,12 @@ buildscript {
             url = "https://files.minecraftforge.net/maven"
         }
 
-        jcenter()
-        mavenCentral()
         maven {
             url = "https://dl.bintray.com/kotlin/kotlin-eap"
         }
+
+        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -37,7 +38,7 @@ println("Java: ${System.getProperty("java.version")}, JVM: ${System.getProperty(
 minecraft {
     mappings channel: project.mappings_channel, version: project.mappings_version
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable
-    accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
+    // accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
 
     runs {
         client {
