@@ -21,6 +21,7 @@ package io.github.blueminecraftteam.healthmod.common.items
 
 import io.github.blueminecraftteam.healthmod.core.HealthMod
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
+import io.github.blueminecraftteam.healthmod.core.util.extensions.minusAssign
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -32,27 +33,30 @@ import net.minecraft.util.Hand
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper
-import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.roundToInt
 
 class AntibioticsItem(properties: Properties) : Item(properties) {
     override fun onItemRightClick(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
         if (!world.isRemote) {
-            if (ThreadLocalRandom.current().nextInt(1, HealthModConfig.SERVER_CONFIG.bacterialResistanceChance.get() + 1) != 1) {
-                for (effectInstance in player.activePotionEffects) {
-                    if (effectInstance.potion.effectType == EffectType.HARMFUL && effectInstance.potion !== Effects.POISON) {
-                        player.removePotionEffect(effectInstance.potion)
-                    }
-                }
+            if ((1..HealthModConfig.SERVER_CONFIG.bacterialResistanceChance.get() + 1).random() != 1) {
+                player.activePotionEffects
+                    .filter { it.potion.effectType == EffectType.HARMFUL }
+                    .filter { it.potion != Effects.POISON }
+                    .map(EffectInstance::getPotion)
+                    .forEach(player::removePotionEffect)
             } else {
                 player.sendStatusMessage(
-                        TranslationTextComponent("text." + HealthMod.MOD_ID + ".antibiotics.resistant_bacteria"),
-                        true
+                    TranslationTextComponent("text.${HealthMod.MOD_ID}.antibiotics.resistant_bacteria"),
+                    true
                 )
-                for (effectInstance in player.activePotionEffects) {
-                    if (effectInstance.potion.effectType == EffectType.HARMFUL && effectInstance.potion !== Effects.POISON) {
+
+                player.activePotionEffects
+                    .filter { it.potion.effectType == EffectType.HARMFUL }
+                    .filter { it.potion != Effects.POISON }
+                    .forEach { effectInstance ->
                         player.removePotionEffect(effectInstance.potion)
-                        effectInstance.combine(EffectInstance(
+                        effectInstance.combine(
+                            EffectInstance(
                                 effectInstance.potion,
                                 (effectInstance.duration * 1.5f).roundToInt(),
                                 effectInstance.amplifier + 1,
@@ -60,18 +64,20 @@ class AntibioticsItem(properties: Properties) : Item(properties) {
                                 effectInstance.doesShowParticles(),
                                 effectInstance.isShowIcon,
                                 ObfuscationReflectionHelper.getPrivateValue(
-                                        EffectInstance::class.java,
-                                        effectInstance,
-                                        "field_230115_j_"
+                                    EffectInstance::class.java,
+                                    effectInstance,
+                                    "field_230115_j_"
                                 )
-                        ))
+                            )
+                        )
                         player.addPotionEffect(effectInstance)
                     }
-                }
             }
         }
+
         val stack = player.getHeldItem(hand)
-        stack.shrink(1)
+        stack -= 1
+
         return ActionResult.resultConsume(stack)
     }
 }

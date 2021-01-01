@@ -33,76 +33,63 @@ import net.minecraft.potion.EffectInstance
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
+@Suppress("unused")
 object ItemRegistries {
     val ITEMS = KDeferredRegister(ForgeRegistries.ITEMS, HealthMod.MOD_ID)
 
-    val BANDAGE by ITEMS.register(
-            "bandage"
-    ) {
-        BandageItem(Item.Properties()
+    val BANDAGE by ITEMS.register("bandage") {
+        BandageItem(
+            Item.Properties()
                 .maxStackSize(16)
                 .maxDamage(1)
-                .rarity(Rarity.UNCOMMON))
-    }
-
-    val SYRINGE by ITEMS.register(
-            "syringe"
-    ) {
-        SyringeItem(Item.Properties()
-                .group(HealthMod.ITEM_GROUP)
-                .maxStackSize(1))
-    }
-
-    val FACE_MASK by ITEMS.register(
-            "face_mask"
-    ) {
-        FaceMaskItem(
-                ArmorMaterial.LEATHER,
-                EquipmentSlotType.HEAD,
-                Item.Properties().group(HealthMod.ITEM_GROUP).maxDamage(100)
+                .rarity(Rarity.UNCOMMON)
         )
     }
 
-    val ANTIBIOTICS by ITEMS.register(
-            "antibiotics"
-    ) {
-        AntibioticsItem(Item.Properties()
+    val SYRINGE by ITEMS.register("syringe") {
+        SyringeItem(
+            Item.Properties()
                 .group(HealthMod.ITEM_GROUP)
-                .maxStackSize(16))
+                .maxStackSize(1)
+        )
     }
 
-    val BROCCOLI by ITEMS.register(
-            "broccoli"
-    ) {
-        Item(Item.Properties()
+    val FACE_MASK by ITEMS.register("face_mask") {
+        FaceMaskItem(
+            ArmorMaterial.LEATHER,
+            EquipmentSlotType.HEAD,
+            Item.Properties().group(HealthMod.ITEM_GROUP).maxDamage(100)
+        )
+    }
+
+    val ANTIBIOTICS by ITEMS.register("antibiotics") {
+        AntibioticsItem(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(16))
+    }
+
+    val BROCCOLI by ITEMS.register("broccoli") {
+        Item(
+            Item.Properties()
                 .group(HealthMod.ITEM_GROUP)
-                .food(Food.Builder()
+                .food(
+                    Food.Builder()
                         .hunger(3)
                         .saturation(2f)
                         .effect({ EffectInstance(EffectRegistries.HEALTHY, 60 * 20) }, 1f)
-                        .build()))
+                        .build()
+                )
+        )
     }
 
-    val FIRST_AID_KIT by ITEMS.register(
-            "first_aid_kit"
-    ) {
-        Item(Item.Properties()
-                .group(HealthMod.ITEM_GROUP))
+    val FIRST_AID_KIT by ITEMS.register("first_aid_kit") {
+        Item(Item.Properties().group(HealthMod.ITEM_GROUP))
     }
 
-    val BLOOD_VIAL by ITEMS.register(
-            "blood_vial"
-    ) {
-        Item(Item.Properties()
-                .group(HealthMod.ITEM_GROUP))
+    val BLOOD_VIAL by ITEMS.register("blood_vial") {
+        Item(Item.Properties().group(HealthMod.ITEM_GROUP))
     }
 
     // TODO functionality
-    val ISOPROPYL_ALCOHOl by ITEMS.register(
-            "isopropyl_alcohol"
-    ) {
-        Item(Item.Properties()
-                .group(HealthMod.ITEM_GROUP)
-                .maxStackSize(1))
+    val ISOPROPYL_ALCOHOL by ITEMS.register("isopropyl_alcohol") {
+        Item(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(1))
     }
 }

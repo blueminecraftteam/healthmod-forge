@@ -37,45 +37,53 @@ import net.minecraftforge.api.distmarker.OnlyIn
 import kotlin.math.floor
 
 // NOTE: Model should work with texture and it does, atm FaceMaskModel doesn't do anything and acts as a placeholder for modelers to put their custom models there. -BioAstroiner
-class FaceMaskItem(materialIn: IArmorMaterial, slot: EquipmentSlotType, builderIn: Properties) : ArmorItem(materialIn, slot, builderIn) {
+class FaceMaskItem(
+    materialIn: IArmorMaterial,
+    slot: EquipmentSlotType,
+    builderIn: Properties
+) : ArmorItem(materialIn, slot, builderIn) {
     @OnlyIn(Dist.CLIENT)
-    override fun <A : BipedModel<*>?> getArmorModel(entity: LivingEntity, itemStack: ItemStack, armorSlot: EquipmentSlotType, originalModel: A): A? {
-        if (itemStack.item is ArmorItem) {
+    override fun <A : BipedModel<*>> getArmorModel(
+        entity: LivingEntity,
+        itemStack: ItemStack,
+        armorSlot: EquipmentSlotType,
+        originalModel: A
+    ): A? {
+        return if (itemStack.item is ArmorItem) {
             val model = FaceMaskModel()
+
             model.bipedHead.showModel = armorSlot == EquipmentSlotType.HEAD
-            model.isChild = originalModel!!.isChild
+            model.isChild = originalModel.isChild
             model.isSitting = originalModel.isSitting
             model.isSneak = originalModel.isSneak
             model.rightArmPose = originalModel.rightArmPose
             model.leftArmPose = originalModel.leftArmPose
 
-            // noinspection unchecked
-            return model as A
+            @Suppress("UNCHECKED_CAST")
+            model as A
+        } else {
+            null
         }
-        return null
     }
 
-    override fun getArmorTexture(stack: ItemStack, entity: Entity, slot: EquipmentSlotType, type: String): String {
-        return HealthMod.MOD_ID + ":textures/models/armor/face_mask.png"
-    }
+    override fun getArmorTexture(
+        stack: ItemStack,
+        entity: Entity,
+        slot: EquipmentSlotType,
+        type: String
+    ) = HealthMod.rl("textures/models/armor/face_mask.png").toString()
 
-    override fun getEquipmentSlot(stack: ItemStack): EquipmentSlotType {
-        return EquipmentSlotType.HEAD
-    }
+    override fun getEquipmentSlot(stack: ItemStack) = EquipmentSlotType.HEAD
 
-    override fun getIsRepairable(toRepair: ItemStack, repair: ItemStack): Boolean {
-        return repair.item === Items.SLIME_BALL
-    }
+    override fun getIsRepairable(toRepair: ItemStack, repair: ItemStack) = repair.item === Items.SLIME_BALL
 
     override fun onArmorTick(stack: ItemStack, world: World, player: PlayerEntity) {
         // if the player is infected it would damage the mask
         // TODO make player suffer less from bad potion effects while wearing masks
         if (player.isPotionActive(EffectRegistries.WOUND_INFECTION)) {
-            stack.damageItem(
-                    floor((world.rand.nextFloat() * 5).toDouble()).toInt(),
-                    player,
-                    { playerEntity: PlayerEntity -> playerEntity.sendBreakAnimation(playerEntity.activeHand) }
-            )
+            stack.damageItem(floor((world.rand.nextFloat() * 5).toDouble()).toInt(), player) {
+                it.sendBreakAnimation(it.activeHand)
+            }
         }
     }
 }

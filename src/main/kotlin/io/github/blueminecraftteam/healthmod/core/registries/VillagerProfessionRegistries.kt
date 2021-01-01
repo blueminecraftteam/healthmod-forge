@@ -27,40 +27,31 @@ import net.minecraft.util.SoundEvents
 import net.minecraft.village.PointOfInterestType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
-import java.util.*
 
 // dont work maybe cus no trades? -ag6
 object VillagerProfessionRegistries {
     val PROFESSIONS = KDeferredRegister(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID)
     val POI_TYPES = KDeferredRegister(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID)
 
-    private val DOCTOR_POINT_OF_INTEREST_STATES: MutableSet<BlockState> = HashSet()
-
-    val DOCTOR_POINT_OF_INTEREST by POI_TYPES.register(
-            "doctor_point_of_interest"
-    ) {
+    val DOCTOR_POINT_OF_INTEREST by POI_TYPES.register("doctor_point_of_interest") {
         PointOfInterestType(
-                "doctor_point_of_interest",
-                ImmutableSet.copyOf(DOCTOR_POINT_OF_INTEREST_STATES),
-                1,
-                1
+            "doctor_point_of_interest",
+            mutableSetOf<BlockState>().apply {
+                addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
+                addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
+            }.run { ImmutableSet.copyOf(this) },
+            1,
+            1
         )
     }
 
-    val DOCTOR by PROFESSIONS.register(
-            "doctor"
-    ) {
+    val DOCTOR by PROFESSIONS.register("doctor") {
         VillagerProfession(
-                "doctor_point_of_interest",
-                DOCTOR_POINT_OF_INTEREST,
-                ImmutableSet.of(ItemRegistries.FIRST_AID_KIT),
-                ImmutableSet.of(BlockRegistries.BANDAGE_BOX),
-                SoundEvents.BLOCK_BREWING_STAND_BREW
+            "doctor",
+            DOCTOR_POINT_OF_INTEREST,
+            ImmutableSet.of(),
+            ImmutableSet.of(),
+            SoundEvents.BLOCK_BREWING_STAND_BREW
         )
-    }
-
-    init {
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
     }
 }

@@ -26,20 +26,20 @@ import net.minecraft.tileentity.TileEntityType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-object TileEntityRegistries {
-    val TILE_ENTITIES = KDeferredRegister(ForgeRegistries.TILE_ENTITIES, HealthMod.MOD_ID)
+object TileEntityTypeRegistries {
+    val TILE_ENTITY_TYPES = KDeferredRegister(ForgeRegistries.TILE_ENTITIES, HealthMod.MOD_ID)
 
-    val BANDAGE_BOX: TileEntityType<BandageBoxTileEntity> by TILE_ENTITIES.register("bandage_box") {
+    val BANDAGE_BOX: TileEntityType<BandageBoxTileEntity> by TILE_ENTITY_TYPES.register("bandage_box") {
+        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         TileEntityType.Builder
-                .create(::BandageBoxTileEntity, BlockRegistries.BANDAGE_BOX)
-                .build(null)
+            .create(::BandageBoxTileEntity, BlockRegistries.BANDAGE_BOX)
+            .build(null)
     }
 
-    val BLOOD_TEST_MACHINE: TileEntityType<BloodTestMachineTileEntity> by TILE_ENTITIES.register(
-            "blood_test_machine"
-    ) {
+    val BLOOD_TEST_MACHINE: TileEntityType<BloodTestMachineTileEntity> by TILE_ENTITY_TYPES.register("blood_test_machine") {
+        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         TileEntityType.Builder
-                .create(::BloodTestMachineTileEntity, BlockRegistries.BLOOD_TEST_MACHINE)
-                .build(null)
+            .create(::BloodTestMachineTileEntity, BlockRegistries.BLOOD_TEST_MACHINE)
+            .build(null)
     }
 }

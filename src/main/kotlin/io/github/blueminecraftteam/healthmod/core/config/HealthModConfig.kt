@@ -19,15 +19,12 @@
 
 package io.github.blueminecraftteam.healthmod.core.config
 
-import io.github.blueminecraftteam.healthmod.core.HealthMod
 import net.minecraftforge.common.ForgeConfigSpec
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber
 import org.apache.commons.lang3.tuple.Pair
 
-@EventBusSubscriber(modid = HealthMod.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 object HealthModConfig {
-    private val specPair: Pair<ServerConfig, ForgeConfigSpec> =
-            ForgeConfigSpec.Builder().configure { builder: ForgeConfigSpec.Builder -> ServerConfig(builder) }
+    private val specPair: Pair<ServerConfig, ForgeConfigSpec> = ForgeConfigSpec.Builder().configure(::ServerConfig)
+
     val SERVER_CONFIG: ServerConfig = specPair.left
     val SERVER_SPEC: ForgeConfigSpec = specPair.right
 }

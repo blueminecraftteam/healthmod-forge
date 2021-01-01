@@ -22,5 +22,5 @@ package io.github.blueminecraftteam.healthmod.client.screen
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.util.text.ITextComponent
 
-class BandageBoxScreen constructor(titleIn: ITextComponent) // TODO
-    : Screen(titleIn)
+// TODO
+class BandageBoxScreen(titleIn: ITextComponent) : Screen(titleIn)

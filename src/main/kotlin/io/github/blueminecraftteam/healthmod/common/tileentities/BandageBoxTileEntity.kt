@@ -21,7 +21,7 @@ package io.github.blueminecraftteam.healthmod.common.tileentities
 
 import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
 import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
@@ -38,12 +38,11 @@ import net.minecraft.world.IBlockReader
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
-import net.minecraftforge.items.IItemHandlerModifiable
 import net.minecraftforge.items.wrapper.InvWrapper
 
-class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntityType<*> = TileEntityRegistries.BANDAGE_BOX) :
-        LockableLootTileEntity(tileEntityTypeIn) {
-    private val items: IItemHandlerModifiable = InvWrapper(this)
+class BandageBoxTileEntity(type: TileEntityType<*> = TileEntityTypeRegistries.BANDAGE_BOX) :
+    LockableLootTileEntity(type) {
+    private val items = InvWrapper(this)
     private var numPlayersUsing = 0
     private var contents = NonNullList.withSize(6, ItemStack.EMPTY)
     private var itemHandler = LazyOptional.of { items }
@@ -82,6 +81,7 @@ class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntit
 
     override fun receiveClientEvent(id: Int, type: Int) = if (id == 1) {
         numPlayersUsing = type
+
         true
     } else {
         super.receiveClientEvent(id, type)
@@ -89,9 +89,7 @@ class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntit
 
     override fun openInventory(player: PlayerEntity) {
         if (!player.isSpectator) {
-            if (numPlayersUsing < 0) {
-                numPlayersUsing = 0
-            }
+            if (numPlayersUsing < 0) numPlayersUsing = 0
             numPlayersUsing++
             onOpenOrClose()
         }
@@ -106,6 +104,7 @@ class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntit
 
     private fun onOpenOrClose() {
         val block = this.blockState.block
+
         if (block is BandageBoxBlock) {
             world!!.addBlockEvent(pos, block, 1, numPlayersUsing)
             world!!.notifyNeighborsOfStateChange(pos, block)
@@ -119,9 +118,11 @@ class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntit
     }
 
     override fun <T> getCapability(capability: Capability<T>, side: Direction?): LazyOptional<T> =
-            if (capability === CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-                itemHandler.cast()
-            } else super.getCapability(capability, side)
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            itemHandler.cast()
+        } else {
+            super.getCapability(capability, side)
+        }
 
     override fun remove() {
         super.remove()
@@ -132,12 +133,15 @@ class BandageBoxTileEntity @JvmOverloads constructor(tileEntityTypeIn: TileEntit
     companion object {
         fun getPlayersUsing(reader: IBlockReader, pos: BlockPos): Int {
             val state = reader.getBlockState(pos)
+
             if (state.hasTileEntity()) {
                 val tileEntity = reader.getTileEntity(pos)
+
                 if (tileEntity is BandageBoxTileEntity) {
                     return tileEntity.numPlayersUsing
                 }
             }
+
             return 0
         }
 

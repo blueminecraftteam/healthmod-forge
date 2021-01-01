@@ -31,10 +31,7 @@ class WoundInfectionEffect(type: EffectType, color: Int) : Effect(type, color) {
 
     override fun isReady(duration: Int, amplifier: Int): Boolean {
         val k = 25 shr amplifier
-        return if (k > 0) {
-            duration % k == 0
-        } else {
-            true
-        }
+
+        return if (k > 0) duration % k == 0 else true
     }
 }

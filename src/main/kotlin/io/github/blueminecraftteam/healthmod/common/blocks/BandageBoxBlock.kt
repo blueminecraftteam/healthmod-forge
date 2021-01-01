@@ -19,20 +19,16 @@
 
 package io.github.blueminecraftteam.healthmod.common.blocks
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.IBlockReader
 
 class BandageBoxBlock(properties: Properties) : Block(properties) {
     // TODO: Model
     // TODO: Opening gui logic
-    override fun hasTileEntity(state: BlockState): Boolean {
-        return true
-    }
+    override fun hasTileEntity(state: BlockState) = true
 
-    override fun createTileEntity(state: BlockState, world: IBlockReader): TileEntity? {
-        return TileEntityRegistries.BANDAGE_BOX.create()
-    }
+    override fun createTileEntity(state: BlockState, world: IBlockReader) =
+        TileEntityTypeRegistries.BANDAGE_BOX.create()
 }

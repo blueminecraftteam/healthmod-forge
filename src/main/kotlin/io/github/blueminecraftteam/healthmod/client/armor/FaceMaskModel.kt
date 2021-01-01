@@ -24,13 +24,12 @@ import net.minecraft.client.renderer.model.ModelRenderer
 import net.minecraft.entity.player.PlayerEntity
 
 // TODO: Model
-class FaceMaskModel : BipedModel<PlayerEntity?>(0.0f, 0.0f, 64, 32) {
-    private val renderer: ModelRenderer
+class FaceMaskModel : BipedModel<PlayerEntity>(0.0f, 0.0f, 64, 32) {
+    private val renderer = ModelRenderer(this, 82, 0)
 
     init {
         textureHeight = 128
         textureWidth = 128
-        renderer = ModelRenderer(this, 82, 0)
         bipedHead.addChild(renderer)
     }
 }

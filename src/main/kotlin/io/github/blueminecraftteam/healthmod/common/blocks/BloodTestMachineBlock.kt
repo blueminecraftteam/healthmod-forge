@@ -19,19 +19,15 @@
 
 package io.github.blueminecraftteam.healthmod.common.blocks
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.IBlockReader
 
 // TODO functionality
 class BloodTestMachineBlock(properties: Properties) : Block(properties) {
-    override fun hasTileEntity(state: BlockState): Boolean {
-        return true
-    }
+    override fun hasTileEntity(state: BlockState) = true
 
-    override fun createTileEntity(state: BlockState, world: IBlockReader): TileEntity? {
-        return TileEntityRegistries.BLOOD_TEST_MACHINE.create()
-    }
+    override fun createTileEntity(state: BlockState, world: IBlockReader) =
+        TileEntityTypeRegistries.BLOOD_TEST_MACHINE.create()
 }

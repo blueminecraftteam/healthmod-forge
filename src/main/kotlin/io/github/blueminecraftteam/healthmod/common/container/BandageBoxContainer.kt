@@ -28,31 +28,26 @@ import net.minecraft.inventory.container.Container
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.IWorldPosCallable
 
-class BandageBoxContainer(windowId: Int, playerInventory: PlayerInventory, tileEntity: BandageBoxTileEntity) :
-        Container(ContainerRegistries.BANDAGE_BOX, windowId) {
-    private val callable: IWorldPosCallable
-    val slotSizePlus2 = 18
+// TODO
+class BandageBoxContainer(
+    windowId: Int,
+    playerInventory: PlayerInventory,
+    tileEntity: BandageBoxTileEntity
+) : Container(ContainerRegistries.BANDAGE_BOX, windowId) {
+    private val callable = IWorldPosCallable.of(tileEntity.world!!, tileEntity.pos)
 
-    init {
-        val world = tileEntity.world ?: throw NullPointerException("the world was null, for some reason.")
-        callable = IWorldPosCallable.of(world, tileEntity.pos)
-    }
+    constructor(
+        windowId: Int,
+        playerInventory: PlayerInventory,
+        data: PacketBuffer
+    ) : this(windowId, playerInventory, getTileEntity(playerInventory, data))
 
-    constructor(windowId: Int, playerInventory: PlayerInventory, data: PacketBuffer) : this(windowId,
-            playerInventory,
-            getTileEntity(playerInventory, data))
-
-    override fun canInteractWith(playerIn: PlayerEntity): Boolean {
-        return isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX)
-    }
+    override fun canInteractWith(playerIn: PlayerEntity) =
+        isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX)
 
     companion object {
-        private fun getTileEntity(playerInventory: PlayerInventory, data: PacketBuffer): BandageBoxTileEntity {
-            val tileEntity = playerInventory.player.world.getTileEntity(data.readBlockPos())
-            if (tileEntity is BandageBoxTileEntity) {
-                return tileEntity
-            }
-            throw IllegalStateException("Tile entity $tileEntity is not correct!")
-        }
+        private fun getTileEntity(playerInventory: PlayerInventory, data: PacketBuffer) =
+            playerInventory.player.world.getTileEntity(data.readBlockPos()) as? BandageBoxTileEntity
+                ?: error("Tile entity is not correct!")
     }
 }

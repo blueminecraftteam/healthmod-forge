@@ -23,15 +23,14 @@ import io.github.blueminecraftteam.healthmod.common.items.SyringeItem
 import io.github.blueminecraftteam.healthmod.core.HealthMod
 import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries
 import net.minecraft.item.ItemModelsProperties
-import net.minecraft.util.ResourceLocation
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 
 object HealthModClient {
-    fun clientEvent(event: FMLClientSetupEvent) {
+    fun onClientSetup(event: FMLClientSetupEvent) {
         ItemModelsProperties.registerProperty(
-                ItemRegistries.SYRINGE,
-                ResourceLocation(HealthMod.MOD_ID, "blood"),
-                SyringeItem.BLOOD_PROPERTY
+            ItemRegistries.SYRINGE,
+            HealthMod.rl("blood"),
+            SyringeItem.BLOOD_PROPERTY
         )
     }
 }

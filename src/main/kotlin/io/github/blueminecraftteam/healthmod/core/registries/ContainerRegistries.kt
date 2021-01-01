@@ -21,9 +21,7 @@ package io.github.blueminecraftteam.healthmod.core.registries
 
 import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer
 import io.github.blueminecraftteam.healthmod.core.HealthMod
-import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.container.ContainerType
-import net.minecraft.network.PacketBuffer
 import net.minecraftforge.common.extensions.IForgeContainerType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
@@ -31,13 +29,7 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object ContainerRegistries {
     val CONTAINERS = KDeferredRegister(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID)
 
-    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.register(
-            "bandage_box"
-    ) {
-        IForgeContainerType.create { windowId: Int, playerInventory: PlayerInventory, data: PacketBuffer ->
-            BandageBoxContainer(windowId, playerInventory, data)
-        }
+    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.register("bandage_box") {
+        IForgeContainerType.create(::BandageBoxContainer)
     }
-
-
 }

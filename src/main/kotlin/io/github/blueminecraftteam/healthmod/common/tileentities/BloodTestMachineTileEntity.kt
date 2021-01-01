@@ -19,9 +19,10 @@
 
 package io.github.blueminecraftteam.healthmod.common.tileentities
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.tileentity.TileEntityType
 
 // TODO functionality
-class BloodTestMachineTileEntity constructor(tileEntityTypeIn: TileEntityType<*> = TileEntityRegistries.BLOOD_TEST_MACHINE) : TileEntity(tileEntityTypeIn)
+class BloodTestMachineTileEntity constructor(tileEntityTypeIn: TileEntityType<*> = TileEntityTypeRegistries.BLOOD_TEST_MACHINE) :
+    TileEntity(tileEntityTypeIn)

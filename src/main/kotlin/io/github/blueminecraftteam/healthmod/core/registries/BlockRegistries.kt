@@ -30,28 +30,23 @@ import net.minecraft.item.DyeColor
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-
 object BlockRegistries {
     val BLOCKS = KDeferredRegister(ForgeRegistries.BLOCKS, HealthMod.MOD_ID)
 
-    //sry xf8b i didnt know how to format this, edit if need
-    val BANDAGE_BOX by BLOCKS.register(
-            "bandage_box"
-    ) {
-        BandageBoxBlock(AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
+    val BANDAGE_BOX by BLOCKS.register("bandage_box") {
+        BandageBoxBlock(
+            AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
                 .sound(SoundType.CLOTH)
                 .noDrops()
-                .zeroHardnessAndResistance())
+                .zeroHardnessAndResistance()
+        )
     }
 
-
-    val BLOOD_TEST_MACHINE by BLOCKS.register(
-            "blood_test_machine"
-    ) {
-        BloodTestMachineBlock(AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
+    val BLOOD_TEST_MACHINE by BLOCKS.register("blood_test_machine") {
+        BloodTestMachineBlock(
+            AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
                 .sound(SoundType.GLASS)
-                .hardnessAndResistance(0f, 0f))
+                .hardnessAndResistance(0f, 0f)
+        )
     }
-
-
 }

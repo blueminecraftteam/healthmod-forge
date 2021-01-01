@@ -23,6 +23,6 @@ import net.minecraft.potion.Effect
 import net.minecraft.potion.EffectType
 
 /**
- * Class to bypass a protected constructor in the [effect class][Effect].
+ * Class to bypass a protected constructor in the [Effect class][Effect].
  */
 class ModEffect(typeIn: EffectType, liquidColorIn: Int) : Effect(typeIn, liquidColorIn)

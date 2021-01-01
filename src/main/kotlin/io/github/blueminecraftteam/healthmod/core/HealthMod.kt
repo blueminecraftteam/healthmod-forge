@@ -27,6 +27,7 @@ import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 import net.minecraftforge.event.RegistryEvent
@@ -37,7 +38,6 @@ import net.minecraftforge.fml.config.ModConfig
 import org.apache.logging.log4j.LogManager
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
-import java.util.*
 
 @Mod(HealthMod.MOD_ID)
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -45,9 +45,7 @@ object HealthMod {
     const val MOD_ID = "healthmod"
     val ITEM_GROUP = object : ItemGroup(MOD_ID) {
         @OnlyIn(Dist.CLIENT)
-        override fun createIcon(): ItemStack {
-            return ItemStack(ItemRegistries.BANDAGE)
-        }
+        override fun createIcon() = ItemStack(ItemRegistries.BANDAGE)
     }
 
     private val LOGGER = LogManager.getLogger()
@@ -57,7 +55,7 @@ object HealthMod {
         ItemRegistries.ITEMS.register(MOD_BUS)
         EffectRegistries.EFFECTS.register(MOD_BUS)
         ContainerRegistries.CONTAINERS.register(MOD_BUS)
-        TileEntityRegistries.TILE_ENTITIES.register(MOD_BUS)
+        TileEntityTypeRegistries.TILE_ENTITY_TYPES.register(MOD_BUS)
         VillagerProfessionRegistries.POI_TYPES.register(MOD_BUS)
         VillagerProfessionRegistries.PROFESSIONS.register(MOD_BUS)
 
@@ -68,26 +66,26 @@ object HealthMod {
         LOGGER.debug("Registered config!")
 
         FORGE_BUS.register(this)
-        FORGE_BUS.addListener(HealthModClient::clientEvent)
+        FORGE_BUS.addListener(HealthModClient::onClientSetup)
     }
 
+    fun rl(path: String) = ResourceLocation(MOD_ID, path)
 
     @SubscribeEvent
     fun onRegisterBlockItems(event: RegistryEvent.Register<Item>) {
-        val registry = event.registry
+        BlockRegistries.BLOCKS.getEntries()
+            .map { it.get() }
+            .forEach {
+                val properties = if (it is BandageBoxBlock) {
+                    Item.Properties().group(ITEM_GROUP).maxStackSize(1)
+                } else {
+                    Item.Properties().group(ITEM_GROUP)
+                }
+                val blockItem = BlockItem(it, properties)
+                blockItem.registryName = it.registryName
 
-        BlockRegistries.BLOCKS.getEntries().map { it.get() }.forEach {
-
-            val properties: Item.Properties = if (it is BandageBoxBlock) {
-                Item.Properties().group(ITEM_GROUP).maxStackSize(1)
-            } else {
-                Item.Properties().group(ITEM_GROUP)
+                event.registry.register(blockItem)
             }
-
-            val blockItem = BlockItem(it, properties)
-            blockItem.registryName = Objects.requireNonNull(it.registryName)
-            registry.register(blockItem)
-        }
 
         LOGGER.debug("Registered block items!")
     }
