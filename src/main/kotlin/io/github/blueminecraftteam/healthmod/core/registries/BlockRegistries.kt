@@ -17,36 +17,41 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
-import io.github.blueminecraftteam.healthmod.common.blocks.BloodTestMachineBlock;
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.DyeColor;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
+import io.github.blueminecraftteam.healthmod.common.blocks.BloodTestMachineBlock
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import net.minecraft.block.AbstractBlock
+import net.minecraft.block.SoundType
+import net.minecraft.block.material.Material
+import net.minecraft.block.material.MaterialColor
+import net.minecraft.item.DyeColor
+import net.minecraftforge.registries.ForgeRegistries
+import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-public class BlockRegistries {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, HealthMod.MOD_ID);
 
-    public static final RegistryObject<Block> BANDAGE_BOX = BLOCKS.register(
-            "bandage_box",
-            () -> new BandageBoxBlock(AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
-                    .sound(SoundType.CLOTH)
-                    .noDrops()
-                    .zeroHardnessAndResistance())
-    );
+object BlockRegistries {
+    val BLOCKS = KDeferredRegister(ForgeRegistries.BLOCKS, HealthMod.MOD_ID)
 
-    public static final RegistryObject<Block> BLOOD_TEST_MACHINE = BLOCKS.register(
-            "blood_test_machine",
-            () -> new BloodTestMachineBlock(AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
-                    .sound(SoundType.GLASS)
-                    .hardnessAndResistance(0, 0))
-    );
+    //sry xf8b i didnt know how to format this, edit if need
+    val BANDAGE_BOX by BLOCKS.register(
+            "bandage_box"
+    ) {
+        BandageBoxBlock(AbstractBlock.Properties.create(Material.WOOL, MaterialColor.SNOW)
+                .sound(SoundType.CLOTH)
+                .noDrops()
+                .zeroHardnessAndResistance())
+    }
+
+
+    val BLOOD_TEST_MACHINE by BLOCKS.register(
+            "blood_test_machine"
+    ) {
+        BloodTestMachineBlock(AbstractBlock.Properties.create(Material.GLASS, DyeColor.WHITE)
+                .sound(SoundType.GLASS)
+                .hardnessAndResistance(0f, 0f))
+    }
+
+
 }

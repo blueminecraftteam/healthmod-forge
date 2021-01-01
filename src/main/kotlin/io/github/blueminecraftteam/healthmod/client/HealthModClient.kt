@@ -17,31 +17,21 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.effects;
+package io.github.blueminecraftteam.healthmod.client
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.DamageSource;
+import io.github.blueminecraftteam.healthmod.common.items.SyringeItem
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries
+import net.minecraft.item.ItemModelsProperties
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 
-public class WoundInfectionEffect extends Effect {
-    public WoundInfectionEffect(EffectType type, int color) {
-        super(type, color);
-    }
-
-    @Override
-    public void performEffect(LivingEntity entity, int amplifier) {
-        entity.attackEntityFrom(new DamageSource("wound_infection"), 2.5F);
-    }
-
-    @Override
-    public boolean isReady(int duration, int amplifier) {
-        int k = 25 >> amplifier;
-
-        if (k > 0) {
-            return duration % k == 0;
-        } else {
-            return true;
-        }
+object HealthModClient {
+    fun clientEvent(event: FMLClientSetupEvent) {
+        ItemModelsProperties.registerProperty(
+                ItemRegistries.SYRINGE,
+                ResourceLocation(HealthMod.MOD_ID, "blood"),
+                SyringeItem.BLOOD_PROPERTY
+        )
     }
 }

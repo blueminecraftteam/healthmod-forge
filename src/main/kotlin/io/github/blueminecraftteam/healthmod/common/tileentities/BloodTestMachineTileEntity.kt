@@ -17,22 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.client.armor;
+package io.github.blueminecraftteam.healthmod.common.tileentities
 
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.player.PlayerEntity;
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import net.minecraft.tileentity.TileEntity
+import net.minecraft.tileentity.TileEntityType
 
-// TODO: Model
-public class FaceMaskModel extends BipedModel<PlayerEntity> {
-    private final ModelRenderer renderer;
-
-    public FaceMaskModel() {
-        super(0.0F, 0.0F, 64, 32);
-
-        this.textureHeight = 128;
-        this.textureWidth = 128;
-        this.renderer = new ModelRenderer(this, 82, 0);
-        this.bipedHead.addChild(renderer);
-    }
-}
+// TODO functionality
+class BloodTestMachineTileEntity constructor(tileEntityTypeIn: TileEntityType<*> = TileEntityRegistries.BLOOD_TEST_MACHINE) : TileEntity(tileEntityTypeIn)

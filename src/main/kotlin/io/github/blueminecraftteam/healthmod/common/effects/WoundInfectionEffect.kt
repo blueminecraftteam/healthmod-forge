@@ -17,16 +17,24 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.effects;
+package io.github.blueminecraftteam.healthmod.common.effects
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.entity.LivingEntity
+import net.minecraft.potion.Effect
+import net.minecraft.potion.EffectType
+import net.minecraft.util.DamageSource
 
-/**
- * Class to bypass a protected constructor in the {@link Effect effect class}.
- */
-public class ModEffect extends Effect {
-    public ModEffect(EffectType typeIn, int liquidColorIn) {
-        super(typeIn, liquidColorIn);
+class WoundInfectionEffect(type: EffectType, color: Int) : Effect(type, color) {
+    override fun performEffect(entity: LivingEntity, amplifier: Int) {
+        entity.attackEntityFrom(DamageSource("wound_infection"), 2.5f)
+    }
+
+    override fun isReady(duration: Int, amplifier: Int): Boolean {
+        val k = 25 shr amplifier
+        return if (k > 0) {
+            duration % k == 0
+        } else {
+            true
+        }
     }
 }

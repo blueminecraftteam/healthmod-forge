@@ -17,27 +17,23 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.effects.ModEffect;
-import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect;
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import io.github.blueminecraftteam.healthmod.common.effects.ModEffect
+import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import net.minecraft.potion.EffectType
+import net.minecraftforge.registries.ForgeRegistries
+import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-public class EffectRegistries {
-    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, HealthMod.MOD_ID);
+object EffectRegistries {
+    val EFFECTS = KDeferredRegister(ForgeRegistries.POTIONS, HealthMod.MOD_ID)
 
-    public static final RegistryObject<Effect> WOUND_INFECTION = EFFECTS.register(
-            "wound_infection",
-            () -> new WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00)
-    );
+    val WOUND_INFECTION by EFFECTS.register(
+            "wound_infection"
+    ) { WoundInfectionEffect(EffectType.HARMFUL, 0x00FF00) }
 
-    public static final RegistryObject<Effect> HEALTHY = EFFECTS.register(
-            "healthy",
-            () -> new ModEffect(EffectType.BENEFICIAL, 0x67eb34)
-    );
+    val HEALTHY by EFFECTS.register(
+            "healthy"
+    ) { ModEffect(EffectType.BENEFICIAL, 0x67eb34) }
 }

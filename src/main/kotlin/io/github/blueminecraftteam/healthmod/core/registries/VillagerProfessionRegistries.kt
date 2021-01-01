@@ -17,51 +17,50 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.core.registries
 
-import com.google.common.collect.ImmutableSet;
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.village.PointOfInterestType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.google.common.collect.ImmutableSet
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import net.minecraft.block.BlockState
+import net.minecraft.entity.merchant.villager.VillagerProfession
+import net.minecraft.util.SoundEvents
+import net.minecraft.village.PointOfInterestType
+import net.minecraftforge.registries.ForgeRegistries
+import thedarkcolour.kotlinforforge.forge.KDeferredRegister
+import java.util.*
 
 // dont work maybe cus no trades? -ag6
-@SuppressWarnings("unused")
-public class VillagerProfessionRegistries {
-    public static final DeferredRegister<VillagerProfession> PROFESSIONS = DeferredRegister.create(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID);
-    public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID);
+object VillagerProfessionRegistries {
+    val PROFESSIONS = KDeferredRegister(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID)
+    val POI_TYPES = KDeferredRegister(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID)
 
-    private static final Set<BlockState> DOCTOR_POINT_OF_INTEREST_STATES = new HashSet<>();
-    public static final RegistryObject<PointOfInterestType> DOCTOR_POINT_OF_INTEREST = POI_TYPES.register(
-            "doctor_point_of_interest",
-            () -> new PointOfInterestType(
-                    "doctor_point_of_interest",
-                    ImmutableSet.copyOf(DOCTOR_POINT_OF_INTEREST_STATES),
-                    1,
-                    1
-            )
-    );
+    private val DOCTOR_POINT_OF_INTEREST_STATES: MutableSet<BlockState> = HashSet()
 
-    public static final RegistryObject<VillagerProfession> DOCTOR = PROFESSIONS.register(
-            "doctor",
-            () -> new VillagerProfession(
-                    "doctor_point_of_interest",
-                    DOCTOR_POINT_OF_INTEREST.get(),
-                    ImmutableSet.of(ItemRegistries.FIRST_AID_KIT.get()),
-                    ImmutableSet.of(BlockRegistries.BANDAGE_BOX.get()),
-                    SoundEvents.BLOCK_BREWING_STAND_BREW
-            )
-    );
+    val DOCTOR_POINT_OF_INTEREST by POI_TYPES.register(
+            "doctor_point_of_interest"
+    ) {
+        PointOfInterestType(
+                "doctor_point_of_interest",
+                ImmutableSet.copyOf(DOCTOR_POINT_OF_INTEREST_STATES),
+                1,
+                1
+        )
+    }
 
-    static {
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX.get()));
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX.get()));
+    val DOCTOR by PROFESSIONS.register(
+            "doctor"
+    ) {
+        VillagerProfession(
+                "doctor_point_of_interest",
+                DOCTOR_POINT_OF_INTEREST,
+                ImmutableSet.of(ItemRegistries.FIRST_AID_KIT),
+                ImmutableSet.of(BlockRegistries.BANDAGE_BOX),
+                SoundEvents.BLOCK_BREWING_STAND_BREW
+        )
+    }
+
+    init {
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
     }
 }

@@ -17,15 +17,20 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.client.screen;
+package io.github.blueminecraftteam.healthmod.client.armor
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.renderer.entity.model.BipedModel
+import net.minecraft.client.renderer.model.ModelRenderer
+import net.minecraft.entity.player.PlayerEntity
 
-public class BandageBoxScreen extends Screen {
-    protected BandageBoxScreen(ITextComponent titleIn) {
-        super(titleIn);
+// TODO: Model
+class FaceMaskModel : BipedModel<PlayerEntity?>(0.0f, 0.0f, 64, 32) {
+    private val renderer: ModelRenderer
+
+    init {
+        textureHeight = 128
+        textureWidth = 128
+        renderer = ModelRenderer(this, 82, 0)
+        bipedHead.addChild(renderer)
     }
-
-    // TODO
 }

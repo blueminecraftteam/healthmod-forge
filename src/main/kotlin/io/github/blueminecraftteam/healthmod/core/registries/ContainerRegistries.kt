@@ -17,21 +17,27 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer;
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.inventory.container.ContainerType
+import net.minecraft.network.PacketBuffer
+import net.minecraftforge.common.extensions.IForgeContainerType
+import net.minecraftforge.registries.ForgeRegistries
+import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-public class ContainerRegistries {
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID);
+object ContainerRegistries {
+    val CONTAINERS = KDeferredRegister(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID)
 
-    public static final RegistryObject<ContainerType<BandageBoxContainer>> BAND_AID_BOX = CONTAINERS.register(
-            "band_aid_box",
-            () -> IForgeContainerType.create(BandageBoxContainer::new)
-    );
+    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.register(
+            "bandage_box"
+    ) {
+        IForgeContainerType.create { windowId: Int, playerInventory: PlayerInventory, data: PacketBuffer ->
+            BandageBoxContainer(windowId, playerInventory, data)
+        }
+    }
+
+
 }

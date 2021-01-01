@@ -17,40 +17,40 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.config;
+package io.github.blueminecraftteam.healthmod.core.config
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec
 
-public class ServerConfig {
-    public final ForgeConfigSpec.IntValue bandageInfectionChance;
-    public final ForgeConfigSpec.IntValue bandageInfectionChanceWhenHealthy;
-    public final ForgeConfigSpec.IntValue bacterialResistanceChance;
+class ServerConfig(builder: ForgeConfigSpec.Builder) {
+    @JvmField
+    val bandageInfectionChance: ForgeConfigSpec.IntValue
 
-    public ServerConfig(ForgeConfigSpec.Builder builder) {
-        builder.comment("This is the configuration for HealthMod.");
+    @JvmField
+    val bandageInfectionChanceWhenHealthy: ForgeConfigSpec.IntValue
 
-        builder.push("Wound Infection");
-        builder.comment("Chance for band aids to fail and to give you a wound infection. Chance is 1 divided by this.");
+    @JvmField
+    val bacterialResistanceChance: ForgeConfigSpec.IntValue
+
+    init {
+        builder.comment("This is the configuration for HealthMod.")
+        builder.push("Wound Infection")
+        builder.comment("Chance for bandages to fail and to give you a wound infection. Chance is 1 divided by this.")
         bandageInfectionChance = builder.defineInRange(
-                "bandAidInfectionChance",
+                "bandageInfectionChance",
                 8,
-                1, /* to */ Integer.MAX_VALUE
-        );
-        builder.comment("Chance for band aids to fail and to give you a wound infection when healthy. Chance is 1 divided by this.");
+                1, Int.MAX_VALUE)
+        builder.comment("Chance for bandages to fail and to give you a wound infection when healthy. Chance is 1 divided by this.")
         bandageInfectionChanceWhenHealthy = builder.defineInRange(
-                "bandAidInfectionChanceWhenHealthy",
+                "bandageInfectionChanceWhenHealthy",
                 16,
-                1, /* to */ Integer.MAX_VALUE
-        );
-        builder.pop();
-
-        builder.push("Other");
-        builder.comment("Chance for bacteria to grow resistance to antibiotics (makes harmful effects stronger). Chance is 1 divided by this.");
+                1, Int.MAX_VALUE)
+        builder.pop()
+        builder.push("Other")
+        builder.comment("Chance for bacteria to grow resistance to antibiotics (makes harmful effects stronger). Chance is 1 divided by this.")
         bacterialResistanceChance = builder.defineInRange(
                 "bacterialResistanceChance",
                 500,
-                1, /* to */ Integer.MAX_VALUE
-        );
-        builder.pop();
+                1, Int.MAX_VALUE)
+        builder.pop()
     }
 }

@@ -17,32 +17,22 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.blocks;
+package io.github.blueminecraftteam.healthmod.common.blocks
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.tileentity.TileEntity
+import net.minecraft.world.IBlockReader
 
-import javax.annotation.Nullable;
-
-public class BandageBoxBlock extends Block {
-    public BandageBoxBlock(Properties properties) {
-        super(properties);
-    }
-
+class BandageBoxBlock(properties: Properties) : Block(properties) {
     // TODO: Model
     // TODO: Opening gui logic
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    override fun hasTileEntity(state: BlockState): Boolean {
+        return true
     }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityRegistries.BANDAGE_BOX.get().create();
+    override fun createTileEntity(state: BlockState, world: IBlockReader): TileEntity? {
+        return TileEntityRegistries.BANDAGE_BOX.create()
     }
 }

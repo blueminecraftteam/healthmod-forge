@@ -17,29 +17,29 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries;
+package io.github.blueminecraftteam.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity;
-import io.github.blueminecraftteam.healthmod.common.tileentities.BloodTestMachineTileEntity;
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity
+import io.github.blueminecraftteam.healthmod.common.tileentities.BloodTestMachineTileEntity
+import io.github.blueminecraftteam.healthmod.core.HealthMod
+import net.minecraft.tileentity.TileEntityType
+import net.minecraftforge.registries.ForgeRegistries
+import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-public class TileEntityRegistries {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, HealthMod.MOD_ID);
+object TileEntityRegistries {
+    val TILE_ENTITIES = KDeferredRegister(ForgeRegistries.TILE_ENTITIES, HealthMod.MOD_ID)
 
-    @SuppressWarnings("ConstantConditions")
-    public static final RegistryObject<TileEntityType<BandageBoxTileEntity>> BANDAGE_BOX = TILE_ENTITIES.register(
-            "band_aid_box",
-            () -> TileEntityType.Builder.create(BandageBoxTileEntity::new, BlockRegistries.BANDAGE_BOX.get())
-                    .build(null)
-    );
+    val BANDAGE_BOX: TileEntityType<BandageBoxTileEntity> by TILE_ENTITIES.register("bandage_box") {
+        TileEntityType.Builder
+                .create(::BandageBoxTileEntity, BlockRegistries.BANDAGE_BOX)
+                .build(null)
+    }
 
-    public static final RegistryObject<TileEntityType<BloodTestMachineTileEntity>> BLOOD_TEST_MACHINE = TILE_ENTITIES.register(
-            "blood_test_machine",
-            () -> TileEntityType.Builder.create(BloodTestMachineTileEntity::new, BlockRegistries.BLOOD_TEST_MACHINE.get())
-                    .build(null)
-    );
+    val BLOOD_TEST_MACHINE: TileEntityType<BloodTestMachineTileEntity> by TILE_ENTITIES.register(
+            "blood_test_machine"
+    ) {
+        TileEntityType.Builder
+                .create(::BloodTestMachineTileEntity, BlockRegistries.BLOOD_TEST_MACHINE)
+                .build(null)
+    }
 }

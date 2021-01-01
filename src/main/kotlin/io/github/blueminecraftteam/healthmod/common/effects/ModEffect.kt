@@ -17,19 +17,12 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.tileentities;
+package io.github.blueminecraftteam.healthmod.common.effects
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityRegistries;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.potion.Effect
+import net.minecraft.potion.EffectType
 
-// TODO functionality
-public class BloodTestMachineTileEntity extends TileEntity {
-    public BloodTestMachineTileEntity(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
-
-    public BloodTestMachineTileEntity() {
-        this(TileEntityRegistries.BLOOD_TEST_MACHINE.get());
-    }
-}
+/**
+ * Class to bypass a protected constructor in the [effect class][Effect].
+ */
+class ModEffect(typeIn: EffectType, liquidColorIn: Int) : Effect(typeIn, liquidColorIn)

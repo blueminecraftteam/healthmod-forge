@@ -17,84 +17,78 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core;
+package io.github.blueminecraftteam.healthmod.core
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock;
-import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig;
-import io.github.blueminecraftteam.healthmod.core.registries.*;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Objects;
+import io.github.blueminecraftteam.healthmod.client.HealthModClient
+import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
+import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
+import io.github.blueminecraftteam.healthmod.core.registries.*
+import net.minecraft.item.BlockItem
+import net.minecraft.item.Item
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.api.distmarker.OnlyIn
+import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.ModLoadingContext
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.config.ModConfig
+import org.apache.logging.log4j.LogManager
+import thedarkcolour.kotlinforforge.forge.FORGE_BUS
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import java.util.*
 
 @Mod(HealthMod.MOD_ID)
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class HealthMod {
-    public static final String MOD_ID = "healthmod";
-    public static final ItemGroup ITEM_GROUP = new ItemGroup(MOD_ID) {
+object HealthMod {
+    const val MOD_ID = "healthmod"
+    val ITEM_GROUP = object : ItemGroup(MOD_ID) {
         @OnlyIn(Dist.CLIENT)
-        @Override
-        public ItemStack createIcon() {
-            return new ItemStack(ItemRegistries.BANDAGE.get());
+        override fun createIcon(): ItemStack {
+            return ItemStack(ItemRegistries.BANDAGE)
         }
-    };
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    public HealthMod() {
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
-        BlockRegistries.BLOCKS.register(modEventBus);
-        ItemRegistries.ITEMS.register(modEventBus);
-        EffectRegistries.EFFECTS.register(modEventBus);
-        ContainerRegistries.CONTAINERS.register(modEventBus);
-        TileEntityRegistries.TILE_ENTITIES.register(modEventBus);
-        VillagerProfessionRegistries.PROFESSIONS.register(modEventBus);
-        VillagerProfessionRegistries.POI_TYPES.register(modEventBus);
-
-        LOGGER.debug("Registered deferred registers to mod event bus!");
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HealthModConfig.SERVER_SPEC);
-
-        LOGGER.debug("Registered config!");
-
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
+    private val LOGGER = LogManager.getLogger()
+
+    init {
+        BlockRegistries.BLOCKS.register(MOD_BUS)
+        ItemRegistries.ITEMS.register(MOD_BUS)
+        EffectRegistries.EFFECTS.register(MOD_BUS)
+        ContainerRegistries.CONTAINERS.register(MOD_BUS)
+        TileEntityRegistries.TILE_ENTITIES.register(MOD_BUS)
+        VillagerProfessionRegistries.POI_TYPES.register(MOD_BUS)
+        VillagerProfessionRegistries.PROFESSIONS.register(MOD_BUS)
+
+        LOGGER.debug("Registered deferred registers to mod event bus!")
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HealthModConfig.SERVER_SPEC)
+
+        LOGGER.debug("Registered config!")
+
+        FORGE_BUS.register(this)
+        FORGE_BUS.addListener(HealthModClient::clientEvent)
+    }
+
+
     @SubscribeEvent
-    public static void onRegisterBlockItems(final RegistryEvent.Register<Item> event) {
-        final IForgeRegistry<Item> registry = event.getRegistry();
+    fun onRegisterBlockItems(event: RegistryEvent.Register<Item>) {
+        val registry = event.registry
 
-        BlockRegistries.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-            final Item.Properties properties;
+        BlockRegistries.BLOCKS.getEntries().map { it.get() }.forEach {
 
-            if (block instanceof BandageBoxBlock) {
-                properties = new Item.Properties().group(ITEM_GROUP).maxStackSize(1);
+            val properties: Item.Properties = if (it is BandageBoxBlock) {
+                Item.Properties().group(ITEM_GROUP).maxStackSize(1)
             } else {
-                properties = new Item.Properties().group(ITEM_GROUP);
+                Item.Properties().group(ITEM_GROUP)
             }
 
-            final BlockItem blockItem = new BlockItem(block, properties);
-            blockItem.setRegistryName(Objects.requireNonNull(block.getRegistryName()));
+            val blockItem = BlockItem(it, properties)
+            blockItem.registryName = Objects.requireNonNull(it.registryName)
+            registry.register(blockItem)
+        }
 
-            registry.register(blockItem);
-        });
-
-        LOGGER.debug("Registered block items!");
+        LOGGER.debug("Registered block items!")
     }
 }

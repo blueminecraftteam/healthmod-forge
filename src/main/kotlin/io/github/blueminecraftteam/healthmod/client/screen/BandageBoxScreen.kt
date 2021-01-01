@@ -17,21 +17,10 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.config;
+package io.github.blueminecraftteam.healthmod.client.screen
 
-import io.github.blueminecraftteam.healthmod.core.HealthMod;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
-import org.apache.commons.lang3.tuple.Pair;
+import net.minecraft.client.gui.screen.Screen
+import net.minecraft.util.text.ITextComponent
 
-@Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class HealthModConfig {
-    public static final ServerConfig SERVER_CONFIG;
-    public static final ForgeConfigSpec SERVER_SPEC;
-
-    static {
-        final Pair<ServerConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
-        SERVER_SPEC = specPair.getRight();
-        SERVER_CONFIG = specPair.getLeft();
-    }
-}
+class BandageBoxScreen constructor(titleIn: ITextComponent) // TODO
+    : Screen(titleIn)
