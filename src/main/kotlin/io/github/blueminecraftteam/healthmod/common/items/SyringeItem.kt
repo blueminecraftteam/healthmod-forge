@@ -20,6 +20,7 @@
 package io.github.blueminecraftteam.healthmod.common.items
 
 import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.blueminecraftteam.healthmod.core.util.extensions.isServer
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.MobEntity
@@ -69,7 +70,7 @@ class SyringeItem(properties: Properties) : Item(properties) {
     ): ActionResultType {
         if (getBlood(stack) >= 1) return ActionResultType.PASS
 
-        if (!playerIn.world.isRemote) {
+        if (playerIn.world.isServer) {
             if (target is MobEntity) {
                 target.attackEntityAsMob(playerIn)
                 setBlood(stack, 1)

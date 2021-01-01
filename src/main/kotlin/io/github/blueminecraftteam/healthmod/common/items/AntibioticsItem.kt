@@ -21,6 +21,7 @@ package io.github.blueminecraftteam.healthmod.common.items
 
 import io.github.blueminecraftteam.healthmod.core.HealthMod
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
+import io.github.blueminecraftteam.healthmod.core.util.extensions.isServer
 import io.github.blueminecraftteam.healthmod.core.util.extensions.minusAssign
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
@@ -37,7 +38,7 @@ import kotlin.math.roundToInt
 
 class AntibioticsItem(properties: Properties) : Item(properties) {
     override fun onItemRightClick(world: World, player: PlayerEntity, hand: Hand): ActionResult<ItemStack> {
-        if (!world.isRemote) {
+        if (world.isServer) {
             if ((1..HealthModConfig.SERVER_CONFIG.bacterialResistanceChance.get() + 1).random() != 1) {
                 player.activePotionEffects
                     .filter { it.potion.effectType == EffectType.HARMFUL }

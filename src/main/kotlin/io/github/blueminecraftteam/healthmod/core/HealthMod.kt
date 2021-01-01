@@ -34,7 +34,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import org.apache.logging.log4j.LogManager
-import thedarkcolour.kotlinforforge.forge.MOD_CONTEXT
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.registerConfig
 
 @Mod(HealthMod.MOD_ID)
@@ -48,15 +48,13 @@ object HealthMod {
     private val LOGGER = LogManager.getLogger()
 
     init {
-
-
-        BlockRegistries.BLOCKS.register(MOD_CONTEXT.getKEventBus())
-        ItemRegistries.ITEMS.register(MOD_CONTEXT.getKEventBus())
-        EffectRegistries.EFFECTS.register(MOD_CONTEXT.getKEventBus())
-        ContainerTypeRegistries.CONTAINER_TYPES.register(MOD_CONTEXT.getKEventBus())
-        TileEntityTypeRegistries.TILE_ENTITY_TYPES.register(MOD_CONTEXT.getKEventBus())
-        VillagerProfessionRegistries.POI_TYPES.register(MOD_CONTEXT.getKEventBus())
-        VillagerProfessionRegistries.PROFESSIONS.register(MOD_CONTEXT.getKEventBus())
+        BlockRegistries.BLOCKS.register(MOD_BUS)
+        ItemRegistries.ITEMS.register(MOD_BUS)
+        EffectRegistries.EFFECTS.register(MOD_BUS)
+        ContainerTypeRegistries.CONTAINER_TYPES.register(MOD_BUS)
+        TileEntityTypeRegistries.TILE_ENTITY_TYPES.register(MOD_BUS)
+        VillagerProfessionRegistries.POI_TYPES.register(MOD_BUS)
+        VillagerProfessionRegistries.PROFESSIONS.register(MOD_BUS)
 
         LOGGER.debug("Registered deferred registers to mod event bus!")
 
