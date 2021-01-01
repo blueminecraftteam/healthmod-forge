@@ -23,9 +23,15 @@ import io.github.blueminecraftteam.healthmod.common.items.SyringeItem
 import io.github.blueminecraftteam.healthmod.core.HealthMod
 import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries
 import net.minecraft.item.ItemModelsProperties
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 
+@Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = [Dist.CLIENT])
 object HealthModClient {
+    @SubscribeEvent
+    @JvmStatic
     fun onClientSetup(event: FMLClientSetupEvent) {
         ItemModelsProperties.registerProperty(
             ItemRegistries.SYRINGE,

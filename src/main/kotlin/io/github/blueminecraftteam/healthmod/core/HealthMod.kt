@@ -19,7 +19,6 @@
 
 package io.github.blueminecraftteam.healthmod.core
 
-import io.github.blueminecraftteam.healthmod.client.HealthModClient
 import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
 import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
 import io.github.blueminecraftteam.healthmod.core.registries.*
@@ -36,7 +35,6 @@ import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import org.apache.logging.log4j.LogManager
-import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 @Mod(HealthMod.MOD_ID)
@@ -64,9 +62,6 @@ object HealthMod {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, HealthModConfig.SERVER_SPEC)
 
         LOGGER.debug("Registered config!")
-
-        FORGE_BUS.register(this)
-        FORGE_BUS.addListener(HealthModClient::onClientSetup)
     }
 
     fun rl(path: String) = ResourceLocation(MOD_ID, path)

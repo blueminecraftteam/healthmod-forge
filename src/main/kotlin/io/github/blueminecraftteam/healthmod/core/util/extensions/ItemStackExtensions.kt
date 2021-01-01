@@ -23,3 +23,5 @@ import net.minecraft.item.ItemStack
 
 operator fun ItemStack.minus(amount: Int): ItemStack = this.copy().apply { shrink(amount) }
 operator fun ItemStack.minusAssign(amount: Int) = this.shrink(amount)
+operator fun ItemStack.plus(amount: Int): ItemStack = this.copy().apply { grow(amount) }
+operator fun ItemStack.plusAssign(amount: Int) = this.grow(amount)
