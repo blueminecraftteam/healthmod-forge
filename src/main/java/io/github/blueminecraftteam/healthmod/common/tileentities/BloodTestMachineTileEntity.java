@@ -29,7 +29,7 @@ public class BloodTestMachineTileEntity extends TileEntity {
         super(tileEntityTypeIn);
     }
 
-    public BloodTestMachineTileEntity(){
+    public BloodTestMachineTileEntity() {
         this(TileEntityRegistries.BLOOD_TEST_MACHINE.get());
     }
 }

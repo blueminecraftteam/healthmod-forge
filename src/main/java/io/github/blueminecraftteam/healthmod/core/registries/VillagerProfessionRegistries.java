@@ -39,7 +39,6 @@ public class VillagerProfessionRegistries {
     public static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID);
 
     private static final Set<BlockState> DOCTOR_POINT_OF_INTEREST_STATES = new HashSet<>();
-
     public static final RegistryObject<PointOfInterestType> DOCTOR_POINT_OF_INTEREST = POI_TYPES.register(
             "doctor_point_of_interest",
             () -> new PointOfInterestType(

@@ -82,7 +82,7 @@ public class ItemRegistries {
             "first_aid_kit",
             () -> new Item(new Item.Properties().group(HealthMod.ITEM_GROUP))
     );
-    
+
     public static final RegistryObject<Item> BLOOD_VIAL = ITEMS.register(
             "blood_vial",
             () -> new Item(new Item.Properties().group(HealthMod.ITEM_GROUP))
