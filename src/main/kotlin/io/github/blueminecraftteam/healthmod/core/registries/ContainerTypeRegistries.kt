@@ -26,10 +26,10 @@ import net.minecraftforge.common.extensions.IForgeContainerType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-object ContainerRegistries {
-    val CONTAINERS = KDeferredRegister(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID)
+object ContainerTypeRegistries {
+    val CONTAINER_TYPES = KDeferredRegister(ForgeRegistries.CONTAINERS, HealthMod.MOD_ID)
 
-    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINERS.registerObject("bandage_box") {
+    val BANDAGE_BOX: ContainerType<BandageBoxContainer> by CONTAINER_TYPES.registerObject("bandage_box") {
         IForgeContainerType.create(::BandageBoxContainer)
     }
 }

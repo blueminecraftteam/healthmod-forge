@@ -21,7 +21,7 @@ package io.github.blueminecraftteam.healthmod.common.container
 
 import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity
 import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries
-import io.github.blueminecraftteam.healthmod.core.registries.ContainerRegistries
+import io.github.blueminecraftteam.healthmod.core.registries.ContainerTypeRegistries
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.container.Container
@@ -33,7 +33,7 @@ class BandageBoxContainer(
     windowId: Int,
     playerInventory: PlayerInventory,
     tileEntity: BandageBoxTileEntity
-) : Container(ContainerRegistries.BANDAGE_BOX, windowId) {
+) : Container(ContainerTypeRegistries.BANDAGE_BOX, windowId) {
     private val callable = IWorldPosCallable.of(tileEntity.world!!, tileEntity.pos)
 
     constructor(
