@@ -62,6 +62,6 @@ public class BandageBoxContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(callable, playerIn, BlockRegistries.BAND_AID_BOX.get());
+        return isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX.get());
     }
 }

@@ -56,13 +56,13 @@ public class VillagerProfessionRegistries {
                     "doctor_point_of_interest",
                     DOCTOR_POINT_OF_INTEREST.get(),
                     ImmutableSet.of(ItemRegistries.FIRST_AID_KIT.get()),
-                    ImmutableSet.of(BlockRegistries.BAND_AID_BOX.get()),
+                    ImmutableSet.of(BlockRegistries.BANDAGE_BOX.get()),
                     SoundEvents.BLOCK_BREWING_STAND_BREW
             )
     );
 
     static {
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BAND_AID_BOX.get()));
-        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BAND_AID_BOX.get()));
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX.get()));
+        DOCTOR_POINT_OF_INTEREST_STATES.addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX.get()));
     }
 }
