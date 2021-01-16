@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Blue Minecraft Team.
+ * Copyright (c) 2021 Team Blue.
  *
  * This file is part of HealthMod.
  *

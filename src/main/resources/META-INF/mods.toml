@@ -20,7 +20,7 @@ logoFile = "logo.png"
 
 credits = "xf8b, AG6, LoneWolf, ilja615, Saksham4106, PTZ, BioAstroiner"
 
-authors = "Blue Minecraft Team"
+authors = "Team Blue"
 
 [[dependencies.healthmod]]
 modId = "forge"

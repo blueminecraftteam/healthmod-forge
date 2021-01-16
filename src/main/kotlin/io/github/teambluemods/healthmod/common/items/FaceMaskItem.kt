@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Team Blue Mods.
+ * Copyright (c) 2021 Team Blue.
  *
  * This file is part of HealthMod.
  *
