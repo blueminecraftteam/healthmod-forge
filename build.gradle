@@ -113,8 +113,8 @@ license {
     header = rootProject.file("LICENSE_HEADER.txt")
 
     ext {
-        name = "Blue Minecraft Team"
-        years = "2020"
+        name = "Team Blue Mods"
+        years = "2021"
         projectName = project.projectName
     }
 

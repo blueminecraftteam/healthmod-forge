@@ -4,7 +4,7 @@ loaderVersion = "[1,)"
 
 license = "LGPL-3.0-or-later"
 
-issueTrackerURL = "https://github.com/blueminecraftteam/healthmod-forge/issues/"
+issueTrackerURL = "https://github.com/teambluemods/healthmod-forge/issues/"
 
 [[mods]]
 
@@ -18,7 +18,7 @@ description = "This mod adds health related things into Minecraft, such as virus
 
 logoFile = "logo.png"
 
-credits = "xf8b, AG6, LoneWolf, ilja615, Saksham4106, PTZ"
+credits = "xf8b, AG6, LoneWolf, ilja615, Saksham4106, PTZ, BioAstroiner"
 
 authors = "Blue Minecraft Team"
 
