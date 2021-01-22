@@ -12,8 +12,8 @@ a mod which adds health related things but for Forge
 
 ## Required Dependencies
 
-- [Minecraft 1.16.4](https://minecraft.net/)
-- [Forge 35.1.4](https://files.minecraftforge.net/)
+- [Minecraft 1.16.5](https://minecraft.net/)
+- [Forge 36.0.1](https://files.minecraftforge.net/)
 
 ### Note
 
