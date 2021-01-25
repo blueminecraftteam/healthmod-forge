@@ -17,11 +17,12 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core
+package io.github.teambluemods.healthmod.core
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
-import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
-import io.github.blueminecraftteam.healthmod.core.registries.*
+import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
+import io.github.teambluemods.healthmod.common.blocks.BandageBoxBlock
+import io.github.teambluemods.healthmod.core.config.HealthModConfig
+import io.github.teambluemods.healthmod.core.registries.*
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup

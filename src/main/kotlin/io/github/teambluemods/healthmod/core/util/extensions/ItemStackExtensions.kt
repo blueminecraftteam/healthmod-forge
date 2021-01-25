@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.util.extensions
+package io.github.teambluemods.healthmod.core.util.extensions
 
 import net.minecraft.item.ItemStack
 

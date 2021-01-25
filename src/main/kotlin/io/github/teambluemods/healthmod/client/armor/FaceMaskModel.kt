@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.client.armor
+package io.github.teambluemods.healthmod.client.armor
 
 import net.minecraft.client.renderer.entity.model.BipedModel
 import net.minecraft.client.renderer.model.ModelRenderer

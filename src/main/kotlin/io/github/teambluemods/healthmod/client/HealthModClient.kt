@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.client
+package io.github.teambluemods.healthmod.client
 
-import io.github.blueminecraftteam.healthmod.common.items.SyringeItem
-import io.github.blueminecraftteam.healthmod.core.HealthMod
-import io.github.blueminecraftteam.healthmod.core.registries.ItemRegistries
+import io.github.teambluemods.healthmod.common.items.SyringeItem
+import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.registries.ItemRegistries
 import net.minecraft.item.ItemModelsProperties
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.eventbus.api.SubscribeEvent

@@ -17,13 +17,13 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries
+package io.github.teambluemods.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.items.AntibioticsItem
-import io.github.blueminecraftteam.healthmod.common.items.BandageItem
-import io.github.blueminecraftteam.healthmod.common.items.FaceMaskItem
-import io.github.blueminecraftteam.healthmod.common.items.SyringeItem
-import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.common.items.AntibioticsItem
+import io.github.teambluemods.healthmod.common.items.BandageItem
+import io.github.teambluemods.healthmod.common.items.FaceMaskItem
+import io.github.teambluemods.healthmod.common.items.SyringeItem
+import io.github.teambluemods.healthmod.core.HealthMod
 import net.minecraft.inventory.EquipmentSlotType
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.Food

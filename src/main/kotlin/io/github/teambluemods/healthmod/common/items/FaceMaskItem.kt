@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.items
+package io.github.teambluemods.healthmod.common.items
 
-import io.github.blueminecraftteam.healthmod.client.armor.FaceMaskModel
-import io.github.blueminecraftteam.healthmod.core.HealthMod
-import io.github.blueminecraftteam.healthmod.core.registries.EffectRegistries
+import io.github.teambluemods.healthmod.client.armor.FaceMaskModel
+import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.registries.EffectRegistries
 import net.minecraft.client.renderer.entity.model.BipedModel
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity

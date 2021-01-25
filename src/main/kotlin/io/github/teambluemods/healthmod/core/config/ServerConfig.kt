@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.config
+package io.github.teambluemods.healthmod.core.config
 
 import net.minecraftforge.common.ForgeConfigSpec
 

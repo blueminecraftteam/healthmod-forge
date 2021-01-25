@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries
+package io.github.teambluemods.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.effects.ModEffect
-import io.github.blueminecraftteam.healthmod.common.effects.WoundInfectionEffect
-import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.common.effects.ModEffect
+import io.github.teambluemods.healthmod.common.effects.WoundInfectionEffect
+import io.github.teambluemods.healthmod.core.HealthMod
 import net.minecraft.potion.EffectType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
