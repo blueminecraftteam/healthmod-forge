@@ -25,8 +25,11 @@ import io.github.teambluemods.healthmod.core.registries.ContainerTypeRegistries
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.container.Container
+import net.minecraft.inventory.container.Slot
+import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.IWorldPosCallable
+
 
 // TODO
 class BandageBoxContainer(
@@ -44,6 +47,28 @@ class BandageBoxContainer(
 
     override fun canInteractWith(playerIn: PlayerEntity) =
         isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX)
+
+    override fun transferStackInSlot(playerIn: PlayerEntity?, index: Int): ItemStack? {
+        var itemstack = ItemStack.EMPTY
+        val slot: Slot? = inventorySlots[index]
+        if (slot != null && slot.hasStack) {
+            val itemstack1: ItemStack = slot.stack
+            itemstack = itemstack1.copy()
+            if (index < 36) {
+                if (!mergeItemStack(itemstack1, 6, inventorySlots.size, true)) {
+                    return ItemStack.EMPTY
+                } else if (!mergeItemStack(itemstack1, 0, 6, false)) {
+                    return ItemStack.EMPTY
+                }
+                if (itemstack1.isEmpty) {
+                    slot.putStack(ItemStack.EMPTY)
+                } else {
+                    slot.onSlotChanged()
+                }
+            }
+        }
+        return itemstack
+    }
 
     companion object {
         private fun getTileEntity(playerInventory: PlayerInventory, data: PacketBuffer) =
