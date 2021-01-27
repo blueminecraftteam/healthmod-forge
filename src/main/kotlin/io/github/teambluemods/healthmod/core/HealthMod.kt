@@ -68,19 +68,17 @@ object HealthMod {
 
     @SubscribeEvent
     fun onRegisterBlockItems(event: RegistryEvent.Register<Item>) {
-        BlockRegistries.BLOCKS.getEntries()
-            .map { it.get() }
-            .forEach {
-                val properties = if (it is BandageBoxBlock) {
-                    Item.Properties().group(ITEM_GROUP).maxStackSize(1)
-                } else {
-                    Item.Properties().group(ITEM_GROUP)
-                }
-                val blockItem = BlockItem(it, properties)
-                blockItem.registryName = it.registryName
-
-                event.registry.register(blockItem)
+        BlockRegistries.BLOCKS.getEntries().map { it.get() }.forEach { block ->
+            val properties = if (block is BandageBoxBlock) {
+                Item.Properties().group(ITEM_GROUP).maxStackSize(1)
+            } else {
+                Item.Properties().group(ITEM_GROUP)
             }
+
+            val blockItem = BlockItem(block, properties).apply { registryName = block.registryName }
+
+            event.registry.register(blockItem)
+        }
 
         LOGGER.debug("Registered block items!")
     }
