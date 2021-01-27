@@ -29,21 +29,95 @@ import net.minecraft.inventory.container.Slot
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketBuffer
 import net.minecraft.util.IWorldPosCallable
+import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.IItemHandler
+import net.minecraftforge.items.SlotItemHandler
+import net.minecraftforge.items.wrapper.InvWrapper
 
 
-// TODO
+// TODO this part needs a lot, but first need da the da, the gui texture
 class BandageBoxContainer(
     windowId: Int,
     playerInventory: PlayerInventory,
     tileEntity: BandageBoxTileEntity
 ) : Container(ContainerTypeRegistries.BANDAGE_BOX, windowId) {
     private val callable = IWorldPosCallable.of(tileEntity.world!!, tileEntity.pos)
+    private val playerInventory: IItemHandler = InvWrapper(playerInventory)
 
     constructor(
         windowId: Int,
         playerInventory: PlayerInventory,
         data: PacketBuffer
-    ) : this(windowId, playerInventory, getTileEntity(playerInventory, data))
+    ) : this(windowId, playerInventory, getTileEntity(playerInventory, data)) {
+
+        val tileEntity = getTileEntity(playerInventory, data)
+        //MainInventory
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent { h ->
+            addSlotRange(
+                h,
+                0,
+                64,
+                24,
+                8,//TODO amount of inventory
+                18 //TODO texture gap
+            )
+        }
+        layoutPlayerInventorySlots(0, 0) //TODO enter values
+    }
+
+    private fun layoutPlayerInventorySlots(leftCol: Int, topRow: Int) {
+        // Player inventory
+        var topRow = topRow //TODO
+        addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18)
+
+        // Hotbar
+        topRow += 0 //TODO player Hotbar topRow coord
+        addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18)
+    }
+
+    /**
+     * unlike [addSlotBox] this method adds only a single row of boxes
+     * @param dx is gap size
+     * @param amount is number of columbus
+     * @param index of first column box , it gets incremented as amount's value
+     */
+    private fun addSlotRange(handler: IItemHandler, index: Int, x: Int, y: Int, amount: Int, dx: Int): Int {
+        var index = index
+        var x = x
+        for (i in 0 until amount) {
+            addSlot(SlotItemHandler(handler, index, x, y))
+            x += dx
+            index++
+        }
+        return index
+    }
+
+    /**
+     * this method makes a huge Box slot with different rows
+     * and collumns, like an Inventory Slots
+     * so it is infact consists of smaller [addSlotRange]s
+     * @param dx x gap
+     * @param dy y gap
+     * @see [addSlotBox]'s doc
+     */
+    private fun addSlotBox(
+        handler: IItemHandler,
+        index: Int,
+        x: Int,
+        y: Int,
+        horAmount: Int,
+        dx: Int,
+        verAmount: Int,
+        dy: Int
+    ): Int {
+        var index = index
+        var y = y
+        for (j in 0 until verAmount) {
+            index = addSlotRange(handler, index, x, y, horAmount, dx)
+            y += dy
+        }
+        return index
+    }
 
     override fun canInteractWith(playerIn: PlayerEntity) =
         isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX)
