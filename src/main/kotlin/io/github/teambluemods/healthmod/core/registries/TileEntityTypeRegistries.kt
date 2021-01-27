@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries
+package io.github.teambluemods.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity
-import io.github.blueminecraftteam.healthmod.common.tileentities.BloodTestMachineTileEntity
-import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.common.tileentities.BandageBoxTileEntity
+import io.github.teambluemods.healthmod.common.tileentities.BloodTestMachineTileEntity
+import io.github.teambluemods.healthmod.core.HealthMod
 import net.minecraft.tileentity.TileEntityType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister

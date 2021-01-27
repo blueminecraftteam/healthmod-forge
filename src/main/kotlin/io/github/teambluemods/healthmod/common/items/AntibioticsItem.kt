@@ -17,12 +17,12 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.items
+package io.github.teambluemods.healthmod.common.items
 
-import io.github.blueminecraftteam.healthmod.core.HealthMod
-import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
-import io.github.blueminecraftteam.healthmod.core.util.extensions.isServer
-import io.github.blueminecraftteam.healthmod.core.util.extensions.minusAssign
+import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.config.HealthModConfig
+import io.github.teambluemods.healthmod.core.util.extensions.isServer
+import io.github.teambluemods.healthmod.core.util.extensions.minusAssign
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack

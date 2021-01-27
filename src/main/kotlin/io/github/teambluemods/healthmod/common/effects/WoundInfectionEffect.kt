@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.effects
+package io.github.teambluemods.healthmod.common.effects
 
 import net.minecraft.entity.LivingEntity
 import net.minecraft.potion.Effect

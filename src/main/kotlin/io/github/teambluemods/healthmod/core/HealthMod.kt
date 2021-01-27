@@ -17,11 +17,12 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core
+package io.github.teambluemods.healthmod.core
 
-import io.github.blueminecraftteam.healthmod.common.blocks.BandageBoxBlock
-import io.github.blueminecraftteam.healthmod.core.config.HealthModConfig
-import io.github.blueminecraftteam.healthmod.core.registries.*
+import io.github.teambluemods.healthmod.common.blocks.BandageBoxBlock
+import io.github.teambluemods.healthmod.core.config.HealthModConfig
+import io.github.teambluemods.healthmod.core.registries.*
+import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
@@ -35,6 +36,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import org.apache.logging.log4j.LogManager
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.forge.ObjectHolderDelegate
 import thedarkcolour.kotlinforforge.forge.registerConfig
 
 @Mod(HealthMod.MOD_ID)
@@ -67,19 +69,17 @@ object HealthMod {
 
     @SubscribeEvent
     fun onRegisterBlockItems(event: RegistryEvent.Register<Item>) {
-        BlockRegistries.BLOCKS.getEntries()
-            .map { it.get() }
-            .forEach {
-                val properties = if (it is BandageBoxBlock) {
-                    Item.Properties().group(ITEM_GROUP).maxStackSize(1)
-                } else {
-                    Item.Properties().group(ITEM_GROUP)
-                }
-                val blockItem = BlockItem(it, properties)
-                blockItem.registryName = it.registryName
-
-                event.registry.register(blockItem)
+        BlockRegistries.BLOCKS.getEntries().map(ObjectHolderDelegate<out Block>::get).forEach { block ->
+            val properties = if (block is BandageBoxBlock) {
+                Item.Properties().group(ITEM_GROUP).maxStackSize(1)
+            } else {
+                Item.Properties().group(ITEM_GROUP)
             }
+
+            val blockItem = BlockItem(block, properties).apply { registryName = block.registryName }
+
+            event.registry.register(blockItem)
+        }
 
         LOGGER.debug("Registered block items!")
     }
