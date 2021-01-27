@@ -39,6 +39,6 @@ object HealthModClient {
             SyringeItem.BLOOD_PROPERTY
         )
         //FIXME i have no idea how to BandageBoxScreen::new in freaking kotling, this lang is not like java
-        //ScreenManager.registerFactory(ContainerTypeRegistries.BANDAGE_BOX,BandageBoxScreen)
+        ScreenManager.registerFactory(ContainerTypeRegistries.BANDAGE_BOX, ::BandageBoxScreen)
     }
 }
