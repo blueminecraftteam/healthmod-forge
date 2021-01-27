@@ -17,10 +17,10 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries
+package io.github.teambluemods.healthmod.core.registries
 
-import io.github.blueminecraftteam.healthmod.common.container.BandageBoxContainer
-import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.common.container.BandageBoxContainer
+import io.github.teambluemods.healthmod.core.HealthMod
 import net.minecraft.inventory.container.ContainerType
 import net.minecraftforge.common.extensions.IForgeContainerType
 import net.minecraftforge.registries.ForgeRegistries

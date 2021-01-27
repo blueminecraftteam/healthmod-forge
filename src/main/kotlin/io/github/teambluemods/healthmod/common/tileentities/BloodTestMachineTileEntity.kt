@@ -17,9 +17,9 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.tileentities
+package io.github.teambluemods.healthmod.common.tileentities
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
+import io.github.teambluemods.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.tileentity.TileEntityType
 

@@ -17,10 +17,10 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.core.registries
+package io.github.teambluemods.healthmod.core.registries
 
 import com.google.common.collect.ImmutableSet
-import io.github.blueminecraftteam.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.HealthMod
 import net.minecraft.block.BlockState
 import net.minecraft.entity.merchant.villager.VillagerProfession
 import net.minecraft.util.SoundEvents

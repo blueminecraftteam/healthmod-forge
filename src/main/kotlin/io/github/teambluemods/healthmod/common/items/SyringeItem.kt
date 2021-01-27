@@ -17,10 +17,10 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.items
+package io.github.teambluemods.healthmod.common.items
 
-import io.github.blueminecraftteam.healthmod.core.HealthMod
-import io.github.blueminecraftteam.healthmod.core.util.extensions.isServer
+import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.util.extensions.isServer
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.MobEntity

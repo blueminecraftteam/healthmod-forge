@@ -17,7 +17,7 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.client.screen
+package io.github.teambluemods.healthmod.client.screen
 
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.util.text.ITextComponent

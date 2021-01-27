@@ -17,11 +17,11 @@
  * along with HealthMod.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.blueminecraftteam.healthmod.common.container
+package io.github.teambluemods.healthmod.common.container
 
-import io.github.blueminecraftteam.healthmod.common.tileentities.BandageBoxTileEntity
-import io.github.blueminecraftteam.healthmod.core.registries.BlockRegistries
-import io.github.blueminecraftteam.healthmod.core.registries.ContainerTypeRegistries
+import io.github.teambluemods.healthmod.common.tileentities.BandageBoxTileEntity
+import io.github.teambluemods.healthmod.core.registries.BlockRegistries
+import io.github.teambluemods.healthmod.core.registries.ContainerTypeRegistries
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.container.Container
