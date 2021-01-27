@@ -19,7 +19,7 @@
 
 package io.github.teambluemods.healthmod.common.blocks
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
+import io.github.teambluemods.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.world.IBlockReader

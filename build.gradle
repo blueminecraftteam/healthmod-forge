@@ -4,10 +4,6 @@ buildscript {
             url = "https://files.minecraftforge.net/maven"
         }
 
-        maven {
-            url = "https://dl.bintray.com/kotlin/kotlin-eap"
-        }
-
         jcenter()
         mavenCentral()
     }
@@ -90,10 +86,6 @@ repositories {
         url = "https://thedarkcolour.github.io/KotlinForForge/"
     }
 
-    maven {
-        url = "https://dl.bintray.com/kotlin/kotlin-eap"
-    }
-    
     mavenCentral()
 }
 
@@ -118,8 +110,7 @@ license {
         projectName = project.projectName
     }
 
-    include("**/*.java")
-    include("**/*.kt")
+    include("**/*.java", "**/*.kt")
 }
 
 jar {
@@ -174,6 +165,7 @@ publishing {
             artifact jar
         }
     }
+
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"

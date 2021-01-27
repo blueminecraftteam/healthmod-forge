@@ -30,8 +30,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 
 @Mod.EventBusSubscriber(modid = HealthMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = [Dist.CLIENT])
 object HealthModClient {
-    @SubscribeEvent
     @JvmStatic
+    @SubscribeEvent
     fun onClientSetup(event: FMLClientSetupEvent) {
         ItemModelsProperties.registerProperty(
             ItemRegistries.SYRINGE,
