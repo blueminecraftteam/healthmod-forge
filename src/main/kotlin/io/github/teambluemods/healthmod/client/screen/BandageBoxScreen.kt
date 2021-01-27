@@ -23,23 +23,20 @@ import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
 import io.github.teambluemods.healthmod.common.container.BandageBoxContainer
 import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.registries.ContainerTypeRegistries
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.Style
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 
-// TODO
 @OnlyIn(Dist.CLIENT)
 class BandageBoxScreen(
     screenContainer: BandageBoxContainer,
     inventory: PlayerInventory,
-    titleIn: ITextComponent
-) :
-    ContainerScreen<BandageBoxContainer>(screenContainer, inventory, titleIn) {
-
+    title: ITextComponent
+) : ContainerScreen<BandageBoxContainer>(screenContainer, inventory, title) {
     init {
         this.guiLeft = 0
         this.guiTop = 0
@@ -47,13 +44,12 @@ class BandageBoxScreen(
         this.ySize = 183
     }
 
-//    constructor() : this(ContainerTypeRegistries.BANDAGE_BOX.create(10,inventory),inventory = ) {
-//      FIXME figure out kotling
-//    }
+    constructor(inventory: PlayerInventory, title: ITextComponent) : this(
+        ContainerTypeRegistries.BANDAGE_BOX.create(10, inventory),
+        inventory,
+        title
+    )
 
-    private val TEXTURE = ResourceLocation(HealthMod.MOD_ID, "textures/gui/bandage_box.png")
-
-    //Oh god mappings... this is hard to look at
     override fun render(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, partTicks: Float) {
         this.renderBackground(matrixStack)
         super.render(matrixStack, mouseX, mouseY, partTicks)
@@ -62,6 +58,7 @@ class BandageBoxScreen(
 
     override fun drawGuiContainerForegroundLayer(matrixStack: MatrixStack, mouseX: Int, mouseY: Int) {
         super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY)
+
         font.drawString(
             matrixStack,
             title.unformattedComponentText,
@@ -69,20 +66,25 @@ class BandageBoxScreen(
             6.0f,
             500
         )
+
         font.drawString(
             matrixStack,
             this.playerInventory.displayName.unformattedComponentText,
             8.0f,
             90.0f,
-            500 // don't know what is number is
+            500
         )
     }
 
     override fun drawGuiContainerBackgroundLayer(matrixStack: MatrixStack, partialTicks: Float, x: Int, y: Int) {
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f)
         minecraft!!.getTextureManager().bindTexture(TEXTURE)
-        val x: Int = (width - this.xSize) / 2
-        val y: Int = (height - this.ySize) / 2
-        this.blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize)
+        val blitX = (width - this.xSize) / 2
+        val blitY = (height - this.ySize) / 2
+        this.blit(matrixStack, blitX, blitY, 0, 0, this.xSize, this.ySize)
+    }
+
+    companion object {
+        private val TEXTURE = HealthMod.rl("textures/gui/bandage_box.png")
     }
 }

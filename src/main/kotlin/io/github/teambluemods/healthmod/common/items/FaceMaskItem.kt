@@ -38,10 +38,10 @@ import kotlin.math.floor
 
 // NOTE: Model should work with texture and it does, atm FaceMaskModel doesn't do anything and acts as a placeholder for modelers to put their custom models there. -BioAstroiner
 class FaceMaskItem(
-    materialIn: IArmorMaterial,
+    material: IArmorMaterial,
     slot: EquipmentSlotType,
-    builderIn: Properties
-) : ArmorItem(materialIn, slot, builderIn) {
+    properties: Properties
+) : ArmorItem(material, slot, properties) {
     @OnlyIn(Dist.CLIENT)
     override fun <A : BipedModel<*>> getArmorModel(
         entity: LivingEntity,

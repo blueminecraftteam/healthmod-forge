@@ -42,106 +42,114 @@ class BandageBoxContainer(
     tileEntity: BandageBoxTileEntity
 ) : Container(ContainerTypeRegistries.BANDAGE_BOX, windowId) {
     private val callable = IWorldPosCallable.of(tileEntity.world!!, tileEntity.pos)
-    private val playerInventory: IItemHandler = InvWrapper(playerInventory)
+    private val playerInventory = InvWrapper(playerInventory)
 
     constructor(
         windowId: Int,
         playerInventory: PlayerInventory,
         data: PacketBuffer
     ) : this(windowId, playerInventory, getTileEntity(playerInventory, data)) {
-
         val tileEntity = getTileEntity(playerInventory, data)
-        //MainInventory
-        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent { h ->
-            addSlotRange(
-                h,
+
+        // main inventory
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent { handler ->
+            this.addSlotRange(
+                handler,
                 0,
                 64,
                 24,
-                8,//TODO amount of inventory
-                18 //TODO texture gap
+                8, // TODO amount of inventory
+                18 // TODO texture gap
             )
         }
-        layoutPlayerInventorySlots(0, 0) //TODO enter values
+
+        layoutPlayerInventorySlots(0, 0) // TODO enter values
     }
 
-    private fun layoutPlayerInventorySlots(leftCol: Int, topRow: Int) {
-        // Player inventory
-        var topRow = topRow //TODO
-        addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18)
+    private fun layoutPlayerInventorySlots(leftColumn: Int, topRow: Int) {
+        // player inventory
+        addSlotBox(playerInventory, 9, leftColumn, topRow, 9, 18, 3, 18)
 
-        // Hotbar
-        topRow += 0 //TODO player Hotbar topRow coord
-        addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18)
+        // hotbar
+        addSlotRange(playerInventory, 0, leftColumn, topRow, 9, 18)
     }
 
     /**
-     * unlike [addSlotBox] this method adds only a single row of boxes
-     * @param dx is gap size
-     * @param amount is number of columbus
-     * @param index of first column box , it gets incremented as amount's value
+     * NOTE: Unlike [addSlotBox], this method adds only a single row of boxes.
      */
-    private fun addSlotRange(handler: IItemHandler, index: Int, x: Int, y: Int, amount: Int, dx: Int): Int {
-        var index = index
-        var x = x
-        for (i in 0 until amount) {
-            addSlot(SlotItemHandler(handler, index, x, y))
-            x += dx
+    private fun addSlotRange(
+        handler: IItemHandler,
+        columnIndex: Int,
+        x: Int,
+        y: Int,
+        columnAmount: Int,
+        gapSize: Int
+    ): Int {
+        var index = columnIndex
+        var currentX = x
+
+        for (i in 0 until columnAmount) {
+            this.addSlot(SlotItemHandler(handler, index, currentX, y))
+            currentX += gapSize
             index++
         }
+
         return index
     }
 
     /**
-     * this method makes a huge Box slot with different rows
-     * and collumns, like an Inventory Slots
-     * so it is infact consists of smaller [addSlotRange]s
-     * @param dx x gap
-     * @param dy y gap
-     * @see [addSlotBox]'s doc
+     * This method makes a huge Box slot with different rows and columns,
+     * like inventory slots. So, it consists of smaller slot ranges.
+     * @see addSlotBox
      */
     private fun addSlotBox(
         handler: IItemHandler,
         index: Int,
         x: Int,
         y: Int,
-        horAmount: Int,
-        dx: Int,
-        verAmount: Int,
-        dy: Int
+        horizontalAmount: Int,
+        xGap: Int,
+        verticalAmount: Int,
+        yGap: Int
     ): Int {
-        var index = index
-        var y = y
-        for (j in 0 until verAmount) {
-            index = addSlotRange(handler, index, x, y, horAmount, dx)
-            y += dy
+        var currentIndex = index
+        var currentY = y
+
+        for (j in 0 until verticalAmount) {
+            currentIndex = addSlotRange(handler, currentIndex, x, currentY, horizontalAmount, xGap)
+            currentY += yGap
         }
-        return index
+
+        return currentIndex
     }
 
     override fun canInteractWith(playerIn: PlayerEntity) =
         isWithinUsableDistance(callable, playerIn, BlockRegistries.BANDAGE_BOX)
 
     override fun transferStackInSlot(playerIn: PlayerEntity?, index: Int): ItemStack? {
-        var itemstack = ItemStack.EMPTY
+        var itemStack = ItemStack.EMPTY
         val slot: Slot? = inventorySlots[index]
+
         if (slot != null && slot.hasStack) {
-            val itemstack1: ItemStack = slot.stack
-            itemstack = itemstack1.copy()
+            val slotStack: ItemStack = slot.stack
+            itemStack = slotStack.copy()
+
             if (index < 36) {
-                if (!mergeItemStack(itemstack1, 6, inventorySlots.size, true)) {
+                if (!mergeItemStack(slotStack, 6, inventorySlots.size, true)) {
                     return ItemStack.EMPTY
-                } else if (!mergeItemStack(itemstack1, 0, 6, false)) {
+                } else if (!mergeItemStack(slotStack, 0, 6, false)) {
                     return ItemStack.EMPTY
                 }
-                if (itemstack1.isEmpty) {
+
+                if (slotStack.isEmpty) {
                     slot.putStack(ItemStack.EMPTY)
                 } else {
                     slot.onSlotChanged()
                 }
             }
         }
-        return itemstack
+
+        return itemStack
     }
 
     companion object {

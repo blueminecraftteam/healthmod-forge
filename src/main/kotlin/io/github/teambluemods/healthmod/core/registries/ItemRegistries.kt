@@ -36,60 +36,54 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 @Suppress("unused")
 object ItemRegistries {
     val ITEMS = KDeferredRegister(ForgeRegistries.ITEMS, HealthMod.MOD_ID)
+    private val DEFAULT_PROPERTIES: Item.Properties get() = Item.Properties().group(HealthMod.ITEM_GROUP)
 
     val BANDAGE by ITEMS.registerObject("bandage") {
         BandageItem(
-            Item.Properties()
-                .maxStackSize(16)
+            DEFAULT_PROPERTIES.maxStackSize(16)
                 .maxDamage(1)
                 .rarity(Rarity.UNCOMMON)
         )
     }
 
     val SYRINGE by ITEMS.registerObject("syringe") {
-        SyringeItem(
-            Item.Properties()
-                .group(HealthMod.ITEM_GROUP)
-                .maxStackSize(1)
-        )
+        SyringeItem(DEFAULT_PROPERTIES.maxStackSize(1))
     }
 
     val FACE_MASK by ITEMS.registerObject("face_mask") {
         FaceMaskItem(
-            ArmorMaterial.LEATHER,
-            EquipmentSlotType.HEAD,
-            Item.Properties().group(HealthMod.ITEM_GROUP).maxDamage(100)
+            material = ArmorMaterial.LEATHER,
+            slot = EquipmentSlotType.HEAD,
+            properties = DEFAULT_PROPERTIES.maxDamage(100)
         )
     }
 
     val ANTIBIOTICS by ITEMS.registerObject("antibiotics") {
-        AntibioticsItem(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(16))
+        AntibioticsItem(DEFAULT_PROPERTIES.maxStackSize(16))
     }
 
     val BROCCOLI by ITEMS.registerObject("broccoli") {
         Item(
-            Item.Properties()
-                .group(HealthMod.ITEM_GROUP)
-                .food(
-                    Food.Builder()
-                        .hunger(3)
-                        .saturation(2f)
-                        .effect({ EffectInstance(EffectRegistries.HEALTHY, 60 * 20) }, 1f)
-                        .build()
-                )
+            DEFAULT_PROPERTIES.food(
+                Food.Builder()
+                    .hunger(3)
+                    .saturation(2f)
+                    .effect({ EffectInstance(EffectRegistries.HEALTHY, 60 * 20) }, 1f)
+                    .build()
+            )
         )
     }
 
     val FIRST_AID_KIT by ITEMS.registerObject("first_aid_kit") {
-        Item(Item.Properties().group(HealthMod.ITEM_GROUP))
+        Item(DEFAULT_PROPERTIES)
     }
 
     val BLOOD_VIAL by ITEMS.registerObject("blood_vial") {
-        Item(Item.Properties().group(HealthMod.ITEM_GROUP))
+        Item(DEFAULT_PROPERTIES)
     }
 
     // TODO functionality
     val ISOPROPYL_ALCOHOL by ITEMS.registerObject("isopropyl_alcohol") {
-        Item(Item.Properties().group(HealthMod.ITEM_GROUP).maxStackSize(1))
+        Item(DEFAULT_PROPERTIES.maxStackSize(1))
     }
 }

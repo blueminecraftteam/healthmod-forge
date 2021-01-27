@@ -21,6 +21,7 @@ package io.github.teambluemods.healthmod.common.blocks
 
 import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import io.github.teambluemods.healthmod.common.tileentities.BandageBoxTileEntity
+import io.github.teambluemods.healthmod.core.util.extensions.isServer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -33,10 +34,8 @@ import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
-import sun.audio.AudioPlayer.player
 
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class BandageBoxBlock(properties: Properties) : Block(properties) {
     // TODO: Model
     override fun hasTileEntity(state: BlockState) = true
@@ -46,41 +45,37 @@ class BandageBoxBlock(properties: Properties) : Block(properties) {
 
     override fun onBlockActivated(
         state: BlockState,
-        worldIn: World,
+        world: World,
         pos: BlockPos,
         playerEntity: PlayerEntity,
-        handIn: Hand,
+        hand: Hand,
         hit: BlockRayTraceResult
     ): ActionResultType {
-        if (!worldIn.isRemote) {
-            val tile = worldIn.getTileEntity(pos)
-            if (tile is BandageBoxTileEntity) {
-                NetworkHooks.openGui(
-                    player as ServerPlayerEntity?,
-                    tile as BandageBoxTileEntity?,
-                    pos
-                )
+        if (world.isServer) {
+            val tileEntity = world.getTileEntity(pos)
+
+            if (tileEntity is BandageBoxTileEntity) {
+                NetworkHooks.openGui(playerEntity as ServerPlayerEntity, tileEntity, pos)
             }
+
             return ActionResultType.SUCCESS
         }
+
         return ActionResultType.FAIL
     }
 
     override fun onReplaced(
         state: BlockState,
-        worldIn: World,
-        pos: BlockPos?,
+        world: World,
+        pos: BlockPos,
         newState: BlockState,
         isMoving: Boolean
     ) {
-        if (state.block !== newState.block) {
-            val te = worldIn.getTileEntity(pos)
-            if (te is BandageBoxTileEntity) {
-                InventoryHelper.dropItems(
-                    worldIn,
-                    pos,
-                    (te as BandageBoxTileEntity?)?.items
-                )
+        if (state.block != newState.block) {
+            val tileEntity = world.getTileEntity(pos)
+
+            if (tileEntity is BandageBoxTileEntity) {
+                InventoryHelper.dropItems(world, pos, tileEntity.items)
             }
         }
     }
