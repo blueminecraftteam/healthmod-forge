@@ -36,6 +36,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import org.apache.logging.log4j.LogManager
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
+import thedarkcolour.kotlinforforge.forge.ObjectHolderDelegate
 import thedarkcolour.kotlinforforge.forge.registerConfig
 
 @Mod(HealthMod.MOD_ID)
@@ -68,7 +69,7 @@ object HealthMod {
 
     @SubscribeEvent
     fun onRegisterBlockItems(event: RegistryEvent.Register<Item>) {
-        BlockRegistries.BLOCKS.getEntries().map { it.get() }.forEach { block ->
+        BlockRegistries.BLOCKS.getEntries().map(ObjectHolderDelegate<out Block>::get).forEach { block ->
             val properties = if (block is BandageBoxBlock) {
                 Item.Properties().group(ITEM_GROUP).maxStackSize(1)
             } else {
