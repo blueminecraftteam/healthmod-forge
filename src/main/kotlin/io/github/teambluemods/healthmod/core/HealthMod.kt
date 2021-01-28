@@ -19,10 +19,10 @@
 
 package io.github.teambluemods.healthmod.core
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import io.github.teambluemods.healthmod.common.blocks.BandageBoxBlock
 import io.github.teambluemods.healthmod.core.config.HealthModConfig
 import io.github.teambluemods.healthmod.core.registries.*
+import net.minecraft.block.Block
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup

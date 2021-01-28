@@ -19,8 +19,8 @@
 
 package io.github.teambluemods.healthmod.common.blocks
 
-import io.github.blueminecraftteam.healthmod.core.registries.TileEntityTypeRegistries
 import io.github.teambluemods.healthmod.common.tileentities.BandageBoxTileEntity
+import io.github.teambluemods.healthmod.core.registries.TileEntityTypeRegistries
 import io.github.teambluemods.healthmod.core.util.extensions.isServer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -34,7 +34,6 @@ import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.world.IBlockReader
 import net.minecraft.world.World
 import net.minecraftforge.fml.network.NetworkHooks
-
 
 class BandageBoxBlock(properties: Properties) : Block(properties) {
     // TODO: Model

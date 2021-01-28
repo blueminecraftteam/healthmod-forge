@@ -23,7 +23,6 @@ import com.mojang.blaze3d.matrix.MatrixStack
 import com.mojang.blaze3d.systems.RenderSystem
 import io.github.teambluemods.healthmod.common.container.BandageBoxContainer
 import io.github.teambluemods.healthmod.core.HealthMod
-import io.github.teambluemods.healthmod.core.registries.ContainerTypeRegistries
 import net.minecraft.client.gui.screen.inventory.ContainerScreen
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.util.text.ITextComponent
@@ -43,12 +42,6 @@ class BandageBoxScreen(
         this.xSize = 175
         this.ySize = 183
     }
-
-    constructor(inventory: PlayerInventory, title: ITextComponent) : this(
-        ContainerTypeRegistries.BANDAGE_BOX.create(10, inventory),
-        inventory,
-        title
-    )
 
     override fun render(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, partTicks: Float) {
         this.renderBackground(matrixStack)
