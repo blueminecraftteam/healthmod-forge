@@ -42,7 +42,6 @@ import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.ItemStackHandler
 import net.minecraftforge.items.wrapper.InvWrapper
 
-
 class BandageBoxTileEntity(type: TileEntityType<*> = TileEntityTypeRegistries.BANDAGE_BOX) :
     LockableLootTileEntity(type) {
     private val items = InvWrapper(this)
