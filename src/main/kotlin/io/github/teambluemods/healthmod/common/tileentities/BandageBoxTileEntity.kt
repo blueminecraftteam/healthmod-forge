@@ -21,6 +21,7 @@ package io.github.teambluemods.healthmod.common.tileentities
 
 import io.github.teambluemods.healthmod.common.blocks.BandageBoxBlock
 import io.github.teambluemods.healthmod.common.container.BandageBoxContainer
+import io.github.teambluemods.healthmod.core.registries.ItemRegistries
 import io.github.teambluemods.healthmod.core.registries.TileEntityTypeRegistries
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -38,6 +39,7 @@ import net.minecraft.world.IBlockReader
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.CapabilityItemHandler
+import net.minecraftforge.items.ItemStackHandler
 import net.minecraftforge.items.wrapper.InvWrapper
 
 class BandageBoxTileEntity(type: TileEntityType<*> = TileEntityTypeRegistries.BANDAGE_BOX) :
@@ -45,7 +47,8 @@ class BandageBoxTileEntity(type: TileEntityType<*> = TileEntityTypeRegistries.BA
     private val items = InvWrapper(this)
     private var numPlayersUsing = 0
     private var contents = NonNullList.withSize(6, ItemStack.EMPTY)
-    private var itemHandler = LazyOptional.of { items }
+    private val handler = this.createHandler()
+    private var itemHandler = LazyOptional.of { handler }
 
     override fun getSizeInventory() = 6
 
@@ -123,6 +126,19 @@ class BandageBoxTileEntity(type: TileEntityType<*> = TileEntityTypeRegistries.BA
         } else {
             super.getCapability(capability, side)
         }
+
+    private fun createHandler() = object : ItemStackHandler(1) {
+        override fun onContentsChanged(slot: Int) {
+            // To make sure the TE persists when the chunk is saved later we need to
+            // mark it dirty every time the item handler changes
+            markDirty()
+        }
+
+        override fun isItemValid(slot: Int, stack: ItemStack) = stack.item == ItemRegistries.BANDAGE
+
+        override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean) =
+            if (stack.item != ItemRegistries.BANDAGE) stack else super.insertItem(slot, stack, simulate)
+    }
 
     override fun remove() {
         super.remove()

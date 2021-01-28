@@ -19,9 +19,12 @@
 
 package io.github.teambluemods.healthmod.client
 
+import io.github.teambluemods.healthmod.client.screen.BandageBoxScreen
 import io.github.teambluemods.healthmod.common.items.SyringeItem
 import io.github.teambluemods.healthmod.core.HealthMod
+import io.github.teambluemods.healthmod.core.registries.ContainerTypeRegistries
 import io.github.teambluemods.healthmod.core.registries.ItemRegistries
+import net.minecraft.client.gui.ScreenManager
 import net.minecraft.item.ItemModelsProperties
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -38,5 +41,7 @@ object HealthModClient {
             HealthMod.rl("blood"),
             SyringeItem.BLOOD_PROPERTY
         )
+
+        ScreenManager.registerFactory(ContainerTypeRegistries.BANDAGE_BOX, ::BandageBoxScreen)
     }
 }

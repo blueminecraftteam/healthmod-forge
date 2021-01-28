@@ -28,7 +28,8 @@ import net.minecraft.village.PointOfInterestType
 import net.minecraftforge.registries.ForgeRegistries
 import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 
-// dont work maybe cus no trades? -ag6
+// don't work maybe cus no trades? -ag6
+@Suppress("MemberVisibilityCanBePrivate")
 object VillagerProfessionRegistries {
     val PROFESSIONS = KDeferredRegister(ForgeRegistries.PROFESSIONS, HealthMod.MOD_ID)
     val POI_TYPES = KDeferredRegister(ForgeRegistries.POI_TYPES, HealthMod.MOD_ID)
@@ -36,10 +37,12 @@ object VillagerProfessionRegistries {
     val DOCTOR_POINT_OF_INTEREST by POI_TYPES.registerObject("doctor_point_of_interest") {
         PointOfInterestType(
             "doctor_point_of_interest",
-            mutableSetOf<BlockState>().apply {
-                addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
-                addAll(PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX))
-            }.run { ImmutableSet.copyOf(this) },
+            mutableSetOf<BlockState>()
+                .apply {
+                    this += PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX)
+                    this += PointOfInterestType.getAllStates(BlockRegistries.BANDAGE_BOX)
+                }
+                .run { ImmutableSet.copyOf(this) },
             1,
             1
         )

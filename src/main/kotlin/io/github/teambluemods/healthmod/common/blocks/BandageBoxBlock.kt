@@ -19,16 +19,63 @@
 
 package io.github.teambluemods.healthmod.common.blocks
 
+import io.github.teambluemods.healthmod.common.tileentities.BandageBoxTileEntity
 import io.github.teambluemods.healthmod.core.registries.TileEntityTypeRegistries
+import io.github.teambluemods.healthmod.core.util.extensions.isServer
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.entity.player.ServerPlayerEntity
+import net.minecraft.inventory.InventoryHelper
+import net.minecraft.util.ActionResultType
+import net.minecraft.util.Hand
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.BlockRayTraceResult
 import net.minecraft.world.IBlockReader
+import net.minecraft.world.World
+import net.minecraftforge.fml.network.NetworkHooks
 
 class BandageBoxBlock(properties: Properties) : Block(properties) {
     // TODO: Model
-    // TODO: Opening gui logic
     override fun hasTileEntity(state: BlockState) = true
 
     override fun createTileEntity(state: BlockState, world: IBlockReader) =
         TileEntityTypeRegistries.BANDAGE_BOX.create()
+
+    override fun onBlockActivated(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        playerEntity: PlayerEntity,
+        hand: Hand,
+        hit: BlockRayTraceResult
+    ): ActionResultType {
+        if (world.isServer) {
+            val tileEntity = world.getTileEntity(pos)
+
+            if (tileEntity is BandageBoxTileEntity) {
+                NetworkHooks.openGui(playerEntity as ServerPlayerEntity, tileEntity, pos)
+            }
+
+            return ActionResultType.SUCCESS
+        }
+
+        return ActionResultType.FAIL
+    }
+
+    override fun onReplaced(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        newState: BlockState,
+        isMoving: Boolean
+    ) {
+        if (state.block != newState.block) {
+            val tileEntity = world.getTileEntity(pos)
+
+            if (tileEntity is BandageBoxTileEntity) {
+                InventoryHelper.dropItems(world, pos, tileEntity.items)
+            }
+        }
+    }
 }
